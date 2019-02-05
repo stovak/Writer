@@ -39,7 +39,7 @@
 @end
 @implementation PrintView
 
-- (id)initWithDocument:(Document*)document toPDF:(bool)pdf
+- (id)initWithDocument:(NSDocument*)document toPDF:(bool)pdf
 {
     self = [super init];
     self.pdf = pdf;
