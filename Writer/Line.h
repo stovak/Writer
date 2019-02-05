@@ -53,5 +53,5 @@ typedef enum : NSUInteger {
 - (Line*)initWithString:(NSString*)string position:(NSUInteger)position;
 - (NSString*)toString;
 - (NSString*)typeAsString;
-
+- (NSString*)typeIdAsString;
 @end

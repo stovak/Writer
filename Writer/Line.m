@@ -76,4 +76,54 @@
     }
 }
 
+- (NSString*)typeIdAsString
+{
+    switch (self.type) {
+        case empty:
+            return @"empty";
+        case section:
+            return @"section";
+        case synopse:
+            return @"synopse";
+        case titlePageTitle:
+            return @"titlePageTitle";
+        case titlePageAuthor:
+            return @"titlePageAuthor";
+        case titlePageCredit:
+            return @"titlePageCredit";
+        case titlePageSource:
+            return @"titlePageSource";
+        case titlePageContact:
+            return @"titlePageContact";
+        case titlePageDraftDate:
+            return @"titlePageDraftDate";
+        case titlePageUnknown:
+            return @"titlePageUnknown";
+        case heading:
+            return @"heading";
+        case action:
+            return @"action";
+        case character:
+            return @"character";
+        case parenthetical:
+            return @"parenthetical";
+        case dialogue:
+            return @"dialogue";
+        case doubleDialogueCharacter:
+            return @"doubleDialogueCharacter";
+        case doubleDialogueParenthetical:
+            return @"doubleDialogueParenthetical";
+        case doubleDialogue:
+            return @"doubleDialogue";
+        case transition:
+            return @"transition";
+        case lyrics:
+            return @"lyrics";
+        case pageBreak:
+            return @"pageBreak";
+        case centered:
+            return @"centered";
+    }
+}
+
 @end

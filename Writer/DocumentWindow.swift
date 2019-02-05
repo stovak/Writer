@@ -386,7 +386,7 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     func formatAllLines() {
         if (self.livePreview) {
             for line in self.parser.lines {
-                self.formatLineOfScreenplay(line, onlyFormatFont: false);
+                self.formatLineOfScreenplay(line as! Line, onlyFormatFont: false);
             }
         } else {
             self.textView?.font = self.courier;
@@ -401,17 +401,29 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     }
     
     func formatLineOfScreenplay(_ line: Line, onlyFormatFont: Bool = false ) {
-        
+        let begin = Int(line.position);
+        let length = line.string.lengthOfBytes(using: String.Encoding.utf8);
+        let range = NSMakeRange(begin, length);
+        let lineType = TableReadLineTypes.value(forKey: line.typeIdAsString()) as! TableReadLineType;
+        self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.font, range: range);
+        self.textView?.textStorage?.addAttribute(NSAttributedString.Key.font, value: TableReadLineTypes.getFontStyle(forFontStyleID: lineType.fontStyle), range: range);
+        if (!onlyFormatFont) {
+            self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.paragraphStyle, range: range);
+            self.textView?.textStorage?.addAttribute(NSAttributedString.Key.paragraphStyle, value: TableReadLineTypes.getParagraphStyle(forTypeID: lineType.id), range: range);
+        }
+        // do bold and italic changes
+        // do uppercase where lineType.uppercase == true
     }
     
     func refontAllLines() {
         for line in self.parser.lines {
-            self.formatLineOfScreenplay(line, onlyFormatFont: true);
+            self.formatLineOfScreenplay(line as! Line, onlyFormatFont: true);
         }
     }
     
     func applyFormatChanges() {
-        for index in self.parser.changedIndices {
+        for case let index as Int in self.parser.changedIndices {
+            let line = self.parser.lines?[index] as! Line;
             self.formatLineOfScreenplay(line, onlyFormatFont: false);
         }
         self.parser.changedIndices.removeAllObjects();

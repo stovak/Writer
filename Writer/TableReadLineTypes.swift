@@ -14,13 +14,13 @@ struct TableReadLineType {
     let id: String;
     let description: String;
     let paragraphStyle: TableReadLineTypeParagraphStyle;
-    let fontStyle: TableReadLineTypeFontStyle;
+    let fontStyle: String;
     let uppercase: Bool;
     
     init( id: String,
           description: String,
           paragraphStyle: TableReadLineTypeParagraphStyle,
-          fontStyle: TableReadLineTypeFontStyle,
+          fontStyle: String = "courier",
           uppercase: Bool = false
         ) {
         self.id = id;
@@ -106,22 +106,20 @@ class TableReadLineTypes: NSObject {
         let trf = trfs.value(forKey: forFontStyleID) as! TableReadFont;
         return trf.font;
     }
-    
-    
-    
+        
     
     public static let empty                       = TableReadLineType(
                                                         id: "empty",
                                                         description: "Empty",
                                                         paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        fontStyle: "courier"
                                                     );
     
     public static let section                     = TableReadLineType(
                                                         id: "section",
                                                         description: "Section",
                                                         paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        fontStyle: "courier"
                                                     );
     
     public static let synopse                     = TableReadLineType(
