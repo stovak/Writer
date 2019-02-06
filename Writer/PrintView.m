@@ -34,13 +34,14 @@
 #import "FNElement.h"
 @interface PrintView () <WebFrameLoadDelegate>
 @property (nonatomic) NSUInteger finishedWebViews;
-@property (weak, nonatomic) Document *document;
+@property (weak, nonatomic) NSDocument *document;
 @property bool pdf;
 @end
 @implementation PrintView
 
 - (id)initWithDocument:(NSDocument*)document toPDF:(bool)pdf
 {
+    NSLog(@"PV Init With Document");
     self = [super init];
     self.pdf = pdf;
     if (self) {
@@ -49,7 +50,7 @@
         _document = document;
         
         //Create a script from the Document
-        FNScript *script = [[FNScript alloc] initWithString:[[document getText] copy]];
+        FNScript *script = [[FNScript alloc] initWithString:[[document dataOfType:@"public.text" error: nil] copy]];
         
         //Remove the title page and put it into an extra script, if there is any title page information
         FNScript *titleScript;
@@ -185,7 +186,7 @@
         if (self.pdf) {
             NSSavePanel *saveDialog = [NSSavePanel savePanel];
             [saveDialog setAllowedFileTypes:@[@"pdf"]];
-            [saveDialog setNameFieldStringValue:[self.document fileNameString]];
+            [saveDialog setNameFieldStringValue:[self.document lastComponentOfFileName]];
             [saveDialog beginSheetModalForWindow:self.document.windowControllers[0].window completionHandler:^(NSInteger result) {
                 if (result == NSFileHandlingPanelOKButton) {
                     NSPrintInfo *printInfo = [self.document.printInfo copy];

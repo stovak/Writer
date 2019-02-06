@@ -19,7 +19,7 @@ struct TableReadLineType {
     
     init( id: String,
           description: String,
-          paragraphStyle: TableReadLineTypeParagraphStyle,
+          paragraphStyle: TableReadLineTypeParagraphStyle = TableReadLineTypeParagraphStyle(),
           fontStyle: String = "courier",
           uppercase: Bool = false
         ) {
@@ -31,7 +31,7 @@ struct TableReadLineType {
     }
 }
 
-struct TableReadLineTypeParagraphStyle: {
+struct TableReadLineTypeParagraphStyle {
 
     
     public static let CHARACTER_INDENT = CGFloat(220);
@@ -110,87 +110,65 @@ class TableReadLineTypes: NSObject {
     
     public static let empty                       = TableReadLineType(
                                                         id: "empty",
-                                                        description: "Empty",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: "courier"
+                                                        description: "Empty"
                                                     );
     
     public static let section                     = TableReadLineType(
                                                         id: "section",
-                                                        description: "Section",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: "courier"
+                                                        description: "Section"
                                                     );
     
     public static let synopse                     = TableReadLineType(
                                                         id: "synopse",
-                                                        description: "Synopse",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Synopse"
                                                     );
     
     public static let titlePageTitle              = TableReadLineType(
                                                         id: "titlePageTitle",
-                                                        description: "Title Page Title",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Title"
                                                     );
     
     public static let titlePageAuthor             = TableReadLineType(
                                                         id: "titlePageAuthor",
-                                                        description: "Title Page Author",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Author"
                                                     );
     
     public static let titlePageCredit             = TableReadLineType(
                                                         id: "titlePageCredit",
-                                                        description: "Title Page Credit",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Credit"
                                                     );
     
     public static let titlePageSource             = TableReadLineType(
                                                         id: "titlePageSource",
-                                                        description: "Title Page Source",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Source"
                                                     );
     
     public static let titlePageContact            = TableReadLineType(
                                                         id: "titlePageContact",
-                                                        description: "Title Page Contact",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Contact"
                                                     );
     
     public static let titlePageDraftDate          = TableReadLineType(
                                                         id: "titlePageDraftDate",
-                                                        description: "Title Page Draft Date",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Draft Date"
                                                     );
     
     public static let titlePageUnknown            = TableReadLineType(
                                                         id: "titlePageUnknown",
-                                                        description: "Title Page Unknown",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Title Page Unknown"
                                                     );
     
     public static let heading                     = TableReadLineType(
                                                         id: "heading",
                                                         description: "Heading",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle(),
+                                                        fontStyle: "boldCourier",
                                                         uppercase: true
                                                     );
     
     public static let action                      = TableReadLineType(
                                                         id: "action",
                                                         description: "Action",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        fontStyle: "boldCourier"
                                                     );
     
     public static let character                   = TableReadLineType(
@@ -201,7 +179,7 @@ class TableReadLineTypes: NSObject {
                                                             headIndent: TableReadLineTypeParagraphStyle.CHARACTER_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
                                                         ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        uppercase: true
                                                     );
     
     public static let parenthetical               = TableReadLineType(
@@ -211,8 +189,7 @@ class TableReadLineTypes: NSObject {
                                                             firstLineHeadIndent: TableReadLineTypeParagraphStyle.PARENTHETICAL_INDENT,
                                                             headIndent: TableReadLineTypeParagraphStyle.PARENTHETICAL_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        )
                                                     );
     
     public static let dialogue                    = TableReadLineType(
@@ -222,8 +199,7 @@ class TableReadLineTypes: NSObject {
                                                             firstLineHeadIndent: TableReadLineTypeParagraphStyle.DIALOGUE_INDENT,
                                                             headIndent: TableReadLineTypeParagraphStyle.DIALOGUE_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        )
                                                     );
     
     public static let doubleDialogueCharacter     = TableReadLineType(
@@ -233,8 +209,7 @@ class TableReadLineTypes: NSObject {
                                                             firstLineHeadIndent: TableReadLineTypeParagraphStyle.DD_CHARACTER_INDENT,
                                                             headIndent: TableReadLineTypeParagraphStyle.DD_CHARACTER_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        )
                                                     );
     
     public static let doubleDialogueParenthetical = TableReadLineType(
@@ -244,8 +219,7 @@ class TableReadLineTypes: NSObject {
                                                             firstLineHeadIndent: TableReadLineTypeParagraphStyle.DD_PARENTHETICAL_INDENT,
                                                             headIndent: TableReadLineTypeParagraphStyle.DD_PARENTHETICAL_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        )
                                                     );
     
     public static let doubleDialogue              = TableReadLineType(
@@ -255,8 +229,7 @@ class TableReadLineTypes: NSObject {
                                                             firstLineHeadIndent: TableReadLineTypeParagraphStyle.DOUBLE_DIALOGUE_INDENT,
                                                             headIndent: TableReadLineTypeParagraphStyle.DOUBLE_DIALOGUE_INDENT,
                                                             tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        )
                                                     );
     
     public static let transition                  = TableReadLineType(
@@ -265,31 +238,27 @@ class TableReadLineTypes: NSObject {
                                                         paragraphStyle: TableReadLineTypeParagraphStyle(
                                                             alignment: NSTextAlignment.right
                                                         ),
-                                                        fontStyle: TableReadLineTypeFontStyle(),
+                                                        fontStyle: "boldCourier",
                                                         uppercase: true
                                                     );
     
     public static let lyrics                      = TableReadLineType(
                                                         id: "lyrics",
                                                         description: "Lyrics",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        fontStyle: "italicCourier"
                                                     );
     
     public static let pageBreak                   = TableReadLineType(
                                                         id: "pageBreak",
-                                                        description: "Page Break",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                        description: "Page Break"
                                                     );
     
     public static let centered                    = TableReadLineType(
                                                         id: "centered",
                                                         description: "Centered",
                                                         paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            alignment: NSTextAlignment.right
-                                                        ),
-                                                        fontStyle: TableReadLineTypeFontStyle()
+                                                            alignment: NSTextAlignment.center
+                                                        )
                                                     );
     
 }

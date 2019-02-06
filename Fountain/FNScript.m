@@ -34,6 +34,8 @@
 
 - (id)initWithFile:(NSString *)path
 {
+    NSLog(@"FNScript Init With File");
+
     self = [self init];
     if (self) {
         [self loadFile:path];
@@ -43,6 +45,7 @@
 
 - (id)initWithString:(NSString *)string
 {
+    NSLog(@"FNScript Init With String");
     self = [self init];
     if (self) {
         [self loadString:string];

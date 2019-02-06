@@ -23,6 +23,7 @@
 
 - (ContinousFountainParser*)initWithString:(NSString*)string
 {
+    NSLog(@"CFP Init With String");
     self = [super init];
     
     if (self) {

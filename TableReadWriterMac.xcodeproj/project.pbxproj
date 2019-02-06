@@ -11,9 +11,13 @@
 		B138B59019E1C974000489C4 /* WriterParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B58F19E1C974000489C4 /* WriterParserTests.m */; };
 		B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1509A411CB6EBBC00884918 /* WriterFDXTests.m */; };
 		B1DCC4631CB32C5200438E7F /* WriterThemeManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DCC4621CB32C5200438E7F /* WriterThemeManagerTests.m */; };
-		D60218262206244800B6B8D9 /* DocumentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60218252206244800B6B8D9 /* DocumentWindow.swift */; };
+		D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60218252206244800B6B8D9 /* TableReadDocument.swift */; };
 		D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
 		D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
+		D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
+		D61B9671220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
+		D61B96A4220A4E6000BC7067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61B96A3220A4E6000BC7067 /* Main.storyboard */; };
+		D61B96A5220A4E6000BC7067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61B96A3220A4E6000BC7067 /* Main.storyboard */; };
 		D638E7CD22053E3D008F8F58 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B138B58219E1C973000489C4 /* MainMenu.xib */; };
 		D638E7D122053E5F008F8F58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B138B57719E1C973000489C4 /* Info.plist */; };
 		D638E7D222053E69008F8F58 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B1C2DE5A1AACFF70002FE0F4 /* DocumentIcon.icns */; };
@@ -26,7 +30,6 @@
 		D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
 		D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B62A3919E3402F009F6E23 /* ColorView.m */; };
 		D66C464622054FCA00BD2FA6 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = B13111931CB2A42300D07A0C /* Line.m */; };
-		D66C464722054FFD00BD2FA6 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B13BC7F21CC5215900E91B8A /* ApplicationDelegate.m */; };
 		D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */; };
 		D68875222205103900E8E97D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA02205073E006B9B83 /* AudioToolbox.framework */; };
 		D68875232205103C00E8E97D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
@@ -56,7 +59,6 @@
 		D6CF0BB922055D2500FDC52C /* Courier Prime Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED61C88AC99001C4D27 /* Courier Prime Italic.ttf */; };
 		D6CF0BBA22055D2500FDC52C /* Courier Prime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED71C88AC99001C4D27 /* Courier Prime.ttf */; };
 		D6CF0BBB22055D4F00FDC52C /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B57B19E1C973000489C4 /* Document.m */; };
-		D6CF0BBC22055D6400FDC52C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B57819E1C973000489C4 /* main.m */; };
 		D6CF0BBD22055D8600FDC52C /* ContinousFountainParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */; };
 		D6CF0BBE22055D8600FDC52C /* NSString+Whitespace.m in Sources */ = {isa = PBXBuildFile; fileRef = B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */; };
 		D6CF0BBF22055D8600FDC52C /* NSMutableIndexSet+Lowest.m in Sources */ = {isa = PBXBuildFile; fileRef = B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */; };
@@ -70,7 +72,7 @@
 		D6CF0BC722055E4300FDC52C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B138B61E19E1D6A7000489C4 /* WebKit.framework */; };
 		D6CF0BC822055E6D00FDC52C /* Big-Fish.fountain in Resources */ = {isa = PBXBuildFile; fileRef = B12DA7821CB44A4600EB17DB /* Big-Fish.fountain */; };
 		D6CF0BC922055E7800FDC52C /* Reference.fountain in Resources */ = {isa = PBXBuildFile; fileRef = B1FE6DA31CC28C3500287E73 /* Reference.fountain */; };
-		D6CF0BCA22055E8F00FDC52C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = B138B57D19E1C973000489C4 /* Document.xib */; };
+		D6CF0BCA22055E8F00FDC52C /* TableReadDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = B138B57D19E1C973000489C4 /* TableReadDocument.xib */; };
 		D6CF0BCB220560FB00FDC52C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA322050821006B9B83 /* CloudKit.framework */; };
 		D6CF0BCC2205640200FDC52C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
 		D6FE9462220752B600B333A9 /* YAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945C220752B600B333A9 /* YAMLParser.swift */; };
@@ -124,10 +126,9 @@
 		B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableIndexSet+Lowest.h"; sourceTree = "<group>"; };
 		B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableIndexSet+Lowest.m"; sourceTree = "<group>"; };
 		B138B57719E1C973000489C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B138B57819E1C973000489C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B138B57A19E1C973000489C4 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
 		B138B57B19E1C973000489C4 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
-		B138B57E19E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		B138B57E19E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TableReadDocument.xib; sourceTree = "<group>"; };
 		B138B58019E1C973000489C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B138B58319E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B138B58919E1C974000489C4 /* WriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,8 +157,6 @@
 		B138B66219E1E8CA000489C4 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		B138B66319E1E8CA000489C4 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		B138B66419E1E8CA000489C4 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		B13BC7F11CC5215900E91B8A /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
-		B13BC7F21CC5215900E91B8A /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
 		B1509A3E1CB5C0C500884918 /* FDXInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDXInterface.h; sourceTree = "<group>"; };
 		B1509A3F1CB5C0C500884918 /* FDXInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDXInterface.m; sourceTree = "<group>"; };
 		B1509A411CB6EBBC00884918 /* WriterFDXTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterFDXTests.m; sourceTree = "<group>"; };
@@ -177,8 +176,11 @@
 		B1F04ED71C88AC99001C4D27 /* Courier Prime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Courier Prime.ttf"; sourceTree = "<group>"; };
 		B1FE6DA31CC28C3500287E73 /* Reference.fountain */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Reference.fountain; sourceTree = "<group>"; };
 		D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableReadWriterMac-Bridging-Header.h"; sourceTree = "<group>"; };
-		D60218252206244800B6B8D9 /* DocumentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentWindow.swift; sourceTree = "<group>"; };
+		D60218252206244800B6B8D9 /* TableReadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadDocument.swift; sourceTree = "<group>"; };
 		D602182822069B9200B6B8D9 /* NSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDocument.swift; sourceTree = "<group>"; };
+		D61B966F220A2CFD00BC7067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D61B969F220A41C700BC7067 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		D61B96A3220A4E6000BC7067 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableReadParagraphStyle.swift; sourceTree = "<group>"; };
 		D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadLineTypes.swift; sourceTree = "<group>"; };
 		D6491E512208F81100A79130 /* TableReadFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadFontStyle.swift; sourceTree = "<group>"; };
@@ -333,22 +335,23 @@
 		B138B57519E1C973000489C4 /* Writer */ = {
 			isa = PBXGroup;
 			children = (
+				D61B96A3220A4E6000BC7067 /* Main.storyboard */,
 				D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */,
 				D602182722069B7000B6B8D9 /* Extensions */,
 				D6C9AADC2204C17B005AFF99 /* Cast */,
 				B1E7FF511BC4555B008E2B99 /* Writer.entitlements */,
-				D60218252206244800B6B8D9 /* DocumentWindow.swift */,
+				D61B966F220A2CFD00BC7067 /* AppDelegate.swift */,
+				B138B57D19E1C973000489C4 /* TableReadDocument.xib */,
+				D60218252206244800B6B8D9 /* TableReadDocument.swift */,
 				D6491E512208F81100A79130 /* TableReadFontStyle.swift */,
 				D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */,
 				D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */,
 				B138B57A19E1C973000489C4 /* Document.h */,
 				B138B57B19E1C973000489C4 /* Document.m */,
-				B13BC7F11CC5215900E91B8A /* ApplicationDelegate.h */,
-				B13BC7F21CC5215900E91B8A /* ApplicationDelegate.m */,
 				B138B58219E1C973000489C4 /* MainMenu.xib */,
-				B138B57D19E1C973000489C4 /* Document.xib */,
 				B1B62A3819E3402F009F6E23 /* ColorView.h */,
 				B1B62A3919E3402F009F6E23 /* ColorView.m */,
+				D6FE94702207AB3300B333A9 /* ErrorHandler.swift */,
 				B13111851CB2893F00D07A0C /* Themes */,
 				B13111911CB2A41B00D07A0C /* Parsing */,
 				B1509A3D1CB5C0B400884918 /* Export */,
@@ -357,7 +360,6 @@
 				B1FE6DA31CC28C3500287E73 /* Reference.fountain */,
 				B12DA7821CB44A4600EB17DB /* Big-Fish.fountain */,
 				B138B57619E1C973000489C4 /* Supporting Files */,
-				D6FE94702207AB3300B333A9 /* ErrorHandler.swift */,
 			);
 			path = Writer;
 			sourceTree = "<group>";
@@ -366,7 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				B138B57719E1C973000489C4 /* Info.plist */,
-				B138B57819E1C973000489C4 /* main.m */,
 				B1E7FF521BC45969008E2B99 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -649,6 +650,7 @@
 				TargetAttributes = {
 					B138B58819E1C974000489C4 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = H3EJ6Y8VJ6;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B138B57219E1C973000489C4;
@@ -727,6 +729,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D61B96A4220A4E6000BC7067 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,13 +737,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6CF0BCA22055E8F00FDC52C /* Document.xib in Resources */,
+				D6CF0BCA22055E8F00FDC52C /* TableReadDocument.xib in Resources */,
 				D6CF0BC922055E7800FDC52C /* Reference.fountain in Resources */,
 				D6CF0BC822055E6D00FDC52C /* Big-Fish.fountain in Resources */,
 				D6CF0BB622055D2500FDC52C /* Themes.plist in Resources */,
 				D6CF0BB722055D2500FDC52C /* Courier Prime Bold Italic.ttf in Resources */,
 				D6CF0BB822055D2500FDC52C /* Courier Prime Bold.ttf in Resources */,
 				D6CF0BB922055D2500FDC52C /* Courier Prime Italic.ttf in Resources */,
+				D61B96A5220A4E6000BC7067 /* Main.storyboard in Resources */,
 				D6CF0BBA22055D2500FDC52C /* Courier Prime.ttf in Resources */,
 				D638E7D122053E5F008F8F58 /* Info.plist in Resources */,
 				D638E7D322053E6D008F8F58 /* Images.xcassets in Resources */,
@@ -791,6 +795,7 @@
 				D6FE9466220752B600B333A9 /* YAMLOperators.swift in Sources */,
 				B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */,
 				D6491E4F2208D68900A79130 /* TableReadLineTypes.swift in Sources */,
+				D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
 				D6FE9467220752B600B333A9 /* YAMLRegex.swift in Sources */,
 				D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */,
 				B131119A1CB2BA7900D07A0C /* WriterParserPerformance.m in Sources */,
@@ -818,23 +823,22 @@
 				D6CF0BC022055D8600FDC52C /* PrintView.m in Sources */,
 				D6FE9469220752FF00B333A9 /* Yaml.swift in Sources */,
 				D6CF0BC122055D8600FDC52C /* OutlineExtractor.m in Sources */,
-				D6CF0BBC22055D6400FDC52C /* main.m in Sources */,
 				D6FE946D220752FF00B333A9 /* YAMLResult.swift in Sources */,
 				D6CF0BBB22055D4F00FDC52C /* Document.m in Sources */,
 				D6CF0BB422055D0B00FDC52C /* ThemeManager.m in Sources */,
 				D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */,
-				D60218262206244800B6B8D9 /* DocumentWindow.swift in Sources */,
+				D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */,
 				D6CF0BB522055D0B00FDC52C /* Theme.m in Sources */,
 				D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */,
 				D6FE94722207AB9C00B333A9 /* ErrorHandler.swift in Sources */,
 				D6CF0BB322055CF900FDC52C /* FDXInterface.m in Sources */,
+				D61B9671220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
 				D6FE946C220752FF00B333A9 /* YAMLRegex.swift in Sources */,
 				D6CF0BAF22055CEB00FDC52C /* FNElement.m in Sources */,
 				D6CF0BB022055CEB00FDC52C /* FNHTMLScript.m in Sources */,
 				D6FE946E220752FF00B333A9 /* YAMLTokenizer.swift in Sources */,
 				D6CF0BB122055CEB00FDC52C /* FNPaginator.m in Sources */,
 				D6CF0BB222055CEB00FDC52C /* FNScript.m in Sources */,
-				D66C464722054FFD00BD2FA6 /* ApplicationDelegate.m in Sources */,
 				D66C464622054FCA00BD2FA6 /* Line.m in Sources */,
 				D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */,
 				D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */,
@@ -884,18 +888,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B138B57D19E1C973000489C4 /* Document.xib */ = {
+		B138B57D19E1C973000489C4 /* TableReadDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B138B57E19E1C973000489C4 /* Base */,
 			);
-			name = Document.xib;
+			name = TableReadDocument.xib;
 			sourceTree = "<group>";
 		};
 		B138B58219E1C973000489C4 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B138B58319E1C973000489C4 /* Base */,
+				D61B969F220A41C700BC7067 /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1031,7 +1036,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -1061,7 +1066,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",

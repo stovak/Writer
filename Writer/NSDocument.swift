@@ -9,8 +9,9 @@
 import Foundation
 import AppKit
 
+@objc
+
 extension NSDocument {
-    
     /**
     
     func exportHTML(sender: Any) {

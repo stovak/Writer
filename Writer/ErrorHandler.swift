@@ -10,14 +10,12 @@ import Foundation
 
 class ErrorHandler {
     
-    
     init(_ error: NSError) {
         printToLog(error);
     }
     
     init(_ error: Error) {
         printToLog(error as NSError);
-        
     }
     
     func printToLog(_ error: NSError) {

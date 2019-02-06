@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.59" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.55"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="14490.55"/>
+        <deployment version="101400" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.59"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="14490.59"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindow" customModule="Writer" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="TableReadDocument" customModule="TableReadWriterMac">
             <connections>
                 <outlet property="backgroundView" destination="3qa-Wg-PsD" id="is8-W2-FQ7"/>
                 <outlet property="boldToolbarButton" destination="6Zj-2I-mQJ" id="B5E-Iy-xRn"/>
@@ -19,6 +19,7 @@
                 <outlet property="italicToolbarButton" destination="YZl-B1-yyf" id="gXy-bv-sJV"/>
                 <outlet property="noteToolbarButton" destination="5xl-bA-Iy2" id="ukI-9P-RUr"/>
                 <outlet property="omitToolbarButton" destination="UfY-1R-epx" id="f1f-wR-6eX"/>
+                <outlet property="oulineViewWidth" destination="7yW-8d-gb9" id="42H-tb-UGf"/>
                 <outlet property="outlineToolbarButton" destination="nal-lQ-yoE" id="ABm-at-FZI"/>
                 <outlet property="outlineView" destination="7yW-8d-gb9" id="2C5-4h-3og"/>
                 <outlet property="outlineViewWidth" destination="gxm-x2-1t3" id="RIU-v7-T76"/>
@@ -160,11 +161,11 @@
                             </tabViewItem>
                             <tabViewItem label="Render" identifier="2" id="Ycm-en-OeX" userLabel="Render Tab">
                                 <view key="view" id="ECs-3D-rzc">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="599"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1050" height="599"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <webView translatesAutoresizingMaskIntoConstraints="NO" id="Vil-EQ-uOZ">
-                                            <rect key="frame" x="50" y="0.0" width="700" height="599"/>
+                                            <rect key="frame" x="175" y="0.0" width="700" height="599"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="700" id="6XZ-rK-7fU"/>
                                             </constraints>

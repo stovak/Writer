@@ -7,12 +7,12 @@
 //
 
 
-import Foundation
+import Cocoa
 import AppKit
 import WebKit
 
 @objc
-class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
     public static let MATCH_PARENTHESES_KEY = "Match Parentheses";
     public static let LIVE_PREVIEW_KEY = "Live Preview";
@@ -30,8 +30,6 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     @IBOutlet unowned var tabView: NSTableView?;
     @IBOutlet weak var backgroundView: ColorView?;
     @IBOutlet weak var oulineViewWidth: NSLayoutConstraint?;
-    var outlineViewVisible: Bool;
-    
     
     @IBOutlet weak var outlineToolbarButton: NSButton?;
     @IBOutlet weak var boldToolbarButton: NSButton?;
@@ -49,31 +47,29 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     @IBOutlet weak var previewToolbarButton: NSButton?;
     @IBOutlet weak var printToolbarButton: NSButton?;
     
-    var toolbarButtons: [ NSButton? ];
-    var contentBuffer: String;
+    var outlineViewVisible: Bool = false;
+
+    var toolbarButtons: [ NSButton? ] = [];
+    var contentBuffer: String = "";
     
-    var courier: NSFont;
-    var boldCourier: NSFont;
-    var italicCourier: NSFont;
-    var boldItalicCourier: NSFont;
+    var livePreview: Bool = false;
+    var matchParentheses: Bool = true;
     
-    var fontsize: NSInteger;
-    var livePreview: Bool;
-    var matchParentheses: Bool;
+    var printView: PrintView?;
     
-    var printView: PrintView;
+    var parser: ContinousFountainParser?;
     
-    var parser: ContinousFountainParser;
-    
-    var themeManager: ThemeManager;
+    var themeManager: ThemeManager?;
     
     override init() {
+        debugPrint("TableReadDocument.init");
         super.init();
         self.printInfo.topMargin = 25;
         self.printInfo.bottomMargin = 50;
     }
     
     override func windowControllerDidLoadNib(_ windowController: NSWindowController) {
+        debugPrint("windowControllerDidLoadNib");
         super.windowControllerDidLoadNib(windowController);
         
         var window = windowController.window;
@@ -108,13 +104,13 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
         ];
         
         self.textView!.textContainerInset = NSMakeSize(
-            CGFloat(DocumentWindow.TEXT_INSET_SIDE),
-            CGFloat(DocumentWindow.TEXT_INSET_TOP)
+            CGFloat(TableReadDocument.TEXT_INSET_SIDE),
+            CGFloat(TableReadDocument.TEXT_INSET_TOP)
         );
         
         self.backgroundView?.fillColor = NSColor(calibratedRed: CGFloat(0.5), green: CGFloat(0.5), blue: CGFloat(0.5), alpha: CGFloat(1.0));
         self.textView?.setFont(
-            self.courier,
+            TableReadFontStyle.courier.font,
             range: NSRange(location: 0, length: (self.textView?.string.lengthOfBytes(using: String.Encoding.utf8))!)
         );
         self.textView?.isAutomaticQuoteSubstitutionEnabled = false;
@@ -128,30 +124,62 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
         } else {
             self.setText("");
         }
-        
         //Initialize Theme Manager (before the formatting, because we need the colors for formatting!)
-        self.themeManager = ThemeManager.shared();
         
-        
-        self.parser = ContinousFountainParser.init(string: self.getText());
+        self.getParser();
+
         self.applyFormatChanges();
     }
     
-    func autosavesInPlace() -> Bool {
-        return true;
+    func getParser() -> ContinousFountainParser {
+        self.getThemeManager();
+        if (self.parser == nil) {
+            self.parser = ContinousFountainParser.init(string: self.getText());
+        }
+        return self.parser!;
     }
     
-    func windowNibName() -> String {
-        return "Document";
+    func getThemeManager() -> ThemeManager {
+        if (self.themeManager == nil) {
+            self.themeManager = ThemeManager.shared();
+        }
+        return self.themeManager!;
+    }
+    
+    
+    override class var autosavesInPlace: Bool {
+        return true
+    }
+    
+    func windowNibName() -> NSNib.Name? {
+        debugPrint("windowNibName");
+        return NSNib.Name("TableReadDocument");
     }
     
     override func data(ofType typeName: String) throws -> Data {
+        debugPrint("Data OfType: \(typeName)");
         let dataRepresentation = self.getText().data(using: .utf8);
         return dataRepresentation!;
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
+        debugPrint("read Data \(typeName)");
+        debugPrint(data);
         self.setText(String(data: data, encoding: .utf8)!);
+        debugPrint(self.getText());
+    }
+    
+    override func read(from url: URL, ofType typeName: String) throws {
+        debugPrint("read URL: \(typeName)");
+        debugPrint(url);
+        do {
+            let text = try String(contentsOf: url);
+            debugPrint(text);
+            self.setText(text);
+            
+        } catch {
+            ErrorHandler(error);
+        }
     }
     
     func getText() -> String {
@@ -238,7 +266,7 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
         saveDialog.begin {
             (result) -> Void in
             if (result.rawValue == NSApplication.ModalResponse.OK.rawValue) {
-                let outlineString = OutlineExtractor.outline(fromParse: self.parser);
+                let outlineString = OutlineExtractor.outline(fromParse: self.getParser());
                 do {
                     try outlineString?.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
                 } catch {
@@ -263,19 +291,20 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     }
     
     func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
-        if (self.matchParentheses) {
+        if (self.matchParentheses && replacementString != nil) {
             if (affectedCharRange.length == 0) {
-                if (replacementString?.compare("(")) {
-                    
+                if (replacementString! == "(") {
+                    return true;
                 }
             }
         }
+        return false;
     }
     
     func replaceCharacterInRange(range: NSRange, withString: String) {
         if (self.textView?.shouldChangeText(in: range, replacementString: withString) ?? false) {
             self.textView?.replaceCharacters(in: range, with: withString);
-            self.textDidChange(NSNotification(name: "", object: nil));
+            self.textDidChange(NSNotification(name: NSNotification.Name.init(rawValue: "Now is the time"), object: self) as Notification);
         }
     }
  
@@ -285,14 +314,14 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     
     func addString(string: String, atIndex: Int) {
         self.replaceCharacterInRange(range: NSMakeRange(atIndex, 0), withString: string);
-        let undo = self.undoManager?.prepare(withInvocationTarget: self) as! DocumentWindow;
+        let undo = self.undoManager?.prepare(withInvocationTarget: self) as! TableReadDocument;
         // [[[self undoManager] prepareWithInvocationTarget:self] removeString:string atIndex:index];
         undo.removeString(string: string, atIndex: atIndex);
     }
     
     func removeString(string: String, atIndex: Int) {
         self.replaceCharacterInRange(range: NSMakeRange(atIndex, string.lengthOfBytes(using: String.Encoding.utf8)), withString: string);
-        let undo = self.undoManager?.prepare(withInvocationTarget: self) as! DocumentWindow;
+        let undo = self.undoManager?.prepare(withInvocationTarget: self) as! TableReadDocument;
         undo.addString(string: string, atIndex: atIndex);
     }
     
@@ -332,10 +361,10 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     
     func textView(_ textView: NSTextView, shouldChangeTextInRanges affectedRanges: [ NSValue ], replacementStrings: [String]?) -> Bool {
         var count = 0;
-        if (self.matchParentheses) {
+        if (self.matchParentheses && replacementStrings != nil) {
             for range in affectedRanges {
                 if (range.rangeValue.length ==  0) {
-                    if (replacementStrings[count].isEqualTo("(")) {
+                    if (replacementStrings![count] == "(") {
                         self.addString(string: ")", atIndex: range.rangeValue.location);
                     }
                     count = count + 1;
@@ -374,10 +403,11 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
         }
         [self.parser parseChangeInRange:affectedCharRange withString:replacementString];
          **/
+        return true;
     }
 
     func textDidChange(notification: NSNotification) {
-        if (self.outlineViewVisible && self.parser.getAndResetChangeInOutline()) {
+        if (self.outlineViewVisible && self.getParser().getAndResetChangeInOutline()) {
             self.outlineView?.reloadData();
         }
         self.applyFormatChanges();
@@ -385,12 +415,12 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     
     func formatAllLines() {
         if (self.livePreview) {
-            for line in self.parser.lines {
+            for line in self.getParser().lines {
                 self.formatLineOfScreenplay(line as! Line, onlyFormatFont: false);
             }
         } else {
-            self.textView?.font = self.courier;
-            self.textView?.textColor = self.themeManager.currentTextColor();
+            self.textView?.font = TableReadFontStyle.courier.font;
+            self.textView?.textColor = self.getThemeManager().currentTextColor();
             
             if (self.textView?.textStorage != nil) {
                 let paragraphStyle = TableReadParagraphStyle();
@@ -416,18 +446,138 @@ class DocumentWindow: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource, N
     }
     
     func refontAllLines() {
-        for line in self.parser.lines {
+        for line in self.getParser().lines {
             self.formatLineOfScreenplay(line as! Line, onlyFormatFont: true);
         }
     }
     
     func applyFormatChanges() {
-        for case let index as Int in self.parser.changedIndices {
-            let line = self.parser.lines?[index] as! Line;
+        for case let index as Int in self.getParser().changedIndices {
+            let line = self.getParser().lines?[index] as! Line;
             self.formatLineOfScreenplay(line, onlyFormatFont: false);
         }
-        self.parser.changedIndices.removeAllObjects();
+        self.getParser().changedIndices.removeAllObjects();
     }
+    
+    override func makeWindowControllers() {
+        let controller = NSWindowController(windowNibName: "TableReadDocument", owner: self);
+        self.addWindowController(controller);
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if (item != nil) {
+            return self.parser?.numberOfOutlineItems() as! Int;
+        }
+        return 0;
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if (item != nil) {
+            return self.parser?.outlineItem(at: UInt(bitPattern: index));
+        }
+        return nil;
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        return false;
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        if let line = item as? Line {
+            if (line.typeIdAsString() == "heading") {
+                //Replace "INT/EXT" with "I/E" to make the lines match nicely
+                var string = line.string.uppercased();
+                string = string.replacingOccurrences(of: "INT/EXT", with: "I/E");
+                string = string.replacingOccurrences(of: "INT./EXT", with: "I/E");
+                string = string.replacingOccurrences(of: "EXT/INT", with: "I/E");
+                string = string.replacingOccurrences(of: "EXT./INT", with: "I/E");
+
+                
+                if ((line.sceneNumber) != nil) {
+                    return String(format: "    %@: %@", line.sceneNumber, string.replacingOccurrences(of: String(format: "#%@#", line.sceneNumber), with: ""));
+                } else {
+                    return NSString(utf8String: "    ".appending(string));
+                }
+            }
+            if (line.typeIdAsString() == "synopse") {
+                
+            }
+        }
+        
+    }
+    
+    /**
+
+    
+    
+    - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+    {
+    if ([item isKindOfClass:[Line class]]) {
+    Line* line = item;
+    if (line.type == heading) {
+    //Replace "INT/EXT" with "I/E" to make the lines match nicely
+    NSString* string = [line.string uppercaseString];
+    string = [string stringByReplacingOccurrencesOfString:@"INT/EXT" withString:@"I/E"];
+    string = [string stringByReplacingOccurrencesOfString:@"INT./EXT" withString:@"I/E"];
+    string = [string stringByReplacingOccurrencesOfString:@"EXT/INT" withString:@"I/E"];
+    string = [string stringByReplacingOccurrencesOfString:@"EXT./INT" withString:@"I/E"];
+    if (line.sceneNumber) {
+    return [NSString stringWithFormat:@"    %@: %@", line.sceneNumber, [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"#%@#", line.sceneNumber] withString:@""]];
+    } else {
+    return [@"    " stringByAppendingString:string];
+    }
+    }
+    if (line.type == synopse) {
+    NSString* string = line.string;
+    if ([string length] > 0) {
+    //Remove "="
+    if ([string characterAtIndex:0] == '=') {
+    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    //Remove leading whitespace
+    while (string.length && [string characterAtIndex:0] == ' ') {
+    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    return [@"  " stringByAppendingString:string];
+    } else {
+    return line.string;
+    }
+    }
+    if (line.type == section) {
+    NSString* string = line.string;
+    if ([string length] > 0) {
+    //Remove "#"
+    if ([string characterAtIndex:0] == '#') {
+    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    //Remove leading whitespace
+    while (string.length && [string characterAtIndex:0] == ' ') {
+    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    return string;
+    } else {
+    return line.string;
+    }
+    }
+    return line.string;
+    }
+    return @"";
+    }
+    
+    - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+    {
+    if ([item isKindOfClass:[Line class]]) {
+    Line* line = item;
+    NSRange lineRange = NSMakeRange(line.position, line.string.length);
+    [self.textView setSelectedRange:lineRange];
+    [self.textView scrollRangeToVisible:lineRange];
+    return YES;
+    }
+    return NO;
+    }
+    
+    
+    **/
     
    
 }
