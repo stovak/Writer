@@ -27,11 +27,12 @@ struct TableReadFont {
     mutating func getSize() -> Int16 {
         if (self.size == 0) {
             let userDefaults = UserDefaults.init();
-            self.size = userDefaults.value(forKey: "Fontsize") as! Int16;
-            
-            if (self.size == 0) {
-                self.size = TableReadFont.DEFAULT_SIZE;
+            if let fontsize = userDefaults.value(forKey: "Fontsize") as? Int16 {
+                self.size = fontsize;
+            } else {
+                self.size = Int16(TableReadFont.DEFAULT_SIZE);
             }
+            
         }
         return self.size;
     }

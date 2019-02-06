@@ -117,8 +117,13 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         self.textView?.isAutomaticDataDetectionEnabled = false;
         self.textView?.isAutomaticDashSubstitutionEnabled = false;
         
-        var userDefaults = UserDefaults.init();
-        self.matchParentheses = userDefaults.value(forKey: "MATCH_PARENTHESES_KEY") as! Bool;
+        let userDefaults = UserDefaults.init();
+        if let matchParen = userDefaults.value(forKey: "MATCH_PARENTHESES_KEY") as? Bool {
+            self.matchParentheses = matchParen;
+        } else {
+            self.matchParentheses = false;
+        }
+        
         if (self.contentBuffer != nil) {
             self.setText(self.contentBuffer);
         } else {
@@ -475,7 +480,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         if (item != nil) {
             return self.parser?.outlineItem(at: UInt(bitPattern: index));
         }
-        return nil;
+        return 0;
     }
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -484,100 +489,79 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         if let line = item as? Line {
-            if (line.typeIdAsString() == "heading") {
+            switch(line.typeIdAsString()) {
+                
+                
+            case "heading":
                 //Replace "INT/EXT" with "I/E" to make the lines match nicely
                 var string = line.string.uppercased();
                 string = string.replacingOccurrences(of: "INT/EXT", with: "I/E");
                 string = string.replacingOccurrences(of: "INT./EXT", with: "I/E");
                 string = string.replacingOccurrences(of: "EXT/INT", with: "I/E");
                 string = string.replacingOccurrences(of: "EXT./INT", with: "I/E");
-
+                
                 
                 if ((line.sceneNumber) != nil) {
                     return String(format: "    %@: %@", line.sceneNumber, string.replacingOccurrences(of: String(format: "#%@#", line.sceneNumber), with: ""));
                 } else {
                     return NSString(utf8String: "    ".appending(string));
                 }
-            }
-            if (line.typeIdAsString() == "synopse") {
+                break;
                 
+                
+            case "synopse":
+                var text = line.string;
+                
+                if (text != nil && (!text!.isEmpty)) {
+                    //Remove "="
+                    let startIndex = text!.index(text!.startIndex, offsetBy: 1);
+                    let firstLetter = String(text![..<startIndex]);
+                    if ( firstLetter == "=") {
+                        text = text!.replacingCharacters(in:  ..<startIndex, with: "");
+                    }
+                    //Remove leading whitespace
+                    text = text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
+                    
+                    return "  ".appending(text!);
+                } else {
+                    return line.string;
+                }
+                
+                break;
+                
+                
+            case "section":
+                var text = line.string;
+                if (text != nil && (!text!.isEmpty)) {
+                    let startIndex = text!.index(text!.startIndex, offsetBy: 1);
+                    let firstLetter = String(text![..<startIndex]);
+                    if (firstLetter == "#") {
+                        text = text!.replacingCharacters(in: ..<startIndex, with: "");
+                    }
+                    text = text!.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
+                    return text;
+                } else {
+                    return line.string;
+                }
+                break;
+                
+            default:
+                return line.string;
             }
+            
         }
-        
+        return "";
     }
     
-    /**
-
-    
-    
-    - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-    {
-    if ([item isKindOfClass:[Line class]]) {
-    Line* line = item;
-    if (line.type == heading) {
-    //Replace "INT/EXT" with "I/E" to make the lines match nicely
-    NSString* string = [line.string uppercaseString];
-    string = [string stringByReplacingOccurrencesOfString:@"INT/EXT" withString:@"I/E"];
-    string = [string stringByReplacingOccurrencesOfString:@"INT./EXT" withString:@"I/E"];
-    string = [string stringByReplacingOccurrencesOfString:@"EXT/INT" withString:@"I/E"];
-    string = [string stringByReplacingOccurrencesOfString:@"EXT./INT" withString:@"I/E"];
-    if (line.sceneNumber) {
-    return [NSString stringWithFormat:@"    %@: %@", line.sceneNumber, [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"#%@#", line.sceneNumber] withString:@""]];
-    } else {
-    return [@"    " stringByAppendingString:string];
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        if let line = item as? Line {
+            let lineRange = NSMakeRange(Int(line.position), Int(line.string.lengthOfBytes(using: String.Encoding.utf8) ));
+            self.textView?.setSelectedRange(lineRange);
+            self.textView?.scrollRangeToVisible(lineRange);
+            return true;
+        }
+        return false;
     }
-    }
-    if (line.type == synopse) {
-    NSString* string = line.string;
-    if ([string length] > 0) {
-    //Remove "="
-    if ([string characterAtIndex:0] == '=') {
-    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-    }
-    //Remove leading whitespace
-    while (string.length && [string characterAtIndex:0] == ' ') {
-    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-    }
-    return [@"  " stringByAppendingString:string];
-    } else {
-    return line.string;
-    }
-    }
-    if (line.type == section) {
-    NSString* string = line.string;
-    if ([string length] > 0) {
-    //Remove "#"
-    if ([string characterAtIndex:0] == '#') {
-    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-    }
-    //Remove leading whitespace
-    while (string.length && [string characterAtIndex:0] == ' ') {
-    string = [string stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-    }
-    return string;
-    } else {
-    return line.string;
-    }
-    }
-    return line.string;
-    }
-    return @"";
-    }
-    
-    - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
-    {
-    if ([item isKindOfClass:[Line class]]) {
-    Line* line = item;
-    NSRange lineRange = NSMakeRange(line.position, line.string.length);
-    [self.textView setSelectedRange:lineRange];
-    [self.textView scrollRangeToVisible:lineRange];
-    return YES;
-    }
-    return NO;
-    }
-    
-    
-    **/
     
    
 }
