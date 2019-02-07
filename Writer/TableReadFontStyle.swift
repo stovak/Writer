@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum TableReadFontType: String {
+    case courier = "courier";
+    case boldCourier = "boldCourier";
+    case italicCourier = "italicCourier";
+    case boldItalicCourier = "boldItalicCourier";
+}
+
+
 struct TableReadFont {
     
     public static let DEFAULT_SIZE = Int16(13);
@@ -40,7 +48,11 @@ struct TableReadFont {
 
 class TableReadFontStyle: NSObject {
     
-    public static let courier = TableReadFont.init(
+    public static func byType(_ type: TableReadFontType) -> TableReadFont {
+        return TableReadFontStyle().value(forKey: type.rawValue) as! TableReadFont;
+    }
+    
+    let courier = TableReadFont.init(
         id: "courier",
         description: "Courier",
         font: NSFont.init(
@@ -51,7 +63,7 @@ class TableReadFontStyle: NSObject {
     );
     
     
-    public static let boldCourier = TableReadFont.init(
+    let boldCourier = TableReadFont.init(
         id: "boldCourier",
         description: "Bold Courier",
         font: NSFont.init(
@@ -61,7 +73,7 @@ class TableReadFontStyle: NSObject {
             size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
     );
     
-    public static let italicCourier = TableReadFont.init(
+    let italicCourier = TableReadFont.init(
         id: "italicCourier",
         description: "Italic Courier",
         font: NSFont.init(
@@ -71,7 +83,7 @@ class TableReadFontStyle: NSObject {
             size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
     );
     
-    public static let boldItalicCourier = TableReadFont.init(
+    let boldItalicCourier = TableReadFont.init(
         id: "boldItalicCourier",
         description: "Bold Italic Courier",
         font: NSFont.init(

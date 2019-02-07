@@ -14,6 +14,8 @@
 		D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60218252206244800B6B8D9 /* TableReadDocument.swift */; };
 		D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
 		D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
+		D618C4F4220CA3020077BDD9 /* TableReadFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C4F3220CA3020077BDD9 /* TableReadFontTests.swift */; };
+		D618C4F7220CB2750077BDD9 /* TableReadLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C4F5220CB1EF0077BDD9 /* TableReadLine.swift */; };
 		D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
 		D61B9671220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
 		D61B96A4220A4E6000BC7067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61B96A3220A4E6000BC7067 /* Main.storyboard */; };
@@ -22,14 +24,10 @@
 		D638E7D122053E5F008F8F58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B138B57719E1C973000489C4 /* Info.plist */; };
 		D638E7D222053E69008F8F58 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B1C2DE5A1AACFF70002FE0F4 /* DocumentIcon.icns */; };
 		D638E7D322053E6D008F8F58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B138B58019E1C973000489C4 /* Images.xcassets */; };
-		D6491E4C2208C9C800A79130 /* TableReadParagraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */; };
 		D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */; };
-		D6491E4F2208D68900A79130 /* TableReadLineTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */; };
 		D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */; };
-		D6491E522208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
 		D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
 		D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B62A3919E3402F009F6E23 /* ColorView.m */; };
-		D66C464622054FCA00BD2FA6 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = B13111931CB2A42300D07A0C /* Line.m */; };
 		D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */; };
 		D68875222205103900E8E97D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA02205073E006B9B83 /* AudioToolbox.framework */; };
 		D68875232205103C00E8E97D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
@@ -120,8 +118,6 @@
 		B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinousFountainParser.m; sourceTree = "<group>"; };
 		B131118D1CB2A41800D07A0C /* NSString+Whitespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Whitespace.h"; sourceTree = "<group>"; };
 		B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Whitespace.m"; sourceTree = "<group>"; };
-		B13111921CB2A42300D07A0C /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		B13111931CB2A42300D07A0C /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		B13111991CB2BA7900D07A0C /* WriterParserPerformance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterParserPerformance.m; sourceTree = "<group>"; };
 		B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableIndexSet+Lowest.h"; sourceTree = "<group>"; };
 		B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableIndexSet+Lowest.m"; sourceTree = "<group>"; };
@@ -178,6 +174,8 @@
 		D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableReadWriterMac-Bridging-Header.h"; sourceTree = "<group>"; };
 		D60218252206244800B6B8D9 /* TableReadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadDocument.swift; sourceTree = "<group>"; };
 		D602182822069B9200B6B8D9 /* NSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDocument.swift; sourceTree = "<group>"; };
+		D618C4F3220CA3020077BDD9 /* TableReadFontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadFontTests.swift; sourceTree = "<group>"; };
+		D618C4F5220CB1EF0077BDD9 /* TableReadLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadLine.swift; sourceTree = "<group>"; };
 		D61B966F220A2CFD00BC7067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D61B969F220A41C700BC7067 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		D61B96A3220A4E6000BC7067 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -292,8 +290,6 @@
 			children = (
 				B131118B1CB2A41800D07A0C /* ContinousFountainParser.h */,
 				B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */,
-				B13111921CB2A42300D07A0C /* Line.h */,
-				B13111931CB2A42300D07A0C /* Line.m */,
 				B131118D1CB2A41800D07A0C /* NSString+Whitespace.h */,
 				B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */,
 				B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */,
@@ -346,6 +342,7 @@
 				D6491E512208F81100A79130 /* TableReadFontStyle.swift */,
 				D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */,
 				D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */,
+				D618C4F5220CB1EF0077BDD9 /* TableReadLine.swift */,
 				B138B57A19E1C973000489C4 /* Document.h */,
 				B138B57B19E1C973000489C4 /* Document.m */,
 				B138B58219E1C973000489C4 /* MainMenu.xib */,
@@ -492,6 +489,7 @@
 			children = (
 				D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */,
 				D685B46522051250008E7C27 /* Info.plist */,
+				D618C4F3220CA3020077BDD9 /* TableReadFontTests.swift */,
 			);
 			path = TableReadWriterMacTests;
 			sourceTree = "<group>";
@@ -791,16 +789,13 @@
 				D6FE9465220752B600B333A9 /* YAMLTokenizer.swift in Sources */,
 				D6FE94712207AB3300B333A9 /* ErrorHandler.swift in Sources */,
 				D6C96A97220500F9006B9B83 /* CastMemberTests.swift in Sources */,
-				D6491E4C2208C9C800A79130 /* TableReadParagraphStyle.swift in Sources */,
 				D6FE9466220752B600B333A9 /* YAMLOperators.swift in Sources */,
 				B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */,
-				D6491E4F2208D68900A79130 /* TableReadLineTypes.swift in Sources */,
 				D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
 				D6FE9467220752B600B333A9 /* YAMLRegex.swift in Sources */,
 				D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */,
 				B131119A1CB2BA7900D07A0C /* WriterParserPerformance.m in Sources */,
 				B1DCC4631CB32C5200438E7F /* WriterThemeManagerTests.m in Sources */,
-				D6491E522208F81100A79130 /* TableReadFontStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +824,7 @@
 				D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */,
 				D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */,
 				D6CF0BB522055D0B00FDC52C /* Theme.m in Sources */,
+				D618C4F7220CB2750077BDD9 /* TableReadLine.swift in Sources */,
 				D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */,
 				D6FE94722207AB9C00B333A9 /* ErrorHandler.swift in Sources */,
 				D6CF0BB322055CF900FDC52C /* FDXInterface.m in Sources */,
@@ -839,7 +835,6 @@
 				D6FE946E220752FF00B333A9 /* YAMLTokenizer.swift in Sources */,
 				D6CF0BB122055CEB00FDC52C /* FNPaginator.m in Sources */,
 				D6CF0BB222055CEB00FDC52C /* FNScript.m in Sources */,
-				D66C464622054FCA00BD2FA6 /* Line.m in Sources */,
 				D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */,
 				D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */,
 			);
@@ -850,6 +845,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */,
+				D618C4F4220CA3020077BDD9 /* TableReadFontTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

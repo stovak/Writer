@@ -9,256 +9,217 @@
 import Foundation
 import AppKit
 
+enum TableReadLineType: String {
+    case empty = "empty";
+    case section = "section";
+    case synopse = "synopse";
+    case titlePageTitle = "titlePageTitle";
+    case titlePageAuthor = "titlePageAuthor";
+    case titlePageCredit = "titlePageCredit";
+    case titlePageSource = "titlePageSource";
+    case titlePageContact = "titlePageContact";
+    case titlePageDraftDate = "titlePageDraftDate";
+    case titlePageUnknown = "titlePageUnknown";
+    case heading = "heading";
+    case action = "action";
+    case character = "character";
+    case parenthetical = "parenthetical";
+    case dialogue = "dialogue";
+    case doubleDialogueCharacter = "doubleDialogueCharacter";
+    case doubleDialogueParenthetical = "doubleDialogueParenthetical";
+    case doubleDialogue = "doubleDialogue";
+    case transition = "transition";
+    case lyrics = "lyrics";
+    case pageBreak = "pageBreak";
+    case centered = "centered";
+}
 
-struct TableReadLineType {
+struct TableReadLineTypeStyle {
     let id: String;
     let description: String;
-    let paragraphStyle: TableReadLineTypeParagraphStyle;
-    let fontStyle: String;
+    let paragraphStyle: TableReadParagraphStyle;
+    let fontStyle: TableReadFont;
     let uppercase: Bool;
     
     init( id: String,
           description: String,
-          paragraphStyle: TableReadLineTypeParagraphStyle = TableReadLineTypeParagraphStyle(),
-          fontStyle: String = "courier",
+          paragraphStyle: TableReadParagraphStyle = TableReadParagraphStyle(),
+          fontStyle: TableReadFont? = nil,
           uppercase: Bool = false
         ) {
         self.id = id;
         self.description = description;
         self.paragraphStyle = paragraphStyle;
-        self.fontStyle = fontStyle;
+        if (fontStyle == nil) {
+            self.fontStyle = TableReadFontStyle.byType(TableReadFontType.courier);
+        } else {
+            self.fontStyle = fontStyle!;
+        }
         self.uppercase = uppercase;
     }
 }
 
-struct TableReadLineTypeParagraphStyle {
-
+@objc
+class TableReadLineTypeStyles: NSObject {
     
-    public static let CHARACTER_INDENT = CGFloat(220);
-    public static let PARENTHETICAL_INDENT = CGFloat(185);
-    public static let DIALOGUE_INDENT = CGFloat(150);
-    public static let DIALOGUE_RIGHT = CGFloat(450);
-    
-    public static let DD_CHARACTER_INDENT = CGFloat(420);
-    public static let DD_PARENTHETICAL_INDENT = CGFloat(385);
-    public static let DOUBLE_DIALOGUE_INDENT = CGFloat(350);
-    public static let DD_RIGHT = CGFloat(650);
-    
-    let alignment: NSTextAlignment;
-    let firstLineHeadIndent: CGFloat;
-    let headIndent: CGFloat;
-    let tailIndent: CGFloat;
-    let lineHeightMultiple: CGFloat;
-    let maximumLineHeight: CGFloat;
-    let minimumLineHeight: CGFloat;
-    let lineSpacing: CGFloat;
-    let paragraphSpacing: CGFloat;
-    let paragraphSpacingBefore: CGFloat;
-    
-    init(   lineSpacing: CGFloat = 12,
-            alignment: NSTextAlignment = NSTextAlignment.left,
-            firstLineHeadIndent: CGFloat = 0,
-            headIndent: CGFloat = 0,
-            tailIndent: CGFloat = 0,
-            lineHeightMultiple: CGFloat = 12,
-            maximumLineHeight: CGFloat = 0,
-            minimumLineHeight: CGFloat = 0,
-            paragraphSpacing: CGFloat = 0,
-            paragraphSpacingBefore: CGFloat = 0
-        ) {
-        self.lineSpacing = lineSpacing;
-        self.alignment = alignment;
-        self.firstLineHeadIndent = firstLineHeadIndent;
-        self.headIndent = headIndent;
-        self.tailIndent = tailIndent;
-        self.lineHeightMultiple = lineHeightMultiple;
-        self.maximumLineHeight = maximumLineHeight;
-        self.minimumLineHeight = minimumLineHeight;
-        self.paragraphSpacing = paragraphSpacing;
-        self.paragraphSpacingBefore = paragraphSpacingBefore;
-    }
-
-}
-
-class TableReadLineTypes: NSObject {
-    
-    public static func getParagraphStyle(forTypeID: String) -> TableReadParagraphStyle {
-        let toReturn = TableReadParagraphStyle();
-        let lineType = self.value(forKey: forTypeID) as! TableReadLineType;
-        
-        toReturn.lineSpacing = lineType.paragraphStyle.lineSpacing;
-        toReturn.alignment = lineType.paragraphStyle.alignment;
-        toReturn.firstLineHeadIndent = lineType.paragraphStyle.firstLineHeadIndent;
-        toReturn.headIndent = lineType.paragraphStyle.headIndent;
-        toReturn.tailIndent = lineType.paragraphStyle.tailIndent;
-        toReturn.lineHeightMultiple = lineType.paragraphStyle.lineHeightMultiple;
-        toReturn.maximumLineHeight = lineType.paragraphStyle.maximumLineHeight;
-        toReturn.minimumLineHeight = lineType.paragraphStyle.minimumLineHeight;
-        toReturn.paragraphSpacing = lineType.paragraphStyle.paragraphSpacing;
-        toReturn.paragraphSpacingBefore = lineType.paragraphStyle.paragraphSpacingBefore;
-        
-        return toReturn;
+    public static func byLineType(_ id: TableReadLineType) -> TableReadLineTypeStyle {
+        return TableReadLineTypeStyles().value(forKey: id.rawValue) as! TableReadLineTypeStyle!;
     }
     
     
-    public static func getFontStyle(forFontStyleID: String) -> NSFont {
-        let trfs = TableReadFontStyle();
-        let trf = trfs.value(forKey: forFontStyleID) as! TableReadFont;
-        return trf.font;
-    }
-        
+     let empty                       = TableReadLineTypeStyle(
+                                           id: "empty",
+                                           description: "Empty"
+                                       );
     
-    public static let empty                       = TableReadLineType(
-                                                        id: "empty",
-                                                        description: "Empty"
-                                                    );
+     let section                     = TableReadLineTypeStyle(
+                                           id: "section",
+                                           description: "Section"
+                                       );
     
-    public static let section                     = TableReadLineType(
-                                                        id: "section",
-                                                        description: "Section"
-                                                    );
+     let synopse                     = TableReadLineTypeStyle(
+                                           id: "synopse",
+                                           description: "Synopse"
+                                       );
     
-    public static let synopse                     = TableReadLineType(
-                                                        id: "synopse",
-                                                        description: "Synopse"
-                                                    );
+     let titlePageTitle              = TableReadLineTypeStyle(
+                                           id: "titlePageTitle",
+                                           description: "Title Page Title"
+                                       );
     
-    public static let titlePageTitle              = TableReadLineType(
-                                                        id: "titlePageTitle",
-                                                        description: "Title Page Title"
-                                                    );
+     let titlePageAuthor             = TableReadLineTypeStyle(
+                                           id: "titlePageAuthor",
+                                           description: "Title Page Author"
+                                       );
     
-    public static let titlePageAuthor             = TableReadLineType(
-                                                        id: "titlePageAuthor",
-                                                        description: "Title Page Author"
-                                                    );
+     let titlePageCredit             = TableReadLineTypeStyle(
+                                           id: "titlePageCredit",
+                                           description: "Title Page Credit"
+                                       );
     
-    public static let titlePageCredit             = TableReadLineType(
-                                                        id: "titlePageCredit",
-                                                        description: "Title Page Credit"
-                                                    );
+     let titlePageSource             = TableReadLineTypeStyle(
+                                           id: "titlePageSource",
+                                           description: "Title Page Source"
+                                       );
     
-    public static let titlePageSource             = TableReadLineType(
-                                                        id: "titlePageSource",
-                                                        description: "Title Page Source"
-                                                    );
+     let titlePageContact            = TableReadLineTypeStyle(
+                                           id: "titlePageContact",
+                                           description: "Title Page Contact"
+                                       );
     
-    public static let titlePageContact            = TableReadLineType(
-                                                        id: "titlePageContact",
-                                                        description: "Title Page Contact"
-                                                    );
+     let titlePageDraftDate          = TableReadLineTypeStyle(
+                                           id: "titlePageDraftDate",
+                                           description: "Title Page Draft Date"
+                                       );
     
-    public static let titlePageDraftDate          = TableReadLineType(
-                                                        id: "titlePageDraftDate",
-                                                        description: "Title Page Draft Date"
-                                                    );
-    
-    public static let titlePageUnknown            = TableReadLineType(
-                                                        id: "titlePageUnknown",
+     let titlePageUnknown            = TableReadLineTypeStyle(
+                                           id: "titlePageUnknown",
                                                         description: "Title Page Unknown"
                                                     );
     
-    public static let heading                     = TableReadLineType(
-                                                        id: "heading",
-                                                        description: "Heading",
-                                                        fontStyle: "boldCourier",
-                                                        uppercase: true
-                                                    );
+     let heading                     = TableReadLineTypeStyle(
+                                           id: "heading",
+                                           description: "Heading",
+                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.courier),
+                                           uppercase: true
+                                       );
     
-    public static let action                      = TableReadLineType(
-                                                        id: "action",
-                                                        description: "Action",
-                                                        fontStyle: "boldCourier"
-                                                    );
+     let action                      = TableReadLineTypeStyle(
+                                           id: "action",
+                                           description: "Action",
+                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier)
+                                       );
     
-    public static let character                   = TableReadLineType(
-                                                        id: "character",
-                                                        description: "Character",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.CHARACTER_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.CHARACTER_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
-                                                        ),
-                                                        uppercase: true
-                                                    );
+     let character                   = TableReadLineTypeStyle(
+                                           id: "character",
+                                           description: "Character",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.CHARACTER_INDENT,
+                                               headIndent: TableReadParagraphStyle.CHARACTER_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                           ),
+                                           uppercase: true
+                                       );
     
-    public static let parenthetical               = TableReadLineType(
-                                                        id: "parenthetical",
-                                                        description: "Parenthetical",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.PARENTHETICAL_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.PARENTHETICAL_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
-                                                        )
-                                                    );
+     let parenthetical               = TableReadLineTypeStyle(
+                                           id: "parenthetical",
+                                           description: "Parenthetical",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.PARENTHETICAL_INDENT,
+                                               headIndent: TableReadParagraphStyle.PARENTHETICAL_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                           )
+                                       );
     
-    public static let dialogue                    = TableReadLineType(
-                                                        id: "dialogue",
-                                                        description: "Dialogue",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.DIALOGUE_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.DIALOGUE_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DIALOGUE_RIGHT
-                                                        )
-                                                    );
+     let dialogue                    = TableReadLineTypeStyle(
+                                           id: "dialogue",
+                                           description: "Dialogue",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.DIALOGUE_INDENT,
+                                               headIndent: TableReadParagraphStyle.DIALOGUE_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                           )
+                                       );
     
-    public static let doubleDialogueCharacter     = TableReadLineType(
-                                                        id: "doubleDialogueCharacter",
-                                                        description: "DD Character",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.DD_CHARACTER_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.DD_CHARACTER_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        )
-                                                    );
+     let doubleDialogueCharacter     = TableReadLineTypeStyle(
+                                           id: "doubleDialogueCharacter",
+                                           description: "DD Character",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.DD_CHARACTER_INDENT,
+                                               headIndent: TableReadParagraphStyle.DD_CHARACTER_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                           )
+                                       );
     
-    public static let doubleDialogueParenthetical = TableReadLineType(
-                                                        id: "doubleDialogueParenthetical",
-                                                        description: "DD Parenthetical",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.DD_PARENTHETICAL_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.DD_PARENTHETICAL_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        )
-                                                    );
+     let doubleDialogueParenthetical = TableReadLineTypeStyle(
+                                           id: "doubleDialogueParenthetical",
+                                           description: "DD Parenthetical",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.DD_PARENTHETICAL_INDENT,
+                                               headIndent: TableReadParagraphStyle.DD_PARENTHETICAL_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                           )
+                                       );
     
-    public static let doubleDialogue              = TableReadLineType(
-                                                        id: "doubleDialogue",
-                                                        description: "Double Dialogue",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            firstLineHeadIndent: TableReadLineTypeParagraphStyle.DOUBLE_DIALOGUE_INDENT,
-                                                            headIndent: TableReadLineTypeParagraphStyle.DOUBLE_DIALOGUE_INDENT,
-                                                            tailIndent: TableReadLineTypeParagraphStyle.DD_RIGHT
-                                                        )
-                                                    );
+     let doubleDialogue              = TableReadLineTypeStyle(
+                                           id: "doubleDialogue",
+                                           description: "Double Dialogue",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               firstLineHeadIndent: TableReadParagraphStyle.DOUBLE_DIALOGUE_INDENT,
+                                               headIndent: TableReadParagraphStyle.DOUBLE_DIALOGUE_INDENT,
+                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                           )
+                                       );
     
-    public static let transition                  = TableReadLineType(
-                                                        id: "transition",
-                                                        description: "Transition",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            alignment: NSTextAlignment.right
-                                                        ),
-                                                        fontStyle: "boldCourier",
-                                                        uppercase: true
-                                                    );
+     let transition                  = TableReadLineTypeStyle(
+                                           id: "transition",
+                                           description: "Transition",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               alignment: NSTextAlignment.right
+                                           ),
+                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
+                                           uppercase: true
+                                       );
     
-    public static let lyrics                      = TableReadLineType(
-                                                        id: "lyrics",
-                                                        description: "Lyrics",
-                                                        fontStyle: "italicCourier"
-                                                    );
+     let lyrics                      = TableReadLineTypeStyle(
+                                           id: "lyrics",
+                                           description: "Lyrics",
+                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.courier)
+                                       );
     
-    public static let pageBreak                   = TableReadLineType(
-                                                        id: "pageBreak",
-                                                        description: "Page Break"
-                                                    );
+     let pageBreak                   = TableReadLineTypeStyle(
+                                           id: "pageBreak",
+                                           description: "Page Break"
+                                       );
     
-    public static let centered                    = TableReadLineType(
-                                                        id: "centered",
-                                                        description: "Centered",
-                                                        paragraphStyle: TableReadLineTypeParagraphStyle(
-                                                            alignment: NSTextAlignment.center
-                                                        )
-                                                    );
+     let centered                    = TableReadLineTypeStyle(
+                                           id: "centered",
+                                           description: "Centered",
+                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
+                                               alignment: NSTextAlignment.center
+                                           )
+                                       );
     
 }
+
+

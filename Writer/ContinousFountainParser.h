@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Line.h"
+#import "TableReadLine.swift"
+#import <Foundation/Foundation.h>
 
 @interface ContinousFountainParser : NSObject
 
@@ -20,14 +21,14 @@
 
 //Convenience Methods for Testing
 - (NSString*)stringAtLine:(NSUInteger)line;
-- (LineType)typeAtLine:(NSUInteger)line;
+- (TableReadLineType)typeAtLine:(NSUInteger)line;
 - (NSUInteger)positionAtLine:(NSUInteger)line;
 - (NSString*)sceneNumberAtLine:(NSUInteger)line;
 
 //Convenience Methods for Outlineview data
 - (BOOL)getAndResetChangeInOutline;
 - (NSUInteger)numberOfOutlineItems; //Returns the number of items for the outline view
-- (Line*)outlineItemAtIndex:(NSUInteger)index; //Returns an items for the outline view
+- (TableReadLine*)outlineItemAtIndex:(NSUInteger)index; //Returns an items for the outline view
 
 - (NSString*)description;
 @end

@@ -110,7 +110,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         
         self.backgroundView?.fillColor = NSColor(calibratedRed: CGFloat(0.5), green: CGFloat(0.5), blue: CGFloat(0.5), alpha: CGFloat(1.0));
         self.textView?.setFont(
-            TableReadFontStyle.courier.font,
+            TableReadFontStyle.byType(TableReadFontType.courier).font,
             range: NSRange(location: 0, length: (self.textView?.string.lengthOfBytes(using: String.Encoding.utf8))!)
         );
         self.textView?.isAutomaticQuoteSubstitutionEnabled = false;
@@ -424,7 +424,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
                 self.formatLineOfScreenplay(line as! Line, onlyFormatFont: false);
             }
         } else {
-            self.textView?.font = TableReadFontStyle.courier.font;
+            self.textView?.font = TableReadFontStyle.byType(TableReadFontType.courier).font;
             self.textView?.textColor = self.getThemeManager().currentTextColor();
             
             if (self.textView?.textStorage != nil) {
@@ -439,8 +439,15 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         let begin = Int(line.position);
         let length = line.string.lengthOfBytes(using: String.Encoding.utf8);
         let range = NSMakeRange(begin, length);
-        let lineType = TableReadLineTypes.value(forKey: line.typeIdAsString()) as! TableReadLineType;
+        let lineTypeID = line.typeIdAsString();
+        if (lineTypeID == nil) {
+            debugPrint("LineTypeID was not set: ");
+            debugPrint(line);
+            exit(0);
+        }
+        let lineType = TableReadLineTypes.value(forKey: lineTypeID!) as! TableReadLineType;
         self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.font, range: range);
+        let fontAttribute = 
         self.textView?.textStorage?.addAttribute(NSAttributedString.Key.font, value: TableReadLineTypes.getFontStyle(forFontStyleID: lineType.fontStyle), range: range);
         if (!onlyFormatFont) {
             self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.paragraphStyle, range: range);

@@ -7,7 +7,6 @@
 //
 
 #import "ContinousFountainParser.h"
-#import "Line.h"
 #import "NSString+Whitespace.h"
 #import "NSMutableIndexSet+Lowest.h"
 
