@@ -13,7 +13,7 @@ class TableReadLine: NSObject {
     
     var type: TableReadLineType?;
     var string: String = "";
-    let position: Int;
+    var position: Int;
     var numberOfPreceedingFormattingCharacters: Int = 0;
     var sceneNumber: String?;
     

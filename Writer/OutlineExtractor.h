@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ContinousFountainParser.h"
+#import "TableReadWriterMac-Swift.h"
+
+@class ContinousFountainParser;
 
 @interface OutlineExtractor : NSObject
 

@@ -7,18 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B131119A1CB2BA7900D07A0C /* WriterParserPerformance.m in Sources */ = {isa = PBXBuildFile; fileRef = B13111991CB2BA7900D07A0C /* WriterParserPerformance.m */; };
-		B138B59019E1C974000489C4 /* WriterParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B58F19E1C974000489C4 /* WriterParserTests.m */; };
-		B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1509A411CB6EBBC00884918 /* WriterFDXTests.m */; };
-		B1DCC4631CB32C5200438E7F /* WriterThemeManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DCC4621CB32C5200438E7F /* WriterThemeManagerTests.m */; };
 		D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60218252206244800B6B8D9 /* TableReadDocument.swift */; };
-		D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
 		D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D602182822069B9200B6B8D9 /* NSDocument.swift */; };
 		D618C4F4220CA3020077BDD9 /* TableReadFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C4F3220CA3020077BDD9 /* TableReadFontTests.swift */; };
 		D618C4F7220CB2750077BDD9 /* TableReadLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C4F5220CB1EF0077BDD9 /* TableReadLine.swift */; };
-		D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
 		D61B9671220A2CFD00BC7067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B966F220A2CFD00BC7067 /* AppDelegate.swift */; };
-		D61B96A4220A4E6000BC7067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61B96A3220A4E6000BC7067 /* Main.storyboard */; };
 		D61B96A5220A4E6000BC7067 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D61B96A3220A4E6000BC7067 /* Main.storyboard */; };
 		D638E7CD22053E3D008F8F58 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B138B58219E1C973000489C4 /* MainMenu.xib */; };
 		D638E7D122053E5F008F8F58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B138B57719E1C973000489C4 /* Info.plist */; };
@@ -27,24 +20,8 @@
 		D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */; };
 		D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */; };
 		D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
-		D6550FB5220F550F0003D8DA /* ContinuousFountainParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */; };
 		D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B62A3919E3402F009F6E23 /* ColorView.m */; };
 		D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */; };
-		D68875222205103900E8E97D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA02205073E006B9B83 /* AudioToolbox.framework */; };
-		D68875232205103C00E8E97D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
-		D68875242205103F00E8E97D /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9A220503A3006B9B83 /* AVKit.framework */; };
-		D6AA1F3E22050B9200A6E3C6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA1F3D22050B9200A6E3C6 /* AudioToolbox.framework */; };
-		D6AA1F4122050BA800A6E3C6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA1F4022050BA800A6E3C6 /* CloudKit.framework */; };
-		D6C96A97220500F9006B9B83 /* CastMemberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96A96220500F9006B9B83 /* CastMemberTests.swift */; };
-		D6C96A99220502C8006B9B83 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A98220502C8006B9B83 /* XCTest.framework */; };
-		D6C96AAC22050A5C006B9B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96AAB22050A5C006B9B83 /* AppDelegate.swift */; };
-		D6C96AAE22050A5C006B9B83 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96AAD22050A5C006B9B83 /* DocumentBrowserViewController.swift */; };
-		D6C96AB022050A5C006B9B83 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96AAF22050A5C006B9B83 /* DocumentViewController.swift */; };
-		D6C96AB222050A5C006B9B83 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96AB122050A5C006B9B83 /* Document.swift */; };
-		D6C96AB522050A5C006B9B83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C96AB322050A5C006B9B83 /* Main.storyboard */; };
-		D6C96AB722050A5E006B9B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C96AB622050A5E006B9B83 /* Assets.xcassets */; };
-		D6C96ABA22050A5E006B9B83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C96AB822050A5E006B9B83 /* LaunchScreen.storyboard */; };
-		D6C96AC522050A5E006B9B83 /* TableReadWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C96AC422050A5E006B9B83 /* TableReadWriterTests.swift */; };
 		D6CF0BAF22055CEB00FDC52C /* FNElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65219E1E8CA000489C4 /* FNElement.m */; };
 		D6CF0BB022055CEB00FDC52C /* FNHTMLScript.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65419E1E8CA000489C4 /* FNHTMLScript.m */; };
 		D6CF0BB122055CEB00FDC52C /* FNPaginator.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65619E1E8CA000489C4 /* FNPaginator.m */; };
@@ -74,12 +51,6 @@
 		D6CF0BCB220560FB00FDC52C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA322050821006B9B83 /* CloudKit.framework */; };
 		D6CF0BCC2205640200FDC52C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
 		D6E439BA220F650B007DCF24 /* ContinuousFountainParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */; };
-		D6FE9462220752B600B333A9 /* YAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945C220752B600B333A9 /* YAMLParser.swift */; };
-		D6FE9463220752B600B333A9 /* Yaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945D220752B600B333A9 /* Yaml.swift */; };
-		D6FE9464220752B600B333A9 /* YAMLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945E220752B600B333A9 /* YAMLResult.swift */; };
-		D6FE9465220752B600B333A9 /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */; };
-		D6FE9466220752B600B333A9 /* YAMLOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE9460220752B600B333A9 /* YAMLOperators.swift */; };
-		D6FE9467220752B600B333A9 /* YAMLRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE9461220752B600B333A9 /* YAMLRegex.swift */; };
 		D6FE9469220752FF00B333A9 /* Yaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945D220752B600B333A9 /* Yaml.swift */; };
 		D6FE946A220752FF00B333A9 /* YAMLOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE9460220752B600B333A9 /* YAMLOperators.swift */; };
 		D6FE946B220752FF00B333A9 /* YAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945C220752B600B333A9 /* YAMLParser.swift */; };
@@ -87,7 +58,6 @@
 		D6FE946D220752FF00B333A9 /* YAMLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945E220752B600B333A9 /* YAMLResult.swift */; };
 		D6FE946E220752FF00B333A9 /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */; };
 		D6FE946F2207562700B333A9 /* TableReadWriterMac-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */; };
-		D6FE94712207AB3300B333A9 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE94702207AB3300B333A9 /* ErrorHandler.swift */; };
 		D6FE94722207AB9C00B333A9 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE94702207AB3300B333A9 /* ErrorHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,13 +68,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D685B44D2205124F008E7C27;
 			remoteInfo = TableReadWriterMac;
-		};
-		D6C96AC122050A5E006B9B83 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B138B56B19E1C973000489C4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D6C96AA822050A5C006B9B83;
-			remoteInfo = TableReadWriter;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -126,7 +89,6 @@
 		B138B57E19E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TableReadDocument.xib; sourceTree = "<group>"; };
 		B138B58019E1C973000489C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B138B58319E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		B138B58919E1C974000489C4 /* WriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B138B58E19E1C974000489C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B138B58F19E1C974000489C4 /* WriterParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriterParserTests.m; sourceTree = "<group>"; };
 		B138B61E19E1D6A7000489C4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -200,7 +162,6 @@
 		D6C96A9E22050686006B9B83 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D6C96AA02205073E006B9B83 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6C96AA322050821006B9B83 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		D6C96AA922050A5C006B9B83 /* TableReadWriter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableReadWriter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C96AAB22050A5C006B9B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C96AAD22050A5C006B9B83 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		D6C96AAF22050A5C006B9B83 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
@@ -209,7 +170,6 @@
 		D6C96AB622050A5E006B9B83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6C96AB922050A5E006B9B83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6C96ABB22050A5E006B9B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D6C96AC022050A5E006B9B83 /* TableReadWriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableReadWriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C96AC422050A5E006B9B83 /* TableReadWriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadWriterTests.swift; sourceTree = "<group>"; };
 		D6C96AC622050A5E006B9B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C9AAD92204BDFF005AFF99 /* TableReadWriter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableReadWriter-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -226,14 +186,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B138B58619E1C974000489C4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6C96A99220502C8006B9B83 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D685B44B2205124F008E7C27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,25 +197,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D685B45C22051250008E7C27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6C96AA622050A5C006B9B83 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D68875232205103C00E8E97D /* AVFoundation.framework in Frameworks */,
-				D6AA1F3E22050B9200A6E3C6 /* AudioToolbox.framework in Frameworks */,
-				D68875242205103F00E8E97D /* AVKit.framework in Frameworks */,
-				D6AA1F4122050BA800A6E3C6 /* CloudKit.framework in Frameworks */,
-				D68875222205103900E8E97D /* AudioToolbox.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6C96ABD22050A5E006B9B83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,9 +251,6 @@
 		B138B57419E1C973000489C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B138B58919E1C974000489C4 /* WriterTests.xctest */,
-				D6C96AA922050A5C006B9B83 /* TableReadWriter.app */,
-				D6C96AC022050A5E006B9B83 /* TableReadWriterTests.xctest */,
 				D685B44E2205124F008E7C27 /* TableReadWriterMac.app */,
 				D685B45F22051250008E7C27 /* TableReadWriterMacTests.xctest */,
 			);
@@ -548,23 +478,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B138B58819E1C974000489C4 /* WriterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B138B59619E1C974000489C4 /* Build configuration list for PBXNativeTarget "WriterTests" */;
-			buildPhases = (
-				B138B58519E1C974000489C4 /* Sources */,
-				B138B58619E1C974000489C4 /* Frameworks */,
-				B138B58719E1C974000489C4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = WriterTests;
-			productName = WriterTests;
-			productReference = B138B58919E1C974000489C4 /* WriterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		D685B44D2205124F008E7C27 /* TableReadWriterMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D685B46622051250008E7C27 /* Build configuration list for PBXNativeTarget "TableReadWriterMac" */;
@@ -600,41 +513,6 @@
 			productReference = D685B45F22051250008E7C27 /* TableReadWriterMacTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D6C96AA822050A5C006B9B83 /* TableReadWriter */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D6C96AC722050A5E006B9B83 /* Build configuration list for PBXNativeTarget "TableReadWriter" */;
-			buildPhases = (
-				D6C96AA522050A5C006B9B83 /* Sources */,
-				D6C96AA622050A5C006B9B83 /* Frameworks */,
-				D6C96AA722050A5C006B9B83 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TableReadWriter;
-			productName = TableReadWriter;
-			productReference = D6C96AA922050A5C006B9B83 /* TableReadWriter.app */;
-			productType = "com.apple.product-type.application";
-		};
-		D6C96ABF22050A5E006B9B83 /* TableReadWriterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D6C96ACA22050A5E006B9B83 /* Build configuration list for PBXNativeTarget "TableReadWriterTests" */;
-			buildPhases = (
-				D6C96ABC22050A5E006B9B83 /* Sources */,
-				D6C96ABD22050A5E006B9B83 /* Frameworks */,
-				D6C96ABE22050A5E006B9B83 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D6C96AC222050A5E006B9B83 /* PBXTargetDependency */,
-			);
-			name = TableReadWriterTests;
-			productName = TableReadWriterTests;
-			productReference = D6C96AC022050A5E006B9B83 /* TableReadWriterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -645,13 +523,6 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Hendrik Noeller";
 				TargetAttributes = {
-					B138B58819E1C974000489C4 = {
-						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = H3EJ6Y8VJ6;
-						LastSwiftMigration = 1010;
-						ProvisioningStyle = Automatic;
-						TestTargetID = B138B57219E1C973000489C4;
-					};
 					D685B44D2205124F008E7C27 = {
 						CreatedOnToolsVersion = 10.2;
 						DevelopmentTeam = H3EJ6Y8VJ6;
@@ -675,28 +546,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = D685B44D2205124F008E7C27;
 					};
-					D6C96AA822050A5C006B9B83 = {
-						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = H3EJ6Y8VJ6;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.InterAppAudio = {
-								enabled = 1;
-							};
-							com.apple.Push = {
-								enabled = 1;
-							};
-							com.apple.iCloud = {
-								enabled = 1;
-							};
-						};
-					};
-					D6C96ABF22050A5E006B9B83 = {
-						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = H3EJ6Y8VJ6;
-						ProvisioningStyle = Automatic;
-						TestTargetID = D6C96AA822050A5C006B9B83;
-					};
 				};
 			};
 			buildConfigurationList = B138B56E19E1C973000489C4 /* Build configuration list for PBXProject "TableReadWriterMac" */;
@@ -712,9 +561,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B138B58819E1C974000489C4 /* WriterTests */,
-				D6C96AA822050A5C006B9B83 /* TableReadWriter */,
-				D6C96ABF22050A5E006B9B83 /* TableReadWriterTests */,
 				D685B44D2205124F008E7C27 /* TableReadWriterMac */,
 				D685B45E22051250008E7C27 /* TableReadWriterMacTests */,
 			);
@@ -722,14 +568,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B138B58719E1C974000489C4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D61B96A4220A4E6000BC7067 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D685B44C2205124F008E7C27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -757,48 +595,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6C96AA722050A5C006B9B83 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6C96ABA22050A5E006B9B83 /* LaunchScreen.storyboard in Resources */,
-				D6C96AB722050A5E006B9B83 /* Assets.xcassets in Resources */,
-				D6C96AB522050A5C006B9B83 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6C96ABE22050A5E006B9B83 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B138B58519E1C974000489C4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6FE9463220752B600B333A9 /* Yaml.swift in Sources */,
-				D6FE9462220752B600B333A9 /* YAMLParser.swift in Sources */,
-				B138B59019E1C974000489C4 /* WriterParserTests.m in Sources */,
-				D6FE9464220752B600B333A9 /* YAMLResult.swift in Sources */,
-				D6FE9465220752B600B333A9 /* YAMLTokenizer.swift in Sources */,
-				D6FE94712207AB3300B333A9 /* ErrorHandler.swift in Sources */,
-				D6C96A97220500F9006B9B83 /* CastMemberTests.swift in Sources */,
-				D6FE9466220752B600B333A9 /* YAMLOperators.swift in Sources */,
-				B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */,
-				D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
-				D6550FB5220F550F0003D8DA /* ContinuousFountainParser.swift in Sources */,
-				D6FE9467220752B600B333A9 /* YAMLRegex.swift in Sources */,
-				D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */,
-				B131119A1CB2BA7900D07A0C /* WriterParserPerformance.m in Sources */,
-				B1DCC4631CB32C5200438E7F /* WriterThemeManagerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D685B44A2205124F008E7C27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -849,25 +648,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6C96AA522050A5C006B9B83 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6C96AB222050A5C006B9B83 /* Document.swift in Sources */,
-				D6C96AB022050A5C006B9B83 /* DocumentViewController.swift in Sources */,
-				D6C96AAE22050A5C006B9B83 /* DocumentBrowserViewController.swift in Sources */,
-				D6C96AAC22050A5C006B9B83 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6C96ABC22050A5E006B9B83 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6C96AC522050A5E006B9B83 /* TableReadWriterTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -875,11 +655,6 @@
 			isa = PBXTargetDependency;
 			target = D685B44D2205124F008E7C27 /* TableReadWriterMac */;
 			targetProxy = D685B46022051250008E7C27 /* PBXContainerItemProxy */;
-		};
-		D6C96AC222050A5E006B9B83 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D6C96AA822050A5C006B9B83 /* TableReadWriter */;
-			targetProxy = D6C96AC122050A5E006B9B83 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1023,61 +798,6 @@
 			};
 			name = Release;
 		};
-		B138B59719E1C974000489C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WriterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.HendrikNoeller.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "WriterTests/WriterTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Writer.app/Contents/MacOS/Writer";
-			};
-			name = Debug;
-		};
-		B138B59819E1C974000489C4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WriterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.HendrikNoeller.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "WriterTests/WriterTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Writer.app/Contents/MacOS/Writer";
-			};
-			name = Release;
-		};
 		D685B46722051250008E7C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1204,130 +924,6 @@
 			};
 			name = Release;
 		};
-		D6C96AC822050A5E006B9B83 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = TableReadWriter/TableReadWriter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TableReadWriter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stovak.TableReadWriter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D6C96AC922050A5E006B9B83 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = TableReadWriter/TableReadWriter.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TableReadWriter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stovak.TableReadWriter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		D6C96ACB22050A5E006B9B83 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TableReadWriterTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stovak.TableReadWriterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableReadWriter.app/TableReadWriter";
-			};
-			name = Debug;
-		};
-		D6C96ACC22050A5E006B9B83 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = H3EJ6Y8VJ6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = TableReadWriterTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stovak.TableReadWriterTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableReadWriter.app/TableReadWriter";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1336,15 +932,6 @@
 			buildConfigurations = (
 				B138B59119E1C974000489C4 /* Debug */,
 				B138B59219E1C974000489C4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B138B59619E1C974000489C4 /* Build configuration list for PBXNativeTarget "WriterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B138B59719E1C974000489C4 /* Debug */,
-				B138B59819E1C974000489C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1363,24 +950,6 @@
 			buildConfigurations = (
 				D685B46A22051250008E7C27 /* Debug */,
 				D685B46B22051250008E7C27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D6C96AC722050A5E006B9B83 /* Build configuration list for PBXNativeTarget "TableReadWriter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6C96AC822050A5E006B9B83 /* Debug */,
-				D6C96AC922050A5E006B9B83 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D6C96ACA22050A5E006B9B83 /* Build configuration list for PBXNativeTarget "TableReadWriterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6C96ACB22050A5E006B9B83 /* Debug */,
-				D6C96ACC22050A5E006B9B83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

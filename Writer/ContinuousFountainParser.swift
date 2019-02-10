@@ -9,6 +9,7 @@
 import Foundation
 import Cocoa
 
+@objc
 class ContinousFountainParser : NSObject {
     
     var lines: [ TableReadLine ] = [];
@@ -16,78 +17,78 @@ class ContinousFountainParser : NSObject {
     
     var changeInOutline: Bool?;
     
-    lazy let description = {
-        let result = "";
-        let index = 0;
-        for line in self.lines {
-            if (index == 0) {
-                result = result.append("0 ");
-            } else {
-                result = result.append(String.init(format: "%lu ", index));
-            }
-            result = result.append(line.toString()).append("\n");
-        }
-        return result;
-    }()
-    
-    
-    init(withString: String) {
+    init(withString string: String) {
         NSLog("CFP Init With String");
         super.init();
         self.parseText(string);
     }
     
     func parseText(_ text: String) {
-        self.lines = text.componentsSeparatedByString("\n");
+        let rawLines = text.components(separatedBy: "\n");
         var position = 0;
-        for rawLine in self.lines {
+        for rawLine in rawLines {
             let index = self.lines.count;
-            let line = TableReadLine.initWithString(rawLine, position: position);
-            self.parseTypeAndFormatting(forLine:line,  atIndex:index);
-            self.lines.addObject(line);
-            self.changedIndices.addObject(index);
-            position = rawLine.length + 1;
+            var line = TableReadLine.init(withString: rawLine, position: position);
+            self.parseTypeAndFormatting(forLine:&line,  atIndex:index);
+            self.lines.append(line);
+            self.changedIndices.add(index);
+            position = rawLine.lengthOfBytes(using: String.Encoding.utf8) + 1;
         }
         self.changeInOutline = true;
         
     }
     
     func parseChange(inRange range: NSRange, withString string: String) {
-        self.changedIndices = NSMutableIndexSet();
+        var changed = IndexSet();
         if (range.length == 0){  //Addition
             for i in 0..<string.lengthOfBytes(using: String.Encoding.utf8) {
-                let char = string.substring(with: NSMakeRange(i, 1));
-                self.changedIndices.add(self.parseCharacterAdded( char, atPosition: range.location + 1));
+                let addRange = Range.init( NSMakeRange(i, 1), in: string);
+                if (addRange != nil) {
+                    let char = String(string[addRange!]);
+                    changed.formUnion(self.parseCharacterAdded( char, atPosition: range.location + 1));
+                } else {
+                    NSLog("Range for string add: \(string) is invalid.");
+                }
             }
         } else if (string.lengthOfBytes(using: String.Encoding.utf8) == 0) {
-            for i in 0..<range.length { //Removal
-                self.changedIndices.add(self.parseCharacterRemoved(char, atPosition: range.location));
+            for _ in 0..<range.length { //Removal
+                if let indexSet = self.parseCharacterRemoved(atPosition: range.location) {
+                    changed.formUnion(indexSet);
+                }
             }
         } else {
             
-            for i in 0..<range.length { // first remove
-                self.changedIndices.add(self.parseCharacterRemoved(char, atPosition: range.location))
+            for _ in 0..<range.length { // first remove
+                if let indexSet = self.parseCharacterRemoved(atPosition: range.location) {
+                    changed.formUnion(indexSet);
+                }
             }
             
             for i in 0..<string.lengthOfBytes(using: String.Encoding.utf8) { // then add
-                let char = string.rangeOfCharacter(from: String.Encoding.utf8, options: nil, range: NSMakeRange(i, 1));
-                self.changedIndices.add(self.parseCharacterAdded(char, atPosition: range.location + 1));
+                let addRange = Range.init(NSMakeRange(i, 1), in: string);
+                if (addRange != nil) {
+                    let char = String(string[addRange!]);
+                    changed.formUnion(self.parseCharacterAdded(char, atPosition: range.location + 1));
+                } else {
+                    NSLog("Range for string replace: \(string) is invalid.");
+                }
+                
             }
         }
-        self.correctParsesInLines(self.changedIndices);
+        self.correctParses(inLines: changed);
     }
     
     func parseCharacterAdded(_ character: String, atPosition position: Int) -> IndexSet {
-        let lineIndex = self.lineIndex(atPosition, position: position);
+        let lineIndex = self.lineIndex(atPosition: position);
         let line = self.lines[lineIndex];
         let indexInLine = position - line.position;
         if (character == "\n") {
             var cutOffString = "";
-            if (indexInLine == line.string.length ) {
+            if (indexInLine == line.string.lengthOfBytes(using: String.Encoding.utf8) ) {
                 cutOffString = "";
             } else {
-                cutOffString = line.string.substring(fromIndex: indexInLine);
-                line.string = line.string.substring(toIndex: indexInLine);
+                cutOffString = line.string[indexInLine];
+                line.string = line.string[indexInLine];
             }
             var newline = Line.init(withString: cutOffString, position: lineIndex + 1);
             self.lines.insert(newLine, atIndex: lineIndex + 1);
@@ -105,17 +106,25 @@ class ContinousFountainParser : NSObject {
         }
     }
 
-    func parseCharacterRemoved(atPosition position: Int) -> NSIndexSet? {
+    func parseCharacterRemoved(atPosition position: Int) -> IndexSet? {
         let lineIndex = self.lineIndex(atPosition: position);
-        let line = self.line[lineIndex];
-        let indexInLine = position-line.position;
-        if (indexInLine == line.string.lengthOfBytues(String.Encoding.utf8)) {
+        let line = self.lines[lineIndex];
+        let indexInLine = position - line.position;
+        if (indexInLine == line.string.lengthOfBytes(using: String.Encoding.utf8)) {
             if (lineIndex == ( self.lines.count - 1 )) {
                 return nil; //Removed newline at end of document without there being an empty line - should never happen but be sure...
             }
             let nextLine = self.lines[lineIndex + 1];
-            line.string = line.string.append(nextLine.string);
+            line.string = line.string.appending(nextLine.string);
+            if (nextLine.getLineTypeStyle().changesOutline == true) {
+                self.changeInOutline = true;
+            }
+            self.lines.remove(at: lineIndex + 1);
+            self.decrementLinePositions(fromIndex: lineIndex + 1, amount: 1);
             
+            
+            
+        } else {
             
         }
         
@@ -131,7 +140,7 @@ class ContinousFountainParser : NSObject {
 
     func lineIndex(atPosition position: Int) -> Int {
         for i in 0..<self.lines.count {
-            line = self.lines[i];
+            let line = self.lines[i];
             if (line.position < position) {
                 return i-1;
             }
@@ -140,64 +149,62 @@ class ContinousFountainParser : NSObject {
     }
     
     func incrementLinePositions(fromIndex index: Int, amount: Int) {
-        for i in index..self.lines.count {
-            var line = self.lines[i];
+        for i in index...self.lines.count {
+            let line = self.lines[i];
             line.position += amount;
         }
     }
     
     func decrementLinePositions(fromIndex index: Int, amount: Int) {
-        for i in index..self.lines.count {
-            var line = self.lines[i];
+        for i in index...self.lines.count {
+            let line = self.lines[i];
             line.position -= amount;
         }
     }
     
     func correctParses(
-            inLines lineIndices: NSMutableIndexSet
+            inLines lineIndices: IndexSet
         ) {
-        for index in lineIndices.count..0 {
-            self.correctParse(inLine: lineIndices.lowestIndex, indicesToDo: lineIndex);
+        var localCopy = lineIndices;
+        while localCopy.count > 0 {
+            let removed = localCopy.remove(localCopy.min()!);
+            if (removed != nil) {
+                self.correctParse(inLine: removed!, indicesToDo: localCopy);
+            }
         }
      }
 
-    func corectParse(
+    func correctParse(
             inLine index: Int,
-            indicesToDo indices: NSMutableIndexSet
+            indicesToDo indices: IndexSet
         ) {
-        if (indices.count) {
-            let lowestToDo = indices.lowestIndex;
-            if (lowestToDo == index) {
-                indices.remove(index);
-            }
-        }
-        let currentLine = self.lines[index];
-        let oldType = currentLine.type;
+        
+        var currentLine = self.lines[index];
         let oldOmitOut = currentLine.omitOut;
         let oldLineTypeStyle = currentLine.getLineTypeStyle();
-        self.parseTypeAndFormatting(forLine: currentLine, atIndex: index);
+        self.parseTypeAndFormatting(forLine: &currentLine, atIndex: index);
         let currentLineTypeStyle = currentLine.getLineTypeStyle();
-        if (!self.changeInOutline == nil &&
+        if (self.changeInOutline != nil &&
             (oldLineTypeStyle.changesOutline || currentLineTypeStyle.changesOutline)) {
             self.changeInOutline = true;
         }
-        self.changedIndices.addObjects(from: index);
-        if (oldLineTypeStyle.id != newLineTypeStyle.id || oldOmitOut != currentLIne.omitOut) {
+        self.changedIndices.add(index);
+        if (oldLineTypeStyle.id != currentLineTypeStyle.id || oldOmitOut != currentLine.omitOut) {
             if (index < ( self.lines.count - 1)) {
                 let nextLine = self.lines[index + 1];
                 let nextLineTypeStyle = nextLine.getLineTypeStyle();
                 if (
                     currentLineTypeStyle.includeNextLine == true ||
-                    nextLIneTypeStyle.includeNextLine == true
+                    nextLineTypeStyle.includeNextLine == true
                 ) {
-                    self.correctParses(inLines: indices+1, indicesToDo: indices);
+                    self.correctParse(inLine: index + 1, indicesToDo: indices);
                 }
             }
         }
     }
     
     func parseTypeAndFormatting(
-            forLine line: TableReadLine,
+            forLine line: inout TableReadLine,
             atIndex index: Int
         ) {
         
@@ -213,8 +220,8 @@ class ContinousFountainParser : NSObject {
     func rangesInChars(_
             string: unichar,
             ofLength length: Int,
-            between startString: Char,
-            and endString: Char,
+            between startString: Character,
+            and endString: Character,
             withLength delimLength: Int,
             excludingIndices excludes: IndexSet
         ) -> NSMutableIndexSet {
@@ -270,6 +277,20 @@ class ContinousFountainParser : NSObject {
             return true;
         }
         return false;
+    }
+    
+    func description() -> String {
+        var result: String = "";
+        var index = 0;
+        for line in self.lines {
+            if (index == 0) {
+                result = result.appending("0 ");
+            } else {
+                result = result.appending(String.init(format: "%lu ", index));
+            }
+            result = result.appending(line.toString()).appending("\n");
+        }
+        return result;
     }
     
 }
