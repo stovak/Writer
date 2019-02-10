@@ -9,6 +9,16 @@
 import Foundation
 import Cocoa
 
+enum ContinuousFountainParserPatterns: String {
+    case BOLD_PATTERN = "**";
+    case ITALIC_PATTERN = "*";
+    case UNDERLINE_PATTERN = "_";
+    case NOTE_OPEN_PATTERN = "[[";
+    case NOTE_CLOSE_PATTERN = "]]";
+    case OMIT_OPEN_PATTERN = "/*";
+    case OMIT_CLOSE_PATTERN = "*/";
+}
+
 @objc
 class ContinousFountainParser : NSObject {
     
@@ -82,35 +92,35 @@ class ContinousFountainParser : NSObject {
         let lineIndex = self.lineIndex(atPosition: position);
         let line = self.lines[lineIndex];
         let indexInLine = position - line.position;
-        if (character == "\n") {
+        if (character.first?.isNewline ?? false) {
             var cutOffString = "";
-            if (indexInLine == line.string.lengthOfBytes(using: String.Encoding.utf8) ) {
+            if (indexInLine == line.string.lengthOfBytes(using: .utf8) ) {
                 cutOffString = "";
             } else {
-                cutOffString = line.string[indexInLine];
-                line.string = line.string[indexInLine];
+                
+                cutOffString = String(line.string[..<line.string.index(line.string.startIndex, offsetBy: indexInLine)]);
+                line.string = String(line.string[line.string.index(line.string.startIndex, offsetBy: indexInLine)...]);
             }
-            var newline = Line.init(withString: cutOffString, position: lineIndex + 1);
-            self.lines.insert(newLine, atIndex: lineIndex + 1);
+            var newline = TableReadLine.init(withString: cutOffString, position: lineIndex + 1);
+            self.lines.insert(newline, at: lineIndex + 1);
             self.incrementLinePositions(fromIndex:lineIndex + 2, amount: 1);
-            return IndexSet.init(integersIn: NSMakeRange(lineIndex, 2));
-        } else {
-            let pieces = [
-                line.string.subString(toIndex: indexInLine),
-                character,
-                line.string.substring(fromIndex: indexInLine)
-            ];
-            line.string = pieces.joined(byString: "");
-            self.incrementLinePosition(fromIndex: lineIndex + 1, amount: 1);
-            return IndexSet.init(integer: lineIndex);
-        }
+            return IndexSet.init(integersIn: Range(NSMakeRange(lineIndex, 2))!);
+        } // else
+        let pieces = [
+            String(line.string[..<line.string.index(line.string.startIndex, offsetBy: indexInLine)]),
+            String(character),
+            String(line.string[line.string.index(line.string.startIndex, offsetBy: indexInLine)...])
+        ];
+        line.string = pieces.joined(separator: "");
+        self.incrementLinePositions(fromIndex: lineIndex + 1, amount: 1);
+        return IndexSet.init(integer: lineIndex);
     }
 
     func parseCharacterRemoved(atPosition position: Int) -> IndexSet? {
         let lineIndex = self.lineIndex(atPosition: position);
         let line = self.lines[lineIndex];
         let indexInLine = position - line.position;
-        if (indexInLine == line.string.lengthOfBytes(using: String.Encoding.utf8)) {
+        if (indexInLine == line.string.count) {
             if (lineIndex == ( self.lines.count - 1 )) {
                 return nil; //Removed newline at end of document without there being an empty line - should never happen but be sure...
             }
@@ -121,21 +131,16 @@ class ContinousFountainParser : NSObject {
             }
             self.lines.remove(at: lineIndex + 1);
             self.decrementLinePositions(fromIndex: lineIndex + 1, amount: 1);
-            
-            
-            
-        } else {
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
+            return IndexSet(integer: lineIndex);
+        } // else
+        let pieces = [
+            String(line.string[..<line.string.index(line.string.startIndex, offsetBy: indexInLine)]),
+            String(line.string[line.string.index(line.string.startIndex, offsetBy: indexInLine)...])
+        ];
+        line.string = pieces.joined();
+        self.decrementLinePositions(fromIndex: lineIndex + 1, amount: 1);
+        return IndexSet(integer: lineIndex);
+    
     }
 
     func lineIndex(atPosition position: Int) -> Int {
@@ -207,6 +212,8 @@ class ContinousFountainParser : NSObject {
             forLine line: inout TableReadLine,
             atIndex index: Int
         ) {
+        line.type = self.parseLineType(forLine: line, atIndex: index);
+        let length = line.string.count;
         
     }
     
@@ -214,6 +221,16 @@ class ContinousFountainParser : NSObject {
             forLine line: TableReadLine,
             atIndex index: Int
         ) -> TableReadLineType {
+        var string = line.string;
+        var length = string.count;
+        if (length == 0) {
+            return .empty;
+        }
+        
+        let firstChar = string.first;
+        let lastChar = string.last;
+        let numWhiteSpaceCharacters = string.rangeOfCharacter(from: .whitespaces);
+        let containsOnlyWhitespace = (String(.count == length);
         
     }
     
