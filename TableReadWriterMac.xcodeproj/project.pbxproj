@@ -27,6 +27,7 @@
 		D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */; };
 		D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */; };
 		D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
+		D6550FB5220F550F0003D8DA /* ContinuousFountainParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */; };
 		D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B62A3919E3402F009F6E23 /* ColorView.m */; };
 		D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */; };
 		D68875222205103900E8E97D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA02205073E006B9B83 /* AudioToolbox.framework */; };
@@ -57,7 +58,6 @@
 		D6CF0BB922055D2500FDC52C /* Courier Prime Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED61C88AC99001C4D27 /* Courier Prime Italic.ttf */; };
 		D6CF0BBA22055D2500FDC52C /* Courier Prime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED71C88AC99001C4D27 /* Courier Prime.ttf */; };
 		D6CF0BBB22055D4F00FDC52C /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B57B19E1C973000489C4 /* Document.m */; };
-		D6CF0BBD22055D8600FDC52C /* ContinousFountainParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */; };
 		D6CF0BBE22055D8600FDC52C /* NSString+Whitespace.m in Sources */ = {isa = PBXBuildFile; fileRef = B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */; };
 		D6CF0BBF22055D8600FDC52C /* NSMutableIndexSet+Lowest.m in Sources */ = {isa = PBXBuildFile; fileRef = B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */; };
 		D6CF0BC022055D8600FDC52C /* PrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D0B84A19E31B86005252E4 /* PrintView.m */; };
@@ -73,6 +73,7 @@
 		D6CF0BCA22055E8F00FDC52C /* TableReadDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = B138B57D19E1C973000489C4 /* TableReadDocument.xib */; };
 		D6CF0BCB220560FB00FDC52C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA322050821006B9B83 /* CloudKit.framework */; };
 		D6CF0BCC2205640200FDC52C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
+		D6E439BA220F650B007DCF24 /* ContinuousFountainParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */; };
 		D6FE9462220752B600B333A9 /* YAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945C220752B600B333A9 /* YAMLParser.swift */; };
 		D6FE9463220752B600B333A9 /* Yaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945D220752B600B333A9 /* Yaml.swift */; };
 		D6FE9464220752B600B333A9 /* YAMLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945E220752B600B333A9 /* YAMLResult.swift */; };
@@ -114,8 +115,6 @@
 		B13111861CB289ED00D07A0C /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		B13111871CB289ED00D07A0C /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		B13111891CB2917000D07A0C /* Themes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Themes.plist; sourceTree = "<group>"; };
-		B131118B1CB2A41800D07A0C /* ContinousFountainParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinousFountainParser.h; sourceTree = "<group>"; };
-		B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinousFountainParser.m; sourceTree = "<group>"; };
 		B131118D1CB2A41800D07A0C /* NSString+Whitespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Whitespace.h"; sourceTree = "<group>"; };
 		B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Whitespace.m"; sourceTree = "<group>"; };
 		B13111991CB2BA7900D07A0C /* WriterParserPerformance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterParserPerformance.m; sourceTree = "<group>"; };
@@ -182,6 +181,7 @@
 		D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableReadParagraphStyle.swift; sourceTree = "<group>"; };
 		D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadLineTypes.swift; sourceTree = "<group>"; };
 		D6491E512208F81100A79130 /* TableReadFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadFontStyle.swift; sourceTree = "<group>"; };
+		D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousFountainParser.swift; sourceTree = "<group>"; };
 		D685B44E2205124F008E7C27 /* TableReadWriterMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableReadWriterMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D685B45922051250008E7C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D685B45A22051250008E7C27 /* TableReadWriterMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TableReadWriterMac.entitlements; sourceTree = "<group>"; };
@@ -288,12 +288,11 @@
 		B13111911CB2A41B00D07A0C /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				B131118B1CB2A41800D07A0C /* ContinousFountainParser.h */,
-				B131118C1CB2A41800D07A0C /* ContinousFountainParser.m */,
 				B131118D1CB2A41800D07A0C /* NSString+Whitespace.h */,
 				B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */,
 				B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */,
 				B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */,
+				D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */,
 			);
 			name = Parsing;
 			sourceTree = "<group>";
@@ -792,6 +791,7 @@
 				D6FE9466220752B600B333A9 /* YAMLOperators.swift in Sources */,
 				B1509A421CB6EBBC00884918 /* WriterFDXTests.m in Sources */,
 				D61B9670220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
+				D6550FB5220F550F0003D8DA /* ContinuousFountainParser.swift in Sources */,
 				D6FE9467220752B600B333A9 /* YAMLRegex.swift in Sources */,
 				D602182922069B9200B6B8D9 /* NSDocument.swift in Sources */,
 				B131119A1CB2BA7900D07A0C /* WriterParserPerformance.m in Sources */,
@@ -808,11 +808,11 @@
 				D6CF0BC222055E1D00FDC52C /* FastFountainParser.m in Sources */,
 				D6CF0BC322055E1D00FDC52C /* FountainParser.m in Sources */,
 				D6FE946A220752FF00B333A9 /* YAMLOperators.swift in Sources */,
+				D6E439BA220F650B007DCF24 /* ContinuousFountainParser.swift in Sources */,
 				D6CF0BC422055E1D00FDC52C /* FountainRegexes.m in Sources */,
 				D6CF0BC522055E1D00FDC52C /* FountainWriter.m in Sources */,
 				D6FE946B220752FF00B333A9 /* YAMLParser.swift in Sources */,
 				D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */,
-				D6CF0BBD22055D8600FDC52C /* ContinousFountainParser.m in Sources */,
 				D6CF0BBE22055D8600FDC52C /* NSString+Whitespace.m in Sources */,
 				D6CF0BBF22055D8600FDC52C /* NSMutableIndexSet+Lowest.m in Sources */,
 				D6CF0BC022055D8600FDC52C /* PrintView.m in Sources */,

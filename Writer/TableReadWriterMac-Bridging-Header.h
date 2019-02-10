@@ -12,7 +12,6 @@
 #import "FountainRegexes.h"
 #import "FountainWriter.h"
 #import "QUQFont.h"
-#import "ContinousFountainParser.h"
 #import "Document.h"
 #import "FDXInterface.h"
 #import "ThemeManager.h"

@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "TableReadLine.swift"
 #import <Foundation/Foundation.h>
 
 @interface ContinousFountainParser : NSObject

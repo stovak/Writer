@@ -35,10 +35,16 @@ class TableReadLine: NSObject {
     
     func typeAsString() -> String {
         if (self.type != nil) {
-            return TableReadLineTypeStyles.byLineType(self.type).description;
+            return self.getLineTypeStyle().description;
         }
+        return TableReadLineTypeStyles().empty.description;
+    }
+    
+    func getLineTypeStyle() -> TableReadLineTypeStyle {
+        return TableReadLineTypeStyles.byLineType(self.type);
+    }
+    
+    func toString() -> String {
+        return self.typeAsString().append(": \"").append(self.string).append("\"");
     }
 }
-
-@objc
-class Line: TableReadLine { }
