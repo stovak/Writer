@@ -35,6 +35,7 @@ enum TableReadLineType: String {
 }
 
 struct TableReadLineTypeStyle {
+    let lineType: TableReadLineType;
     let id: String;
     let description: String;
     let paragraphStyle: TableReadParagraphStyle;
@@ -42,20 +43,25 @@ struct TableReadLineTypeStyle {
     let uppercase: Bool;
     let changesOutline: Bool;
     let includeNextLine: Bool;
+    let isMetaData: Bool;
     
-    init( id: String,
+    init( lineType: TableReadLineType,
+          id: String,
           description: String,
           paragraphStyle: TableReadParagraphStyle = TableReadParagraphStyle(),
           fontStyle: TableReadFont? = nil,
           uppercase: Bool = false,
           changesOutline: Bool = false,
-          includeNextLine: Bool = false
+          includeNextLine: Bool = false,
+          isMetaData: Bool = false
         ) {
+        self.lineType = lineType;
         self.id = id;
         self.description = description;
         self.paragraphStyle = paragraphStyle;
         self.changesOutline = changesOutline;
         self.includeNextLine = includeNextLine;
+        self.isMetaData = isMetaData;
         if (fontStyle == nil) {
             self.fontStyle = TableReadFontStyle.byType(TableReadFontType.courier);
         } else {
@@ -69,17 +75,19 @@ struct TableReadLineTypeStyle {
 class TableReadLineTypeStyles: NSObject {
     
     public static func byLineType(_ id: TableReadLineType) -> TableReadLineTypeStyle {
-        return TableReadLineTypeStyles().value(forKey: id.rawValue) as! TableReadLineTypeStyle!;
+        return TableReadLineTypeStyles().value(forKey: id.rawValue) as! TableReadLineTypeStyle;
     }
     
     
      let empty                       = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.empty,
                                            id: "empty",
                                            description: "Empty",
                                            includeNextLine: true
                                        );
     
      let section                     = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.section,
                                            id: "section",
                                            description: "Section",
                                            changesOutline: true,
@@ -87,6 +95,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let synopse                     = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.synopse,
                                            id: "synopse",
                                            description: "Synopse",
                                            changesOutline: true,
@@ -94,48 +103,63 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let titlePageTitle              = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageTitle,
                                            id: "titlePageTitle",
                                            description: "Title Page Title",
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageAuthor             = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageAuthor,
                                            id: "titlePageAuthor",
                                            description: "Title Page Author",
-                                           includeNextLIne: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageCredit             = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageCredit,
                                            id: "titlePageCredit",
                                            description: "Title Page Credit",
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageSource             = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageSource,
                                            id: "titlePageSource",
                                            description: "Title Page Source",
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageContact            = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageContact,
                                            id: "titlePageContact",
                                            description: "Title Page Contact",
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageDraftDate          = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageDraftDate,
                                            id: "titlePageDraftDate",
                                            description: "Title Page Draft Date",
-                                           includeNextLIne: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let titlePageUnknown            = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.titlePageUnknown,
                                            id: "titlePageUnknown",
                                            description: "Title Page Unknown",
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           isMetaData: true
                                        );
     
      let heading                     = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.heading,
                                            id: "heading",
                                            description: "Heading",
                                            fontStyle: TableReadFontStyle.byType(TableReadFontType.courier),
@@ -144,12 +168,14 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let action                      = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.action,
                                            id: "action",
                                            description: "Action",
                                            fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier)
                                        );
     
      let character                   = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.character,
                                            id: "character",
                                            description: "Character",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -162,6 +188,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let parenthetical               = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.parenthetical,
                                            id: "parenthetical",
                                            description: "Parenthetical",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -173,6 +200,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let dialogue                    = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.dialogue,
                                            id: "dialogue",
                                            description: "Dialogue",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -184,6 +212,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let doubleDialogueCharacter     = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.doubleDialogueCharacter,
                                            id: "doubleDialogueCharacter",
                                            description: "DD Character",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -195,6 +224,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let doubleDialogueParenthetical = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.doubleDialogueParenthetical,
                                            id: "doubleDialogueParenthetical",
                                            description: "DD Parenthetical",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -206,6 +236,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let doubleDialogue              = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.doubleDialogue,
                                            id: "doubleDialogue",
                                            description: "Double Dialogue",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -217,6 +248,7 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let transition                  = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.transition,
                                            id: "transition",
                                            description: "Transition",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
@@ -227,17 +259,20 @@ class TableReadLineTypeStyles: NSObject {
                                        );
     
      let lyrics                      = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.lyrics,
                                            id: "lyrics",
                                            description: "Lyrics",
                                            fontStyle: TableReadFontStyle.byType(TableReadFontType.courier)
                                        );
     
      let pageBreak                   = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.pageBreak,
                                            id: "pageBreak",
                                            description: "Page Break"
                                        );
     
      let centered                    = TableReadLineTypeStyle(
+                                           lineType: TableReadLineType.centered,
                                            id: "centered",
                                            description: "Centered",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(

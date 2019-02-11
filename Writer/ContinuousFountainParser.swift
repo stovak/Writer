@@ -9,16 +9,6 @@
 import Foundation
 import Cocoa
 
-enum ContinuousFountainParserPatterns: String {
-    case BOLD_PATTERN = "**";
-    case ITALIC_PATTERN = "*";
-    case UNDERLINE_PATTERN = "_";
-    case NOTE_OPEN_PATTERN = "[[";
-    case NOTE_CLOSE_PATTERN = "]]";
-    case OMIT_OPEN_PATTERN = "/*";
-    case OMIT_CLOSE_PATTERN = "*/";
-}
-
 @objc
 class ContinousFountainParser : NSObject {
     
@@ -221,71 +211,206 @@ class ContinousFountainParser : NSObject {
             forLine line: TableReadLine,
             atIndex index: Int
         ) -> TableReadLineType {
-        var string = line.string;
-        var length = string.count;
+        let string = line.string.trimmingCharacters(in: CharacterSet.whitespaces);
+        let length = string.count;
         if (length == 0) {
             return .empty;
         }
         
         let firstChar = string.first;
         let lastChar = string.last;
-        let numWhiteSpaceCharacters = string.rangeOfCharacter(from: .whitespaces);
-        let containsOnlyWhitespace = (String(.count == length);
         
+        //Check for forces (the first character can force a line type)
+        if (firstChar == "!") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .action;
+        }
+        if (firstChar == "@") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .character;
+        }
+        if (firstChar == "~") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .lyrics;
+        }
+        if (firstChar == ">" && lastChar != "<") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .transition;
+        }
+        if (firstChar == "#") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .section;
+        }
+        if (firstChar == "=" && (length >= 2 ? string.first != "=" : true)) {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .synopse;
+        }
+        if (firstChar == "." && length >= 2 && string.first != ".") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .heading;
+        }
+        
+        let preceedingLine = (index == 0) ? nil : self.lines[index - 1];
+        let firstColonInRange = string.range(of: ":");
+        let preceedingLineIsNil = ( preceedingLine == nil );
+        let preceedingLineIsMetaData = ( preceedingLine?.getLineTypeStyle().isMetaData ?? false );
+
+        
+        if ( (preceedingLineIsNil || preceedingLineIsMetaData) && firstColonInRange != nil ) {
+            let upToFirstColon = String(string[..<firstColonInRange!.upperBound].localizedCapitalized);
+            let lineTypeStyles = TableReadLineTypeStyles();
+            if let lineTypeStyle = (lineTypeStyles.value(forKey: "titlePage" + upToFirstColon) as? TableReadLineTypeStyle) {
+                return lineTypeStyle.lineType;
+            }
+            return TableReadLineType.titlePageUnknown;
+        }
+        if (preceedingLine != nil){
+            if (length >= 2 && string.substring(to: 2) == "  ") {
+                line.numberOfPreceedingFormattingCharacters = 2;
+                return preceedingLine!.type;
+            } else if (length >= 1 && string.substring(to: 1) == "\t") {
+                line.numberOfPreceedingFormattingCharacters = 1;
+                return preceedingLine!.type;
+            }
+        }
+        
+        let firstThreeLetters = string.substring(to: 3).lowercased();
+        let lastThreeLetters = string.substring(from: 3).lowercased();
+
+        if (preceedingLine?.type == .empty) {
+            if (length >= 3) {
+                if (
+                    firstThreeLetters == "int" ||
+                    firstThreeLetters == "ext" ||
+                    firstThreeLetters == "est" ||
+                    firstThreeLetters == "i/e"
+                    ) {
+                    return .heading;
+                }
+                if ( lastThreeLetters == "to:") {
+                    return .transition;
+                }
+                if ( firstThreeLetters == "===") {
+                    return .pageBreak;
+                }
+            }
+            if (firstChar == ">" && lastChar == "<") {
+                return .centered;
+            }
+        }
+        if (preceedingLine != nil) {
+            if (
+                preceedingLine!.type == .character ||
+                preceedingLine!.type == .dialogue  ||
+                preceedingLine!.type == .parenthetical
+                ) {
+                if (firstChar == "(" && lastChar == ")") {
+                    return .parenthetical
+                }
+                return .dialogue
+            } else if (
+                preceedingLine!.type == .doubleDialogueCharacter ||
+                preceedingLine!.type == .doubleDialogue ||
+                preceedingLine!.type == .doubleDialogueParenthetical
+            ) {
+                //Text in parentheses after character or dialogue is a parenthetical, else its dialogue
+                if (firstChar == "(" && lastChar == ")") {
+                    return .doubleDialogueParenthetical;
+                } else {
+                    return .doubleDialogue;
+                }
+            } else if (preceedingLine!.type == .section) {
+                return .section;
+            } else if (preceedingLine!.type == .synopse) {
+                return .synopse;
+            }
+        }
+        
+        return .action
     }
     
-    func rangesInChars(_
-            string: unichar,
-            ofLength length: Int,
-            between startString: Character,
-            and endString: Character,
-            withLength delimLength: Int,
-            excludingIndices excludes: IndexSet
-        ) -> NSMutableIndexSet {
-        
-        
-        
-    }
     
-    func rangesOfOmitChars(_
-            string: unichar,
-            ofLength length: Int,
-            inLine line: TableReadLine,
-            lastLineOmitOut lastLineOut: Bool,
-            saveStarsIn stars: NSMutableIndexSet
-        ) -> NSMutableIndexSet {
-        
-    }
     
     func sceneNumber(
-            forChars string: unichar,
+            forChars string: String,
             ofLength length: Int
         ) -> NSRange {
         
+        var backNumberIndex = NSNotFound;
+        var i = length - 1;
+        
+        repeat {
+            var c = string.substring(with: Range(NSMakeRange(i, 1))!);
+            if (c == " ") { continue; }
+            if (backNumberIndex == NSNotFound) {
+                if (c == "#") {
+                    backNumberIndex = i;
+                }
+                else {
+                    break;
+                }
+            } else {
+                if (c == "#") {
+                    return NSMakeRange(i+1, backNumberIndex-i-1);
+                }
+            }
+            i -= 1;
+        } while i >= 0;
+        return NSMakeRange(0, 0);
     }
     
     func string(atLine lineNum: Int) -> String {
-        
+        if (lineNum >= self.lines.count) {
+            return "";
+        } else {
+            return self.lines[lineNum].string;
+        }
     }
     
     func type(atLine lineNum: Int) -> TableReadLineType {
-        
+        if (lineNum >= self.lines.count) {
+            return .empty;
+        } else {
+            return self.lines[lineNum].type;
+        }
     }
     
-    func position(atLine lineNum: Int) -> String {
-        
+    func position(atLine lineNum: Int) -> Int {
+        if (lineNum >= self.lines.count) {
+            return NSNotFound;
+        } else {
+            return self.lines[lineNum].position;
+        }
     }
     
-    func sceneNumber(atLine lineNum: Int) -> String {
-        
+    func sceneNumber(atLine lineNum: Int) -> Int? {
+        if (lineNum >= self.lines.count) {
+            return nil;
+        } else {
+            return self.lines[lineNum].sceneNumber;
+        }
     }
     
     func numberOfOutlineItems() -> Int {
-        
+        var result = 0;
+        for eachLine in self.lines {
+            if (eachLine.type == .section || eachLine.type == .synopse || eachLine.type == .heading) {
+                result += 1;
+            }
+        }
+        return result;
     }
     
-    func outlineItem(atIndex index: Int) -> TableReadLine {
-        
+    func outlineItem(atIndex index: Int) -> TableReadLine? {
+        for eachLine in self.lines {
+            if (eachLine.type == .section || eachLine.type == .synopse || eachLine.type == .heading) {
+                if (index == 0) {
+                    return eachLine;
+                }
+                index -= 1;
+            }
+        }
+        return nil;
     }
     
     func getAndResetChangeInOutline() -> Bool {

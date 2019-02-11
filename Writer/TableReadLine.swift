@@ -8,14 +8,25 @@
 
 import Foundation
 
+
+enum TableReadTextParserPatterns: String {
+    case BOLD_PATTERN = "**";
+    case ITALIC_PATTERN = "*";
+    case UNDERLINE_PATTERN = "_";
+    case NOTE_OPEN_PATTERN = "[[";
+    case NOTE_CLOSE_PATTERN = "]]";
+    case OMIT_OPEN_PATTERN = "/*";
+    case OMIT_CLOSE_PATTERN = "*/";
+}
+
 @objc
 class TableReadLine: NSObject {
     
-    var type: TableReadLineType?;
+    var type: TableReadLineType;
     var string: String = "";
     var position: Int;
     var numberOfPreceedingFormattingCharacters: Int = 0;
-    var sceneNumber: String?;
+    var sceneNumber: Int?;
     
     var boldRanges: NSMutableSet? = nil;
     var italicRanges: NSMutableSet? = nil;
@@ -34,10 +45,7 @@ class TableReadLine: NSObject {
     }
     
     func typeAsString() -> String {
-        if (self.type != nil) {
-            return self.getLineTypeStyle().description;
-        }
-        return TableReadLineTypeStyles().empty.description;
+        return self.getLineTypeStyle().description;
     }
     
     func getLineTypeStyle() -> TableReadLineTypeStyle {
@@ -47,4 +55,10 @@ class TableReadLine: NSObject {
     func toString() -> String {
         return self.typeAsString().append(": \"").append(self.string).append("\"");
     }
+    
+    func BIUNDiscovery() {
+        
+    }
+
+    
 }

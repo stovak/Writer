@@ -51,6 +51,7 @@
 		D6CF0BCB220560FB00FDC52C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96AA322050821006B9B83 /* CloudKit.framework */; };
 		D6CF0BCC2205640200FDC52C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C96A9E22050686006B9B83 /* AVFoundation.framework */; };
 		D6E439BA220F650B007DCF24 /* ContinuousFountainParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */; };
+		D6E72FD72210AB1D007795A4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E72FD62210AB1D007795A4 /* String.swift */; };
 		D6FE9469220752FF00B333A9 /* Yaml.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945D220752B600B333A9 /* Yaml.swift */; };
 		D6FE946A220752FF00B333A9 /* YAMLOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE9460220752B600B333A9 /* YAMLOperators.swift */; };
 		D6FE946B220752FF00B333A9 /* YAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945C220752B600B333A9 /* YAMLParser.swift */; };
@@ -176,6 +177,7 @@
 		D6C9AADD2204C7B1005AFF99 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		D6C9AADF2204C8A3005AFF99 /* CastMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastMember.swift; sourceTree = "<group>"; };
 		D6C9AAE12204CAEB005AFF99 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D6E72FD62210AB1D007795A4 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D6FE945C220752B600B333A9 /* YAMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLParser.swift; path = "New Group/YAMLParser.swift"; sourceTree = SOURCE_ROOT; };
 		D6FE945D220752B600B333A9 /* Yaml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Yaml.swift; path = "New Group/Yaml.swift"; sourceTree = SOURCE_ROOT; };
 		D6FE945E220752B600B333A9 /* YAMLResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLResult.swift; path = "New Group/YAMLResult.swift"; sourceTree = SOURCE_ROOT; };
@@ -399,6 +401,7 @@
 		D602182722069B7000B6B8D9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D6E72FD62210AB1D007795A4 /* String.swift */,
 				D602182822069B9200B6B8D9 /* NSDocument.swift */,
 			);
 			name = Extensions;
@@ -634,6 +637,7 @@
 				D6FE946E220752FF00B333A9 /* YAMLTokenizer.swift in Sources */,
 				D6CF0BB122055CEB00FDC52C /* FNPaginator.m in Sources */,
 				D6CF0BB222055CEB00FDC52C /* FNScript.m in Sources */,
+				D6E72FD72210AB1D007795A4 /* String.swift in Sources */,
 				D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */,
 				D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */,
 			);
