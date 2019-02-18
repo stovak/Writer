@@ -8,8 +8,8 @@
 //  Greatly copied from: https://github.com/vilcans/screenplain/blob/master/screenplain/export/fdx.py
 
 #import "FDXInterface.h"
-#import "ContinousFountainParser.h"
-#import "Line.h"
+#import <TableReadWriterMac-Swift.h>
+
 
 @implementation FDXInterface
 

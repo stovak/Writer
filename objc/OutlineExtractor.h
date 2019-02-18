@@ -12,6 +12,8 @@
 
 @class ContinousFountainParser;
 
+@class TableReadLine;
+
 @interface OutlineExtractor : NSObject
 
 + (NSString*)outlineFromParse:(ContinousFountainParser*)parser;

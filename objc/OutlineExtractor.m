@@ -14,8 +14,8 @@
 {
     NSMutableString* result = [[NSMutableString alloc] init];
     
-    Line* lastLine = nil;
-    for (Line* line in parser.lines) {
+    TableReadLine* lastLine = nil;
+    for (TableReadLine* line in parser.lines) {
         if (line.type == section || line.type == synopse || line.type == heading) {
             //To put empty lines in between types, we compare to the last lines type
             if (lastLine && (line.type == heading || lastLine.type != line.type)) {

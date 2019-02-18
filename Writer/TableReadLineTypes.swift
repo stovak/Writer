@@ -44,6 +44,7 @@ struct TableReadLineTypeStyle {
     let changesOutline: Bool;
     let includeNextLine: Bool;
     let isMetaData: Bool;
+    let fdxName: String;
     
     init( lineType: TableReadLineType,
           id: String,
@@ -53,7 +54,8 @@ struct TableReadLineTypeStyle {
           uppercase: Bool = false,
           changesOutline: Bool = false,
           includeNextLine: Bool = false,
-          isMetaData: Bool = false
+          isMetaData: Bool = false,
+          fdxName: String = "General"
         ) {
         self.lineType = lineType;
         self.id = id;
@@ -68,6 +70,7 @@ struct TableReadLineTypeStyle {
             self.fontStyle = fontStyle!;
         }
         self.uppercase = uppercase;
+        self.fdxName = fdxName;
     }
 }
 
@@ -76,6 +79,10 @@ class TableReadLineTypeStyles: NSObject {
     
     public static func byLineType(_ id: TableReadLineType) -> TableReadLineTypeStyle {
         return TableReadLineTypeStyles().value(forKey: id.rawValue) as! TableReadLineTypeStyle;
+    }
+    
+    public static func getFontStyle(forLineTypeId lineTypeID: String) -> TableReadFont {
+        return (TableReadLineTypeStyles().value(forKey: lineTypeID) as! TableReadLineTypeStyle).fontStyle
     }
     
     
@@ -107,7 +114,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageTitle",
                                            description: "Title Page Title",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageAuthor             = TableReadLineTypeStyle(
@@ -115,7 +123,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageAuthor",
                                            description: "Title Page Author",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageCredit             = TableReadLineTypeStyle(
@@ -123,7 +132,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageCredit",
                                            description: "Title Page Credit",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageSource             = TableReadLineTypeStyle(
@@ -131,7 +141,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageSource",
                                            description: "Title Page Source",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageContact            = TableReadLineTypeStyle(
@@ -139,7 +150,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageContact",
                                            description: "Title Page Contact",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageDraftDate          = TableReadLineTypeStyle(
@@ -147,7 +159,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageDraftDate",
                                            description: "Title Page Draft Date",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let titlePageUnknown            = TableReadLineTypeStyle(
@@ -155,7 +168,8 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "titlePageUnknown",
                                            description: "Title Page Unknown",
                                            includeNextLine: true,
-                                           isMetaData: true
+                                           isMetaData: true,
+                                           fdxName: "TitlePage"
                                        );
     
      let heading                     = TableReadLineTypeStyle(
@@ -164,14 +178,16 @@ class TableReadLineTypeStyles: NSObject {
                                            description: "Heading",
                                            fontStyle: TableReadFontStyle.byType(TableReadFontType.courier),
                                            uppercase: true,
-                                           changesOutline: true
+                                           changesOutline: true,
+                                           fdxName: "Scene Heading"
                                        );
     
      let action                      = TableReadLineTypeStyle(
                                            lineType: TableReadLineType.action,
                                            id: "action",
                                            description: "Action",
-                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier)
+                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
+                                           fdxName: "Action"
                                        );
     
      let character                   = TableReadLineTypeStyle(
@@ -179,12 +195,13 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "character",
                                            description: "Character",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.CHARACTER_INDENT,
-                                               headIndent: TableReadParagraphStyle.CHARACTER_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                            firstLineHeadIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
+                                            headIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
+                                            tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
                                            ),
                                            uppercase: true,
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           fdxName: "Character"
                                        );
     
      let parenthetical               = TableReadLineTypeStyle(
@@ -192,11 +209,12 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "parenthetical",
                                            description: "Parenthetical",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.PARENTHETICAL_INDENT,
-                                               headIndent: TableReadParagraphStyle.PARENTHETICAL_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                            firstLineHeadIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
+                                               headIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
+                                               tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
                                            ),
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           fdxName: "Parenthetical"
                                        );
     
      let dialogue                    = TableReadLineTypeStyle(
@@ -204,11 +222,12 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "dialogue",
                                            description: "Dialogue",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.DIALOGUE_INDENT,
-                                               headIndent: TableReadParagraphStyle.DIALOGUE_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DIALOGUE_RIGHT
+                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
+                                               headIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
+                                               tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
                                            ),
-                                           includeNextLine: true
+                                           includeNextLine: true,
+                                           fdxName: "Dialogue"
                                        );
     
      let doubleDialogueCharacter     = TableReadLineTypeStyle(
@@ -216,9 +235,9 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "doubleDialogueCharacter",
                                            description: "DD Character",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.DD_CHARACTER_INDENT,
-                                               headIndent: TableReadParagraphStyle.DD_CHARACTER_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
+                                               headIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
+                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
                                            ),
                                            includeNextLine: true
                                        );
@@ -228,9 +247,9 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "doubleDialogueParenthetical",
                                            description: "DD Parenthetical",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.DD_PARENTHETICAL_INDENT,
-                                               headIndent: TableReadParagraphStyle.DD_PARENTHETICAL_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
+                                               headIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
+                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
                                            ),
                                            includeNextLine: true
                                        );
@@ -240,9 +259,9 @@ class TableReadLineTypeStyles: NSObject {
                                            id: "doubleDialogue",
                                            description: "Double Dialogue",
                                            paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyle.DOUBLE_DIALOGUE_INDENT,
-                                               headIndent: TableReadParagraphStyle.DOUBLE_DIALOGUE_INDENT,
-                                               tailIndent: TableReadParagraphStyle.DD_RIGHT
+                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
+                                               headIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
+                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
                                            ),
                                            includeNextLine: true
                                        );
@@ -255,7 +274,8 @@ class TableReadLineTypeStyles: NSObject {
                                                alignment: NSTextAlignment.right
                                            ),
                                            fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
-                                           uppercase: true
+                                           uppercase: true,
+                                           fdxName: "Transition"
                                        );
     
      let lyrics                      = TableReadLineTypeStyle(

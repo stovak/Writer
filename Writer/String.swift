@@ -151,7 +151,73 @@ extension String {
                            lastLineOmitOut lastLineOut: Bool,
                            saveStarsIn stars: NSMutableIndexSet
         ) -> IndexSet {
+        var toReturn = IndexSet();
+        var lastIndex = length - TableReadTextParserPatterns.OMIT_OPEN_PATTERN.length();
+        line.omitIn = lastLineOut;
         
+        
+        
+        return toReturn;
     }
+    
+    
+    /**
+ 
+ 
+     NSMutableIndexSet* indexSet = [[NSMutableIndexSet alloc] init];
+     
+     NSInteger lastIndex = length - OMIT_PATTERN_LENGTH; //Last index to look at if we are looking for start
+     NSInteger rangeBegin = lastLineOut ? 0 : -1; //Set to -1 when no range is currently inspected, or the the index of a detected beginning
+     line.omitIn = lastLineOut;
+     
+     for (int i = 0;;i++) {
+     if (i > lastIndex) break;
+     if (rangeBegin == -1) {
+     bool match = YES;
+     for (int j = 0; j < OMIT_PATTERN_LENGTH; j++) {
+     if (string[j+i] != OMIT_OPEN_PATTERN[j]) {
+     match = NO;
+     break;
+     }
+     }
+     if (match) {
+     rangeBegin = i;
+     [stars addIndex:i+1];
+     }
+     } else {
+     bool match = YES;
+     for (int j = 0; j < OMIT_PATTERN_LENGTH; j++) {
+     if (string[j+i] != OMIT_CLOSE_PATTERN[j]) {
+     match = NO;
+     break;
+     }
+     }
+     if (match) {
+     [indexSet addIndexesInRange:NSMakeRange(rangeBegin, i - rangeBegin + OMIT_PATTERN_LENGTH)];
+     rangeBegin = -1;
+     [stars addIndex:i];
+     }
+     }
+     }
+     
+     //Terminate any open ranges at the end of the line so that this line is omited untill the end
+     if (rangeBegin != -1) {
+     NSRange rangeToAdd = NSMakeRange(rangeBegin, length - rangeBegin);
+     [indexSet addIndexesInRange:rangeToAdd];
+     line.omitOut = YES;
+     } else {
+     line.omitOut = NO;
+     }
+     
+     return indexSet;
+ 
+ 
+ 
+ 
+ 
+ 
+ **/
+    
+    
     
 }

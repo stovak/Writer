@@ -139,7 +139,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     func getParser() -> ContinousFountainParser {
         self.getThemeManager();
         if (self.parser == nil) {
-            self.parser = ContinousFountainParser.init(string: self.getText());
+            self.parser = ContinousFountainParser.init(withString: self.getText());
         }
         return self.parser!;
     }
@@ -252,10 +252,11 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         saveDialog.begin {
             (result) -> Void in
             if (result.rawValue == NSApplication.ModalResponse.OK.rawValue) {
-                let fdxString = FDXInterface.fdx(from: self.getText());
+                let fdxFile = FDXFile(fromParser: self.getParser());
+                let fdxString = fdxFile.toString();
                 
                 do {
-                    try fdxString?.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
+                    try fdxString.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
                 } catch {
                     ErrorHandler(error);
                 }
@@ -271,9 +272,10 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         saveDialog.begin {
             (result) -> Void in
             if (result.rawValue == NSApplication.ModalResponse.OK.rawValue) {
-                let outlineString = OutlineExtractor.outline(fromParse: self.getParser());
+                let extractor = OutlineExtractor();
+                let outlineString = extractor.outline(self.getParser());
                 do {
-                    try outlineString?.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
+                    try outlineString.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
                 } catch {
                     ErrorHandler(error);
                 }
@@ -421,7 +423,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     func formatAllLines() {
         if (self.livePreview) {
             for line in self.getParser().lines {
-                self.formatLineOfScreenplay(line as! Line, onlyFormatFont: false);
+                self.formatLineOfScreenplay(line as! TableReadLine, onlyFormatFont: false);
             }
         } else {
             self.textView?.font = TableReadFontStyle.byType(TableReadFontType.courier).font;
@@ -435,23 +437,34 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         }
     }
     
-    func formatLineOfScreenplay(_ line: Line, onlyFormatFont: Bool = false ) {
+    func formatLineOfScreenplay(_ line: TableReadLine, onlyFormatFont: Bool = false ) {
         let begin = Int(line.position);
         let length = line.string.lengthOfBytes(using: String.Encoding.utf8);
         let range = NSMakeRange(begin, length);
-        let lineTypeID = line.typeIdAsString();
+        let lineTypeID = line.typeAsString();
         if (lineTypeID == nil) {
             debugPrint("LineTypeID was not set: ");
             debugPrint(line);
             exit(0);
         }
-        let lineType = TableReadLineTypes.value(forKey: lineTypeID!) as! TableReadLineType;
-        self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.font, range: range);
-        let fontAttribute = 
-        self.textView?.textStorage?.addAttribute(NSAttributedString.Key.font, value: TableReadLineTypes.getFontStyle(forFontStyleID: lineType.fontStyle), range: range);
+        let lineType = TableReadLineTypeStyles.value(forKey: lineTypeID) as! TableReadLineTypeStyle;
+        self.textView?.textStorage?.removeAttribute(
+            NSAttributedString.Key.font, range: range
+        );
+        self.textView?.textStorage?.addAttribute(
+                NSAttributedString.Key.font,
+                value: lineType.fontStyle,
+                range: range);
         if (!onlyFormatFont) {
-            self.textView?.textStorage?.removeAttribute(NSAttributedString.Key.paragraphStyle, range: range);
-            self.textView?.textStorage?.addAttribute(NSAttributedString.Key.paragraphStyle, value: TableReadLineTypes.getParagraphStyle(forTypeID: lineType.id), range: range);
+            self.textView?.textStorage?.removeAttribute(
+                NSAttributedString.Key.paragraphStyle,
+                range: range
+            );
+            self.textView?.textStorage?.addAttribute(
+                NSAttributedString.Key.paragraphStyle,
+                value: lineType.paragraphStyle,
+                range: range
+            );
         }
         // do bold and italic changes
         // do uppercase where lineType.uppercase == true
@@ -459,13 +472,13 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     
     func refontAllLines() {
         for line in self.getParser().lines {
-            self.formatLineOfScreenplay(line as! Line, onlyFormatFont: true);
+            self.formatLineOfScreenplay(line , onlyFormatFont: true);
         }
     }
     
     func applyFormatChanges() {
         for case let index as Int in self.getParser().changedIndices {
-            let line = self.getParser().lines?[index] as! Line;
+            let line = self.getParser().lines[index];
             self.formatLineOfScreenplay(line, onlyFormatFont: false);
         }
         self.getParser().changedIndices.removeAllObjects();
@@ -477,17 +490,11 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     }
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if (item != nil) {
-            return self.parser?.numberOfOutlineItems() as! Int;
-        }
-        return 0;
+        return self.parser?.numberOfOutlineItems() ?? 0;
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if (item != nil) {
-            return self.parser?.outlineItem(at: UInt(bitPattern: index));
-        }
-        return 0;
+        return self.parser?.outlineItem(atIndex: index) ?? 0;
     }
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -495,8 +502,8 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     }
     
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-        if let line = item as? Line {
-            switch(line.typeIdAsString()) {
+        if let line = item as? TableReadLine {
+            switch(line.typeAsString()) {
                 
                 
             case "heading":
@@ -509,7 +516,16 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
                 
                 
                 if ((line.sceneNumber) != nil) {
-                    return String(format: "    %@: %@", line.sceneNumber, string.replacingOccurrences(of: String(format: "#%@#", line.sceneNumber), with: ""));
+                    return String(
+                        format: "    %@: %@", line.sceneNumber ?? 0,
+                        string.replacingOccurrences(
+                            of: String(
+                                format: "#%@#",
+                                line.sceneNumber ?? 0
+                            ),
+                            with: ""
+                        )
+                    );
                 } else {
                     return NSString(utf8String: "    ".appending(string));
                 }
@@ -519,17 +535,17 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
             case "synopse":
                 var text = line.string;
                 
-                if (text != nil && (!text!.isEmpty)) {
+                if (!text.isEmpty) {
                     //Remove "="
-                    let startIndex = text!.index(text!.startIndex, offsetBy: 1);
-                    let firstLetter = String(text![..<startIndex]);
+                    let startIndex = text.index(text.startIndex, offsetBy: 1);
+                    let firstLetter = String(text[..<startIndex]);
                     if ( firstLetter == "=") {
-                        text = text!.replacingCharacters(in:  ..<startIndex, with: "");
+                        text = text.replacingCharacters(in:  ..<startIndex, with: "");
                     }
                     //Remove leading whitespace
-                    text = text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
+                    text = text.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
                     
-                    return "  ".appending(text!);
+                    return "  ".appending(text);
                 } else {
                     return line.string;
                 }
@@ -539,13 +555,13 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
                 
             case "section":
                 var text = line.string;
-                if (text != nil && (!text!.isEmpty)) {
-                    let startIndex = text!.index(text!.startIndex, offsetBy: 1);
-                    let firstLetter = String(text![..<startIndex]);
+                if (!text.isEmpty) {
+                    let startIndex = text.index(text.startIndex, offsetBy: 1);
+                    let firstLetter = String(text[..<startIndex]);
                     if (firstLetter == "#") {
-                        text = text!.replacingCharacters(in: ..<startIndex, with: "");
+                        text = text.replacingCharacters(in: ..<startIndex, with: "");
                     }
-                    text = text!.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
+                    text = text.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines);
                     return text;
                 } else {
                     return line.string;
@@ -561,7 +577,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     }
     
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
-        if let line = item as? Line {
+        if let line = item as? TableReadLine {
             let lineRange = NSMakeRange(Int(line.position), Int(line.string.lengthOfBytes(using: String.Encoding.utf8) ));
             self.textView?.setSelectedRange(lineRange);
             self.textView?.scrollRangeToVisible(lineRange);

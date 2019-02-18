@@ -17,16 +17,33 @@
 		D638E7D122053E5F008F8F58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B138B57719E1C973000489C4 /* Info.plist */; };
 		D638E7D222053E69008F8F58 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B1C2DE5A1AACFF70002FE0F4 /* DocumentIcon.icns */; };
 		D638E7D322053E6D008F8F58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B138B58019E1C973000489C4 /* Images.xcassets */; };
+		D63E812D221B21E200317EDA /* FDXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63E812C221B21E200317EDA /* FDXFile.swift */; };
 		D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */; };
 		D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */; };
 		D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6491E512208F81100A79130 /* TableReadFontStyle.swift */; };
+		D66B287E221A683B00A5F4C4 /* ThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B13111821CB2885200D07A0C /* ThemeManager.h */; };
+		D66B287F221A683B00A5F4C4 /* Theme.h in Headers */ = {isa = PBXBuildFile; fileRef = B13111861CB289ED00D07A0C /* Theme.h */; };
+		D66B2880221A683B00A5F4C4 /* NSString+Whitespace.h in Headers */ = {isa = PBXBuildFile; fileRef = B131118D1CB2A41800D07A0C /* NSString+Whitespace.h */; };
+		D66B2881221A683B00A5F4C4 /* NSMutableIndexSet+Lowest.h in Headers */ = {isa = PBXBuildFile; fileRef = B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */; };
+		D66B2882221A683B00A5F4C4 /* PrintView.h in Headers */ = {isa = PBXBuildFile; fileRef = B1D0B84919E31B86005252E4 /* PrintView.h */; };
+		D66B2885221A687D00A5F4C4 /* FastFountainParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B64F19E1E8CA000489C4 /* FastFountainParser.h */; };
+		D66B2886221A687D00A5F4C4 /* FNElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65119E1E8CA000489C4 /* FNElement.h */; };
+		D66B2887221A687D00A5F4C4 /* FNHTMLScript.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65319E1E8CA000489C4 /* FNHTMLScript.h */; };
+		D66B2888221A687D00A5F4C4 /* FNPaginator.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65519E1E8CA000489C4 /* FNPaginator.h */; };
+		D66B2889221A687D00A5F4C4 /* FNScript.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65719E1E8CA000489C4 /* FNScript.h */; };
+		D66B288A221A687D00A5F4C4 /* FountainParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65919E1E8CA000489C4 /* FountainParser.h */; };
+		D66B288B221A687D00A5F4C4 /* FountainRegexes.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65B19E1E8CA000489C4 /* FountainRegexes.h */; };
+		D66B288C221A687D00A5F4C4 /* FountainWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65D19E1E8CA000489C4 /* FountainWriter.h */; };
+		D66B288D221A687D00A5F4C4 /* QUQFont.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B65F19E1E8CA000489C4 /* QUQFont.h */; };
+		D66B288E221A687D00A5F4C4 /* RegexKitLite.h in Headers */ = {isa = PBXBuildFile; fileRef = B138B66319E1E8CA000489C4 /* RegexKitLite.h */; };
+		D66B288F221A687D00A5F4C4 /* TableReadWriter-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C9AAD92204BDFF005AFF99 /* TableReadWriter-Bridging-Header.h */; };
+		D66B2891221A718700A5F4C4 /* OutlineExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66B2890221A718700A5F4C4 /* OutlineExtractor.swift */; };
 		D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B62A3919E3402F009F6E23 /* ColorView.m */; };
 		D685B46422051250008E7C27 /* TableReadWriterMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D685B46322051250008E7C27 /* TableReadWriterMacTests.swift */; };
 		D6CF0BAF22055CEB00FDC52C /* FNElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65219E1E8CA000489C4 /* FNElement.m */; };
 		D6CF0BB022055CEB00FDC52C /* FNHTMLScript.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65419E1E8CA000489C4 /* FNHTMLScript.m */; };
 		D6CF0BB122055CEB00FDC52C /* FNPaginator.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65619E1E8CA000489C4 /* FNPaginator.m */; };
 		D6CF0BB222055CEB00FDC52C /* FNScript.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65819E1E8CA000489C4 /* FNScript.m */; };
-		D6CF0BB322055CF900FDC52C /* FDXInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = B1509A3F1CB5C0C500884918 /* FDXInterface.m */; };
 		D6CF0BB422055D0B00FDC52C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B13111831CB2885200D07A0C /* ThemeManager.m */; };
 		D6CF0BB522055D0B00FDC52C /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = B13111871CB289ED00D07A0C /* Theme.m */; };
 		D6CF0BB622055D2500FDC52C /* Themes.plist in Resources */ = {isa = PBXBuildFile; fileRef = B13111891CB2917000D07A0C /* Themes.plist */; };
@@ -34,11 +51,9 @@
 		D6CF0BB822055D2500FDC52C /* Courier Prime Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED51C88AC99001C4D27 /* Courier Prime Bold.ttf */; };
 		D6CF0BB922055D2500FDC52C /* Courier Prime Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED61C88AC99001C4D27 /* Courier Prime Italic.ttf */; };
 		D6CF0BBA22055D2500FDC52C /* Courier Prime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F04ED71C88AC99001C4D27 /* Courier Prime.ttf */; };
-		D6CF0BBB22055D4F00FDC52C /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B57B19E1C973000489C4 /* Document.m */; };
 		D6CF0BBE22055D8600FDC52C /* NSString+Whitespace.m in Sources */ = {isa = PBXBuildFile; fileRef = B131118E1CB2A41800D07A0C /* NSString+Whitespace.m */; };
 		D6CF0BBF22055D8600FDC52C /* NSMutableIndexSet+Lowest.m in Sources */ = {isa = PBXBuildFile; fileRef = B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */; };
 		D6CF0BC022055D8600FDC52C /* PrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D0B84A19E31B86005252E4 /* PrintView.m */; };
-		D6CF0BC122055D8600FDC52C /* OutlineExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EC6B9D1CE3B33200B48CDB /* OutlineExtractor.m */; };
 		D6CF0BC222055E1D00FDC52C /* FastFountainParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65019E1E8CA000489C4 /* FastFountainParser.m */; };
 		D6CF0BC322055E1D00FDC52C /* FountainParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65A19E1E8CA000489C4 /* FountainParser.m */; };
 		D6CF0BC422055E1D00FDC52C /* FountainRegexes.m in Sources */ = {isa = PBXBuildFile; fileRef = B138B65C19E1E8CA000489C4 /* FountainRegexes.m */; };
@@ -58,7 +73,7 @@
 		D6FE946C220752FF00B333A9 /* YAMLRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE9461220752B600B333A9 /* YAMLRegex.swift */; };
 		D6FE946D220752FF00B333A9 /* YAMLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945E220752B600B333A9 /* YAMLResult.swift */; };
 		D6FE946E220752FF00B333A9 /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */; };
-		D6FE946F2207562700B333A9 /* TableReadWriterMac-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */; };
+		D6FE946F2207562700B333A9 /* TableReadWriterMac-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D60218222206015800B6B8D9 /* TableReadWriterMac-Bridging-Header.h */; };
 		D6FE94722207AB9C00B333A9 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FE94702207AB3300B333A9 /* ErrorHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,8 +100,6 @@
 		B131119B1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableIndexSet+Lowest.h"; sourceTree = "<group>"; };
 		B131119C1CB2C6B300D07A0C /* NSMutableIndexSet+Lowest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableIndexSet+Lowest.m"; sourceTree = "<group>"; };
 		B138B57719E1C973000489C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B138B57A19E1C973000489C4 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
-		B138B57B19E1C973000489C4 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		B138B57E19E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TableReadDocument.xib; sourceTree = "<group>"; };
 		B138B58019E1C973000489C4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B138B58319E1C973000489C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -115,8 +128,6 @@
 		B138B66219E1E8CA000489C4 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = "<group>"; };
 		B138B66319E1E8CA000489C4 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		B138B66419E1E8CA000489C4 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		B1509A3E1CB5C0C500884918 /* FDXInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDXInterface.h; sourceTree = "<group>"; };
-		B1509A3F1CB5C0C500884918 /* FDXInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDXInterface.m; sourceTree = "<group>"; };
 		B1509A411CB6EBBC00884918 /* WriterFDXTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterFDXTests.m; sourceTree = "<group>"; };
 		B1B62A3819E3402F009F6E23 /* ColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorView.h; sourceTree = "<group>"; };
 		B1B62A3919E3402F009F6E23 /* ColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorView.m; sourceTree = "<group>"; };
@@ -126,8 +137,6 @@
 		B1DCC4621CB32C5200438E7F /* WriterThemeManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterThemeManagerTests.m; sourceTree = "<group>"; };
 		B1E7FF511BC4555B008E2B99 /* Writer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Writer.entitlements; sourceTree = "<group>"; };
 		B1E7FF521BC45969008E2B99 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		B1EC6B9C1CE3B33200B48CDB /* OutlineExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineExtractor.h; sourceTree = "<group>"; };
-		B1EC6B9D1CE3B33200B48CDB /* OutlineExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineExtractor.m; sourceTree = "<group>"; };
 		B1F04ED41C88AC99001C4D27 /* Courier Prime Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Courier Prime Bold Italic.ttf"; sourceTree = "<group>"; };
 		B1F04ED51C88AC99001C4D27 /* Courier Prime Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Courier Prime Bold.ttf"; sourceTree = "<group>"; };
 		B1F04ED61C88AC99001C4D27 /* Courier Prime Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Courier Prime Italic.ttf"; sourceTree = "<group>"; };
@@ -141,10 +150,12 @@
 		D61B966F220A2CFD00BC7067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D61B969F220A41C700BC7067 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		D61B96A3220A4E6000BC7067 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D63E812C221B21E200317EDA /* FDXFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDXFile.swift; sourceTree = "<group>"; };
 		D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableReadParagraphStyle.swift; sourceTree = "<group>"; };
 		D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadLineTypes.swift; sourceTree = "<group>"; };
 		D6491E512208F81100A79130 /* TableReadFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReadFontStyle.swift; sourceTree = "<group>"; };
 		D6550FB4220F550F0003D8DA /* ContinuousFountainParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousFountainParser.swift; sourceTree = "<group>"; };
+		D66B2890221A718700A5F4C4 /* OutlineExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineExtractor.swift; sourceTree = "<group>"; };
 		D685B44E2205124F008E7C27 /* TableReadWriterMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableReadWriterMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D685B45922051250008E7C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D685B45A22051250008E7C27 /* TableReadWriterMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TableReadWriterMac.entitlements; sourceTree = "<group>"; };
@@ -178,12 +189,12 @@
 		D6C9AADF2204C8A3005AFF99 /* CastMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastMember.swift; sourceTree = "<group>"; };
 		D6C9AAE12204CAEB005AFF99 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D6E72FD62210AB1D007795A4 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		D6FE945C220752B600B333A9 /* YAMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLParser.swift; path = "New Group/YAMLParser.swift"; sourceTree = SOURCE_ROOT; };
-		D6FE945D220752B600B333A9 /* Yaml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Yaml.swift; path = "New Group/Yaml.swift"; sourceTree = SOURCE_ROOT; };
-		D6FE945E220752B600B333A9 /* YAMLResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLResult.swift; path = "New Group/YAMLResult.swift"; sourceTree = SOURCE_ROOT; };
-		D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLTokenizer.swift; path = "New Group/YAMLTokenizer.swift"; sourceTree = SOURCE_ROOT; };
-		D6FE9460220752B600B333A9 /* YAMLOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLOperators.swift; path = "New Group/YAMLOperators.swift"; sourceTree = SOURCE_ROOT; };
-		D6FE9461220752B600B333A9 /* YAMLRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLRegex.swift; path = "New Group/YAMLRegex.swift"; sourceTree = SOURCE_ROOT; };
+		D6FE945C220752B600B333A9 /* YAMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLParser.swift; path = Yaml/YAMLParser.swift; sourceTree = SOURCE_ROOT; };
+		D6FE945D220752B600B333A9 /* Yaml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Yaml.swift; path = Yaml/Yaml.swift; sourceTree = SOURCE_ROOT; };
+		D6FE945E220752B600B333A9 /* YAMLResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLResult.swift; path = Yaml/YAMLResult.swift; sourceTree = SOURCE_ROOT; };
+		D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLTokenizer.swift; path = Yaml/YAMLTokenizer.swift; sourceTree = SOURCE_ROOT; };
+		D6FE9460220752B600B333A9 /* YAMLOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLOperators.swift; path = Yaml/YAMLOperators.swift; sourceTree = SOURCE_ROOT; };
+		D6FE9461220752B600B333A9 /* YAMLRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLRegex.swift; path = Yaml/YAMLRegex.swift; sourceTree = SOURCE_ROOT; };
 		D6FE94702207AB3300B333A9 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,8 +285,6 @@
 				D6491E4B2208C9C800A79130 /* TableReadParagraphStyle.swift */,
 				D6491E4E2208D68900A79130 /* TableReadLineTypes.swift */,
 				D618C4F5220CB1EF0077BDD9 /* TableReadLine.swift */,
-				B138B57A19E1C973000489C4 /* Document.h */,
-				B138B57B19E1C973000489C4 /* Document.m */,
 				B138B58219E1C973000489C4 /* MainMenu.xib */,
 				B1B62A3819E3402F009F6E23 /* ColorView.h */,
 				B1B62A3919E3402F009F6E23 /* ColorView.m */,
@@ -379,10 +388,8 @@
 			children = (
 				B1D0B84919E31B86005252E4 /* PrintView.h */,
 				B1D0B84A19E31B86005252E4 /* PrintView.m */,
-				B1509A3E1CB5C0C500884918 /* FDXInterface.h */,
-				B1509A3F1CB5C0C500884918 /* FDXInterface.m */,
-				B1EC6B9C1CE3B33200B48CDB /* OutlineExtractor.h */,
-				B1EC6B9D1CE3B33200B48CDB /* OutlineExtractor.m */,
+				D66B2890221A718700A5F4C4 /* OutlineExtractor.swift */,
+				D63E812C221B21E200317EDA /* FDXFile.swift */,
 			);
 			name = Export;
 			sourceTree = "<group>";
@@ -474,17 +481,44 @@
 				D6FE945E220752B600B333A9 /* YAMLResult.swift */,
 				D6FE945F220752B600B333A9 /* YAMLTokenizer.swift */,
 			);
-			name = Yaml;
-			path = "New Group";
+			path = Yaml;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D66B287D221A67F200A5F4C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D66B2885221A687D00A5F4C4 /* FastFountainParser.h in Headers */,
+				D66B2886221A687D00A5F4C4 /* FNElement.h in Headers */,
+				D66B2887221A687D00A5F4C4 /* FNHTMLScript.h in Headers */,
+				D66B2888221A687D00A5F4C4 /* FNPaginator.h in Headers */,
+				D66B2889221A687D00A5F4C4 /* FNScript.h in Headers */,
+				D66B288A221A687D00A5F4C4 /* FountainParser.h in Headers */,
+				D66B288B221A687D00A5F4C4 /* FountainRegexes.h in Headers */,
+				D66B288C221A687D00A5F4C4 /* FountainWriter.h in Headers */,
+				D66B288D221A687D00A5F4C4 /* QUQFont.h in Headers */,
+				D66B288E221A687D00A5F4C4 /* RegexKitLite.h in Headers */,
+				D66B288F221A687D00A5F4C4 /* TableReadWriter-Bridging-Header.h in Headers */,
+				D66B287E221A683B00A5F4C4 /* ThemeManager.h in Headers */,
+				D66B287F221A683B00A5F4C4 /* Theme.h in Headers */,
+				D66B2880221A683B00A5F4C4 /* NSString+Whitespace.h in Headers */,
+				D66B2881221A683B00A5F4C4 /* NSMutableIndexSet+Lowest.h in Headers */,
+				D66B2882221A683B00A5F4C4 /* PrintView.h in Headers */,
+				D6FE946F2207562700B333A9 /* TableReadWriterMac-Bridging-Header.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		D685B44D2205124F008E7C27 /* TableReadWriterMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D685B46622051250008E7C27 /* Build configuration list for PBXNativeTarget "TableReadWriterMac" */;
 			buildPhases = (
+				D66B287D221A67F200A5F4C4 /* Headers */,
 				D685B44A2205124F008E7C27 /* Sources */,
 				D685B44B2205124F008E7C27 /* Frameworks */,
 				D685B44C2205124F008E7C27 /* Resources */,
@@ -605,13 +639,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6FE946F2207562700B333A9 /* TableReadWriterMac-Bridging-Header.h in Sources */,
 				D6CF0BC622055E3700FDC52C /* RegexKitLite.m in Sources */,
 				D6CF0BC222055E1D00FDC52C /* FastFountainParser.m in Sources */,
 				D6CF0BC322055E1D00FDC52C /* FountainParser.m in Sources */,
 				D6FE946A220752FF00B333A9 /* YAMLOperators.swift in Sources */,
 				D6E439BA220F650B007DCF24 /* ContinuousFountainParser.swift in Sources */,
 				D6CF0BC422055E1D00FDC52C /* FountainRegexes.m in Sources */,
+				D63E812D221B21E200317EDA /* FDXFile.swift in Sources */,
 				D6CF0BC522055E1D00FDC52C /* FountainWriter.m in Sources */,
 				D6FE946B220752FF00B333A9 /* YAMLParser.swift in Sources */,
 				D6491E532208F81100A79130 /* TableReadFontStyle.swift in Sources */,
@@ -619,9 +653,7 @@
 				D6CF0BBF22055D8600FDC52C /* NSMutableIndexSet+Lowest.m in Sources */,
 				D6CF0BC022055D8600FDC52C /* PrintView.m in Sources */,
 				D6FE9469220752FF00B333A9 /* Yaml.swift in Sources */,
-				D6CF0BC122055D8600FDC52C /* OutlineExtractor.m in Sources */,
 				D6FE946D220752FF00B333A9 /* YAMLResult.swift in Sources */,
-				D6CF0BBB22055D4F00FDC52C /* Document.m in Sources */,
 				D6CF0BB422055D0B00FDC52C /* ThemeManager.m in Sources */,
 				D6491E4D2208C9D800A79130 /* TableReadParagraphStyle.swift in Sources */,
 				D60218262206244800B6B8D9 /* TableReadDocument.swift in Sources */,
@@ -629,7 +661,6 @@
 				D618C4F7220CB2750077BDD9 /* TableReadLine.swift in Sources */,
 				D602182A22069BDA00B6B8D9 /* NSDocument.swift in Sources */,
 				D6FE94722207AB9C00B333A9 /* ErrorHandler.swift in Sources */,
-				D6CF0BB322055CF900FDC52C /* FDXInterface.m in Sources */,
 				D61B9671220A2CFD00BC7067 /* AppDelegate.swift in Sources */,
 				D6FE946C220752FF00B333A9 /* YAMLRegex.swift in Sources */,
 				D6CF0BAF22055CEB00FDC52C /* FNElement.m in Sources */,
@@ -639,6 +670,7 @@
 				D6CF0BB222055CEB00FDC52C /* FNScript.m in Sources */,
 				D6E72FD72210AB1D007795A4 /* String.swift in Sources */,
 				D6491E502208D68900A79130 /* TableReadLineTypes.swift in Sources */,
+				D66B2891221A718700A5F4C4 /* OutlineExtractor.swift in Sources */,
 				D66C464522054FBE00BD2FA6 /* ColorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

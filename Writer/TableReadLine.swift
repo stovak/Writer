@@ -17,12 +17,16 @@ enum TableReadTextParserPatterns: String {
     case NOTE_CLOSE_PATTERN = "]]";
     case OMIT_OPEN_PATTERN = "/*";
     case OMIT_CLOSE_PATTERN = "*/";
+    
+    func length() -> Int {
+        return self.rawValue.lengthOfBytes(using: .utf8);
+    }
 }
 
 @objc
 class TableReadLine: NSObject {
     
-    var type: TableReadLineType;
+    public var type: TableReadLineType;
     var string: String = "";
     var position: Int;
     var numberOfPreceedingFormattingCharacters: Int = 0;
@@ -53,7 +57,27 @@ class TableReadLine: NSObject {
     }
     
     func toString() -> String {
-        return self.typeAsString().append(": \"").append(self.string).append("\"");
+        return self.typeAsString() + ": \""  + self.string + "\"";
+    }
+    
+    func toFDXParagraph() -> XMLElement {
+        let style = TableReadLineTypeStyles.byLineType(self.type);
+        let text = XMLElement(name: "Text");
+        text.stringValue = self.string;
+        if (style.fdxName == "TitlePage") {
+            let para = XMLElement(name: "Paragraph");
+            para.addChild(text);
+            let toReturn = XMLElement(name: "TitlePage");
+            toReturn.addChild(para);
+            return toReturn;
+        } else {
+            let toReturn = XMLElement(name: "Paragraph");
+            toReturn.setAttributesWith([
+                "Type": style.fdxName
+                ]);
+            toReturn.addChild(text);
+            return toReturn;
+        }
     }
     
     func BIUNDiscovery() {

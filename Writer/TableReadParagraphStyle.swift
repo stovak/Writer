@@ -9,18 +9,19 @@
 import Foundation
 import AVKit
 
+enum TableReadParagraphStyleDefaults: CGFloat {
+    case CHARACTER_INDENT = 220;
+    case PARENTHETICAL_INDENT = 185;
+    case DIALOGUE_INDENT = 150;
+    case DIALOGUE_RIGHT = 450;
+    
+    case DD_CHARACTER_INDENT = 420;
+    case DD_PARENTHETICAL_INDENT = 385;
+    case DOUBLE_DIALOGUE_INDENT = 350;
+    case DD_RIGHT = 650;
+}
+
 class TableReadParagraphStyle: NSMutableParagraphStyle {
-    
-    public static let CHARACTER_INDENT = CGFloat(220);
-    public static let PARENTHETICAL_INDENT = CGFloat(185);
-    public static let DIALOGUE_INDENT = CGFloat(150);
-    public static let DIALOGUE_RIGHT = CGFloat(450);
-    
-    public static let DD_CHARACTER_INDENT = CGFloat(420);
-    public static let DD_PARENTHETICAL_INDENT = CGFloat(385);
-    public static let DOUBLE_DIALOGUE_INDENT = CGFloat(350);
-    public static let DD_RIGHT = CGFloat(650);
-    
     
     override init() {
         super.init();

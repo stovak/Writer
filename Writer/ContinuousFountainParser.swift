@@ -12,7 +12,7 @@ import Cocoa
 @objc
 class ContinousFountainParser : NSObject {
     
-    var lines: [ TableReadLine ] = [];
+    @objc public var lines: [ TableReadLine ] = [];
     var changedIndices: NSMutableArray = [];
     
     var changeInOutline: Bool?;
@@ -402,12 +402,13 @@ class ContinousFountainParser : NSObject {
     }
     
     func outlineItem(atIndex index: Int) -> TableReadLine? {
+        var toReturn = index;
         for eachLine in self.lines {
             if (eachLine.type == .section || eachLine.type == .synopse || eachLine.type == .heading) {
                 if (index == 0) {
                     return eachLine;
                 }
-                index -= 1;
+                toReturn -= 1;
             }
         }
         return nil;

@@ -28,7 +28,6 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "Document.h"
 #import <WebKit/WebKit.h>
 
 @interface PrintView : NSView

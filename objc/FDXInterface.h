@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ContinousFountainParser;
+
 @interface FDXInterface : NSObject
 
 + (NSString*)fdxFromString:(NSString*)string;

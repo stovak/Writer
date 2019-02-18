@@ -32,7 +32,6 @@
 #import "FNScript.h"
 #import "FNHTMLScript.h"
 #import "FDXInterface.h"
-#import "OutlineExtractor.h"
 #import "PrintView.h"
 #import "ColorView.h"
 #import "ContinousFountainParser.h"
