@@ -10,6 +10,8 @@ import Foundation
 
 
 enum TableReadTextParserPatterns: String {
+    typealias RawValue = String
+
     case BOLD_PATTERN = "**";
     case ITALIC_PATTERN = "*";
     case UNDERLINE_PATTERN = "_";
@@ -23,6 +25,17 @@ enum TableReadTextParserPatterns: String {
     }
 }
 
+enum TableReadBIUNDRegexPatterns: String {
+    typealias RawValue = String
+    
+    case BOLD      = "(\\*{2})(.+?)(\\*{2})";
+    case ITALIC    = "(\\*)(.+?)(\\*)";
+    case UNDERLINE = "(_)(.+?)(_)";
+    case NOTE      = "(\\[\\[)(.+?)(\\]\\])";
+    case OMIT      = "(\\/\\*)(.+?)(\\*\\/)";
+
+}
+
 @objc
 class TableReadLine: NSObject {
     
@@ -32,11 +45,11 @@ class TableReadLine: NSObject {
     var numberOfPreceedingFormattingCharacters: Int = 0;
     var sceneNumber: Int?;
     
-    var boldRanges: NSMutableSet? = nil;
-    var italicRanges: NSMutableSet? = nil;
-    var underlinedRanges: NSMutableSet? = nil;
-    var noteRanges: NSMutableSet? = nil;
-    var omitedRanges: NSMutableSet? = nil;
+    var boldRanges: [ NSTextCheckingResult ] = [];
+    var italicRanges: [ NSTextCheckingResult ] = [];
+    var underlinedRanges: [ NSTextCheckingResult ] = [];
+    var noteRanges: [ NSTextCheckingResult ] = [];
+    var omitedRanges: [ NSTextCheckingResult ] = [];
     
     var omitIn: Bool = false; //wether the line terminates an unfinished omit
     var omitOut: Bool = false; //Wether the line starts an omit and doesn't finish it
@@ -49,6 +62,10 @@ class TableReadLine: NSObject {
     }
     
     func typeAsString() -> String {
+        return self.getLineTypeStyle().id;
+    }
+    
+    func typeAsLabel() -> String {
         return self.getLineTypeStyle().description;
     }
     
@@ -57,7 +74,7 @@ class TableReadLine: NSObject {
     }
     
     func toString() -> String {
-        return self.typeAsString() + ": \""  + self.string + "\"";
+        return self.typeAsLabel() + ": \""  + self.string + "\"";
     }
     
     func toFDXParagraph() -> XMLElement {
@@ -80,9 +97,64 @@ class TableReadLine: NSObject {
         }
     }
     
+    func toHTMLElement() -> XMLElement {
+        let style = TableReadLineTypeStyles.byLineType(self.type);
+        let element = XMLElement(name: style.id);
+        element.stringValue = self.string;
+        return element;
+    }
+    
     func BIUNDiscovery() {
-        
+        self.getBoldRanges();
+        self.getItalicRanges();
+        self.getUnderlineRanges();
+        self.getNoteRanges();
+        self.getOmitRanges();
     }
 
+    func getBoldRanges() {
+        do {
+            let regex = try NSRegularExpression(pattern: TableReadBIUNDRegexPatterns.BOLD.rawValue, options: []);
+            self.boldRanges = regex.matches(in: self.string, options: [], range: NSMakeRange(0, self.string.count));
+        } catch {
+            ErrorHandler.init(error);
+        }
+    }
+    
+    func getItalicRanges() {
+        do {
+            let regex = try NSRegularExpression(pattern: TableReadBIUNDRegexPatterns.ITALIC.rawValue, options: []);
+            self.italicRanges = regex.matches(in: self.string, options: [], range: NSMakeRange(0, self.string.count));
+        } catch {
+            ErrorHandler.init(error);
+        }
+    }
+    
+    func getUnderlineRanges() {
+        do {
+            let regex = try NSRegularExpression(pattern: TableReadBIUNDRegexPatterns.UNDERLINE.rawValue, options: []);
+            self.italicRanges = regex.matches(in: self.string, options: [], range: NSMakeRange(0, self.string.count));
+        } catch {
+            ErrorHandler.init(error);
+        }
+    }
+    
+    func getNoteRanges() {
+        do {
+            let regex = try NSRegularExpression(pattern: TableReadBIUNDRegexPatterns.NOTE.rawValue, options: []);
+            self.italicRanges = regex.matches(in: self.string, options: [], range: NSMakeRange(0, self.string.count));
+        } catch {
+            ErrorHandler.init(error);
+        }
+    }
+    
+    func getOmitRanges() {
+        do {
+            let regex = try NSRegularExpression(pattern: TableReadBIUNDRegexPatterns.OMIT.rawValue, options: []);
+            self.italicRanges = regex.matches(in: self.string, options: [], range: NSMakeRange(0, self.string.count));
+        } catch {
+            ErrorHandler.init(error);
+        }
+    }
     
 }

@@ -25,10 +25,10 @@ class TableReadParagraphStyle: NSMutableParagraphStyle {
     
     override init() {
         super.init();
-        self.setValue(NSTextAlignment.left, forKey: "alignment");
-        self.setValue(0, forKey: "firstLineHeadIndent");
-        self.setValue(0, forKey: "headIndent");
-        self.setValue(0, forKey: "tailIndent");
+        self.alignment = NSTextAlignment.left;
+        self.firstLineHeadIndent = 0;
+        self.headIndent = 0;
+        self.tailIndent = 0;
     }
     
     public static func initWithValues(

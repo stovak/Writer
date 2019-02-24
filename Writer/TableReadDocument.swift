@@ -23,11 +23,11 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     public static let INITIAL_WIDTH = 800;
     
     
-    @IBOutlet unowned var toolbar: NSToolbar?;
-    @IBOutlet unowned var textView: NSTextView?;
+    @IBOutlet var toolbar: NSToolbar?;
+    @IBOutlet var textView: NSTextView?;
     @IBOutlet weak var outlineView: NSOutlineView?;
-    @IBOutlet unowned var webView: WebView?;
-    @IBOutlet unowned var tabView: NSTableView?;
+    @IBOutlet var webView: WebView?;
+    @IBOutlet var tabView: NSTableView?;
     @IBOutlet weak var backgroundView: ColorView?;
     @IBOutlet weak var oulineViewWidth: NSLayoutConstraint?;
     
@@ -55,7 +55,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
     var livePreview: Bool = false;
     var matchParentheses: Bool = true;
     
-    var printView: PrintView?;
+    var printView: TableReadPreview?;
     
     var parser: ContinousFountainParser?;
     
@@ -214,12 +214,12 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
             alert.alertStyle = NSAlert.Style.warning;
             alert.beginSheetModal(for: self.windowControllers[0].window!, completionHandler: nil);
         } else {
-            self.printView = PrintView.init(document: self, toPDF: false);
+            self.printView = TableReadPreview.init(withDocument: self);
         }
     }
     
     @IBAction func exportPDF(_ sender: Any) {
-        self.printView = PrintView.init(document: self, toPDF: true);
+        self.printView = TableReadPreview.init(withDocument: self);
     }
     
     @IBAction func exportHMTL(_ sender: Any) throws {
@@ -230,11 +230,10 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         saveDialog.begin {
             (result) -> Void in
             if (result.rawValue == NSApplication.ModalResponse.OK.rawValue) {
-                let fnScript = FNScript.init(string: self.getText());
-                let htmlScript = FNHTMLScript.init(script: fnScript);
-                let htmlString = htmlScript?.html();
+                let extractor = HTML5Extractor(fromParser: self.getParser());
+                let htmlString = extractor.toString();
                 do {
-                    try htmlString?.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
+                    try htmlString.write(to: saveDialog.url!, atomically: true, encoding: String.Encoding.utf8);
                 } catch {
                     ErrorHandler(error);
                 }
@@ -252,7 +251,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         saveDialog.begin {
             (result) -> Void in
             if (result.rawValue == NSApplication.ModalResponse.OK.rawValue) {
-                let fdxFile = FDXFile(fromParser: self.getParser());
+                let fdxFile = FDXExtractor(fromParser: self.getParser());
                 let fdxString = fdxFile.toString();
                 
                 do {
@@ -332,31 +331,31 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         undo.addString(string: string, atIndex: atIndex);
     }
     
-    func makeBold(sender: Any) {
+    @IBAction func makeBold(sender: Any) {
         if (self.selectedTabViewTab() == 0) {
             // [self format:cursorLocation beginningSymbol:boldSymbol endSymbol:boldSymbol];
         }
     }
 
-    func makeItalic(sender: Any) {
+    @IBAction func makeItalic(sender: Any) {
         if (self.selectedTabViewTab() == 0) {
             // [self format:cursorLocation beginningSymbol:italicSymbol endSymbol:italicSymbol];
         }
     }
     
-    func makeUnderlined(sender: Any) {
+    @IBAction func makeUnderlined(sender: Any) {
         if (self.selectedTabViewTab() == 0) {
             // [self format:cursorLocation beginningSymbol:underlinedSymbol endSymbol:underlinedSymbol];
         }
     }
     
-    func makeNote(sender: Any) {
+    @IBAction func makeNote(sender: Any) {
         if (self.selectedTabViewTab() == 0) {
             // [self format:cursorLocation beginningSymbol:noteOpen endSymbol:noteClose];
         }
     }
     
-    func makeOmitted(sender: Any) {
+    @IBAction func makeOmitted(sender: Any) {
         if (self.selectedTabViewTab() == 0) {
             // [self format:cursorLocation beginningSymbol:omitOpen endSymbol:omitClose];
         }
@@ -447,25 +446,43 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
             debugPrint(line);
             exit(0);
         }
-        let lineType = TableReadLineTypeStyles.value(forKey: lineTypeID) as! TableReadLineTypeStyle;
-        self.textView?.textStorage?.removeAttribute(
-            NSAttributedString.Key.font, range: range
-        );
-        self.textView?.textStorage?.addAttribute(
-                NSAttributedString.Key.font,
-                value: lineType.fontStyle,
-                range: range);
-        if (!onlyFormatFont) {
-            self.textView?.textStorage?.removeAttribute(
-                NSAttributedString.Key.paragraphStyle,
-                range: range
-            );
-            self.textView?.textStorage?.addAttribute(
-                NSAttributedString.Key.paragraphStyle,
-                value: lineType.paragraphStyle,
-                range: range
-            );
+        
+        let lineType = TableReadLineTypeStyles.styles[lineTypeID];
+        if (lineType == nil) {
+            fatalError("AHHHHHHHHHHHHHHHHHHHHHH");
         }
+        if (self.textView?.textStorage != nil) {
+            
+            if (self.textView?.textStorage?.attributeKeys.contains(NSAttributedString.Key.font.rawValue) ?? false) {
+                self.textView!.textStorage!.removeAttribute(
+                    NSAttributedString.Key.font, range: range
+                );
+            }
+            
+            if (self.textView?.textStorage?.font != lineType!.fontStyle.font) {
+                self.textView!.textStorage!.addAttribute(
+                    NSAttributedString.Key.font,
+                    value: lineType!.fontStyle.font,
+                    range: range
+                );
+            }
+            
+            
+            if (!onlyFormatFont) {
+                if (self.textView!.textStorage!.attributeKeys.contains(NSAttributedString.Key.paragraphStyle.rawValue) ) {
+                    self.textView!.textStorage!.removeAttribute(
+                        NSAttributedString.Key.paragraphStyle,
+                        range: range
+                    );
+                }
+                self.textView!.textStorage!.addAttribute(
+                    NSAttributedString.Key.paragraphStyle,
+                    value: lineType!.paragraphStyle,
+                    range: range
+                );
+            }
+        }
+        
         // do bold and italic changes
         // do uppercase where lineType.uppercase == true
     }

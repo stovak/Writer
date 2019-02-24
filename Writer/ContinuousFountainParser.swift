@@ -23,6 +23,10 @@ class ContinousFountainParser : NSObject {
         self.parseText(string);
     }
     
+    /**
+      *  Main Parsing function
+      *
+      */
     func parseText(_ text: String) {
         let rawLines = text.components(separatedBy: "\n");
         var position = 0;
@@ -32,7 +36,7 @@ class ContinousFountainParser : NSObject {
             self.parseTypeAndFormatting(forLine:&line,  atIndex:index);
             self.lines.append(line);
             self.changedIndices.add(index);
-            position = rawLine.lengthOfBytes(using: String.Encoding.utf8) + 1;
+            position += rawLine.count + 1;
         }
         self.changeInOutline = true;
         
@@ -203,8 +207,7 @@ class ContinousFountainParser : NSObject {
             atIndex index: Int
         ) {
         line.type = self.parseLineType(forLine: line, atIndex: index);
-        let length = line.string.count;
-        
+        line.BIUNDiscovery();
     }
     
     func parseLineType(
@@ -216,7 +219,6 @@ class ContinousFountainParser : NSObject {
         if (length == 0) {
             return .empty;
         }
-        
         let firstChar = string.first;
         let lastChar = string.last;
         
@@ -249,21 +251,25 @@ class ContinousFountainParser : NSObject {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .heading;
         }
-        
+
         let preceedingLine = (index == 0) ? nil : self.lines[index - 1];
         let firstColonInRange = string.range(of: ":");
         let preceedingLineIsNil = ( preceedingLine == nil );
         let preceedingLineIsMetaData = ( preceedingLine?.getLineTypeStyle().isMetaData ?? false );
-
-        
         if ( (preceedingLineIsNil || preceedingLineIsMetaData) && firstColonInRange != nil ) {
-            let upToFirstColon = String(string[..<firstColonInRange!.upperBound].localizedCapitalized);
-            let lineTypeStyles = TableReadLineTypeStyles();
-            if let lineTypeStyle = (lineTypeStyles.value(forKey: "titlePage" + upToFirstColon) as? TableReadLineTypeStyle) {
+            let upToFirstColon = String(
+                string[..<(firstColonInRange!.upperBound)]
+                    .replacingOccurrences(of: ":", with: "")
+                    .localizedCapitalized
+            );
+            let key = "titlePage" + upToFirstColon;
+            if let lineTypeStyle = TableReadLineTypeStyles.styles[key] {
                 return lineTypeStyle.lineType;
             }
+
             return TableReadLineType.titlePageUnknown;
         }
+
         if (preceedingLine != nil){
             if (length >= 2 && string.substring(to: 2) == "  ") {
                 line.numberOfPreceedingFormattingCharacters = 2;
@@ -273,11 +279,11 @@ class ContinousFountainParser : NSObject {
                 return preceedingLine!.type;
             }
         }
-        
+
         let firstThreeLetters = string.substring(to: 3).lowercased();
         let lastThreeLetters = string.substring(from: 3).lowercased();
 
-        if (preceedingLine?.type == .empty) {
+        if (preceedingLine?.type == nil || preceedingLine?.type == .empty) {
             if (length >= 3) {
                 if (
                     firstThreeLetters == "int" ||
@@ -293,12 +299,29 @@ class ContinousFountainParser : NSObject {
                 if ( firstThreeLetters == "===") {
                     return .pageBreak;
                 }
+                if (string.uppercased().trimmingCharacters(in: CharacterSet.whitespaces) == string) {
+                    // A character line ending in ^ is a double dialogue character
+                    if (lastChar == "^") {
+                        return .doubleDialogueCharacter;
+                    } else {
+                        return .character;
+                    }
+                }
             }
             if (firstChar == ">" && lastChar == "<") {
                 return .centered;
             }
         }
+        
+      
+        
+        
+
+        
+        
+
         if (preceedingLine != nil) {
+            
             if (
                 preceedingLine!.type == .character ||
                 preceedingLine!.type == .dialogue  ||
@@ -325,7 +348,7 @@ class ContinousFountainParser : NSObject {
                 return .synopse;
             }
         }
-        
+
         return .action
     }
     
@@ -359,36 +382,20 @@ class ContinousFountainParser : NSObject {
         return NSMakeRange(0, 0);
     }
     
-    func string(atLine lineNum: Int) -> String {
-        if (lineNum >= self.lines.count) {
-            return "";
-        } else {
-            return self.lines[lineNum].string;
-        }
+    func string(atLine lineNum: Int) -> String? {
+        return ( self.lines.indices.contains(lineNum)  ? self.lines[lineNum].string : nil );
     }
     
-    func type(atLine lineNum: Int) -> TableReadLineType {
-        if (lineNum >= self.lines.count) {
-            return .empty;
-        } else {
-            return self.lines[lineNum].type;
-        }
+    func type(atLine lineNum: Int) -> TableReadLineType? {
+        return ( self.lines.indices.contains(lineNum) ? self.lines[lineNum].type : nil );
     }
     
-    func position(atLine lineNum: Int) -> Int {
-        if (lineNum >= self.lines.count) {
-            return NSNotFound;
-        } else {
-            return self.lines[lineNum].position;
-        }
+    func position(atLine lineNum: Int) -> Int? {
+        return (self.lines.indices.contains(lineNum) ? self.lines[lineNum].position : nil );
     }
     
     func sceneNumber(atLine lineNum: Int) -> Int? {
-        if (lineNum >= self.lines.count) {
-            return nil;
-        } else {
-            return self.lines[lineNum].sceneNumber;
-        }
+        return (self.lines.indices.contains(lineNum) ? self.lines[lineNum].sceneNumber : nil);
     }
     
     func numberOfOutlineItems() -> Int {
@@ -423,15 +430,16 @@ class ContinousFountainParser : NSObject {
     }
     
     func description() -> String {
-        var result: String = "";
+        var result = String();
         var index = 0;
         for line in self.lines {
             if (index == 0) {
                 result = result.appending("0 ");
             } else {
-                result = result.appending(String.init(format: "%lu ", index));
+                result = result.appendingFormat("%D ", index);
             }
             result = result.appending(line.toString()).appending("\n");
+            index += 1;
         }
         return result;
     }

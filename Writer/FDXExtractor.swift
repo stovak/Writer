@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FDXFile: NSObject {
+class FDXExtractor: NSObject {
     
     let parser: ContinousFountainParser;
     
@@ -51,7 +51,7 @@ class FDXFile: NSObject {
     }
     
     func getTitlePage() -> XMLElement {
-        let toReturn = XMLElement("TitlePage");
+        let toReturn = XMLElement(name: "TitlePage");
         for element in self.titlePage {
             toReturn.addChild(element);
         }

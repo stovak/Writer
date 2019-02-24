@@ -69,5 +69,12 @@
 	<string>NSApplication</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Courier Prime.ttf</string>
+		<string>Courier Prime Italic.ttf</string>
+		<string>Courier Prime Bold.ttf</string>
+		<string>Courier Prime Bold Italic.ttf</string>
+	</array>
 </dict>
 </plist>

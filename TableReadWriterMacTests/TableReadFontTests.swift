@@ -30,13 +30,30 @@ class TableReadFontTests: XCTestCase {
             description: "Courier",
             font: NSFont.init(
                 descriptor: NSFontDescriptor.init(
-                    name: "Courier Prime",
+                    name: "Courier",
                     size: CGFloat(TableReadFont.DEFAULT_SIZE)),
                 size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
         );
         
         XCTAssertTrue(testSubject.id == "courier", "ID should be as given string");
-        XCTAssertTrue(testSubject.description, "Description should be as given string");
+        XCTAssertTrue(testSubject.description == "Courier", "Description should be as given string");
+        XCTAssertEqual(testSubject.font.className, "NSFont", "The font property should be a member of NSFont");
+        XCTAssertEqual(testSubject.font.pointSize, CGFloat(TableReadFont.DEFAULT_SIZE), "The font property should be a member of NSFont");
+
         
     }
+    
+    func testFontStyles() {
+        let testSubject = TableReadFontStyle.styles[TableReadFontType.courier.rawValue];
+        if (testSubject == nil) {
+            XCTFail("Font Styles will not instantiate");
+        }
+        
+        XCTAssertEqual(testSubject!.id, "courier", "ID should be as given string" + testSubject!.id);
+        XCTAssertEqual(testSubject!.description, "Courier", "Description should be as given stringL " + testSubject!.description);
+        XCTAssertEqual(testSubject!.font.className, "NSFont", "The font property should be a member of NSFont");
+        XCTAssertEqual(testSubject!.font.pointSize, CGFloat(TableReadFont.DEFAULT_SIZE), "The font property should be a member of NSFont");
+
+    }
+    
 }

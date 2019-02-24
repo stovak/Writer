@@ -11,6 +11,7 @@ import AppKit
 
 enum TableReadLineType: String {
     case empty = "empty";
+    case general = "general";
     case section = "section";
     case synopse = "synopse";
     case titlePageTitle = "titlePageTitle";
@@ -49,7 +50,7 @@ struct TableReadLineTypeStyle {
     init( lineType: TableReadLineType,
           id: String,
           description: String,
-          paragraphStyle: TableReadParagraphStyle = TableReadParagraphStyle(),
+          paragraphStyle: TableReadParagraphStyle = TableReadParagraphStyle.initWithValues(),
           fontStyle: TableReadFont? = nil,
           uppercase: Bool = false,
           changesOutline: Bool = false,
@@ -78,227 +79,237 @@ struct TableReadLineTypeStyle {
 class TableReadLineTypeStyles: NSObject {
     
     public static func byLineType(_ id: TableReadLineType) -> TableReadLineTypeStyle {
-        return TableReadLineTypeStyles().value(forKey: id.rawValue) as! TableReadLineTypeStyle;
+        return TableReadLineTypeStyles.styles[id.rawValue]!;
     }
     
-    public static func getFontStyle(forLineTypeId lineTypeID: String) -> TableReadFont {
-        return (TableReadLineTypeStyles().value(forKey: lineTypeID) as! TableReadLineTypeStyle).fontStyle
+    public static func getFontStyle(forLineType lineType: TableReadLineType) -> TableReadFont {
+        return TableReadLineTypeStyles.styles[lineType.rawValue]!.fontStyle
     }
     
+    public static let styles = [
+        
+        "empty": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.empty,
+                   id: "empty",
+                   description: "Empty",
+                   includeNextLine: true
+               ),
+        
+        "general": TableReadLineTypeStyle(
+            lineType: TableReadLineType.general,
+            id: "general",
+            description: "General",
+            includeNextLine: true
+        ),
+        
+        
+     "section": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.section,
+                   id: "section",
+                   description: "Section",
+                   changesOutline: true,
+                   includeNextLine: true
+               ),
     
-     let empty                       = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.empty,
-                                           id: "empty",
-                                           description: "Empty",
-                                           includeNextLine: true
-                                       );
+     "synopse": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.synopse,
+                   id: "synopse",
+                   description: "Synopse",
+                   changesOutline: true,
+                   includeNextLine: true
+               ),
     
-     let section                     = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.section,
-                                           id: "section",
-                                           description: "Section",
-                                           changesOutline: true,
-                                           includeNextLine: true
-                                       );
+    "titlePageTitle": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageTitle,
+                   id: "titlePageTitle",
+                   description: "Title Page Title",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let synopse                     = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.synopse,
-                                           id: "synopse",
-                                           description: "Synopse",
-                                           changesOutline: true,
-                                           includeNextLine: true
-                                       );
+    "titlePageAuthor": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageAuthor,
+                   id: "titlePageAuthor",
+                   description: "Title Page Author",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageTitle              = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageTitle,
-                                           id: "titlePageTitle",
-                                           description: "Title Page Title",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+    "titlePageCredit": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageCredit,
+                   id: "titlePageCredit",
+                   description: "Title Page Credit",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageAuthor             = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageAuthor,
-                                           id: "titlePageAuthor",
-                                           description: "Title Page Author",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+    "titlePageSource": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageSource,
+                   id: "titlePageSource",
+                   description: "Title Page Source",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageCredit             = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageCredit,
-                                           id: "titlePageCredit",
-                                           description: "Title Page Credit",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+    "titlePageContact": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageContact,
+                   id: "titlePageContact",
+                   description: "Title Page Contact",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageSource             = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageSource,
-                                           id: "titlePageSource",
-                                           description: "Title Page Source",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+    "titlePageDraftDate" : TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageDraftDate,
+                   id: "titlePageDraftDate",
+                   description: "Title Page Draft Date",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageContact            = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageContact,
-                                           id: "titlePageContact",
-                                           description: "Title Page Contact",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+    "titlePageUnknown": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.titlePageUnknown,
+                   id: "titlePageUnknown",
+                   description: "Title Page Unknown",
+                   includeNextLine: true,
+                   isMetaData: true,
+                   fdxName: "TitlePage"
+               ),
     
-     let titlePageDraftDate          = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageDraftDate,
-                                           id: "titlePageDraftDate",
-                                           description: "Title Page Draft Date",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+     "heading": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.heading,
+                   id: "heading",
+                   description: "Heading",
+                   fontStyle: TableReadFontStyle.byType(TableReadFontType.courier),
+                   uppercase: true,
+                   changesOutline: true,
+                   fdxName: "Scene Heading"
+               ),
     
-     let titlePageUnknown            = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.titlePageUnknown,
-                                           id: "titlePageUnknown",
-                                           description: "Title Page Unknown",
-                                           includeNextLine: true,
-                                           isMetaData: true,
-                                           fdxName: "TitlePage"
-                                       );
+     "action": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.action,
+                   id: "action",
+                   description: "Action",
+                   fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
+                   fdxName: "Action"
+               ),
     
-     let heading                     = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.heading,
-                                           id: "heading",
-                                           description: "Heading",
-                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.courier),
-                                           uppercase: true,
-                                           changesOutline: true,
-                                           fdxName: "Scene Heading"
-                                       );
+    "character": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.character,
+                   id: "character",
+                   description: "Character",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                    firstLineHeadIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
+                    headIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
+                    tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
+                   ),
+                   uppercase: true,
+                   includeNextLine: true,
+                   fdxName: "Character"
+               ),
     
-     let action                      = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.action,
-                                           id: "action",
-                                           description: "Action",
-                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
-                                           fdxName: "Action"
-                                       );
+    "parenthetical": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.parenthetical,
+                   id: "parenthetical",
+                   description: "Parenthetical",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                    firstLineHeadIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
+                       headIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
+                       tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
+                   ),
+                   includeNextLine: true,
+                   fdxName: "Parenthetical"
+               ),
     
-     let character                   = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.character,
-                                           id: "character",
-                                           description: "Character",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                            firstLineHeadIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
-                                            headIndent: TableReadParagraphStyleDefaults.CHARACTER_INDENT.rawValue,
-                                            tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
-                                           ),
-                                           uppercase: true,
-                                           includeNextLine: true,
-                                           fdxName: "Character"
-                                       );
+    "dialogue": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.dialogue,
+                   id: "dialogue",
+                   description: "Dialogue",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       firstLineHeadIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
+                       headIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
+                       tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
+                   ),
+                   includeNextLine: true,
+                   fdxName: "Dialogue"
+               ),
     
-     let parenthetical               = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.parenthetical,
-                                           id: "parenthetical",
-                                           description: "Parenthetical",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                            firstLineHeadIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
-                                               headIndent: TableReadParagraphStyleDefaults.PARENTHETICAL_INDENT.rawValue,
-                                               tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
-                                           ),
-                                           includeNextLine: true,
-                                           fdxName: "Parenthetical"
-                                       );
+    "doubleDialogueCharacter": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.doubleDialogueCharacter,
+                   id: "doubleDialogueCharacter",
+                   description: "DD Character",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
+                       headIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
+                       tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
+                   ),
+                   includeNextLine: true
+               ),
     
-     let dialogue                    = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.dialogue,
-                                           id: "dialogue",
-                                           description: "Dialogue",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
-                                               headIndent: TableReadParagraphStyleDefaults.DIALOGUE_INDENT.rawValue,
-                                               tailIndent: TableReadParagraphStyleDefaults.DIALOGUE_RIGHT.rawValue
-                                           ),
-                                           includeNextLine: true,
-                                           fdxName: "Dialogue"
-                                       );
+    "doubleDialogueParenthetical": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.doubleDialogueParenthetical,
+                   id: "doubleDialogueParenthetical",
+                   description: "DD Parenthetical",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
+                       headIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
+                       tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
+                   ),
+                   includeNextLine: true
+               ),
     
-     let doubleDialogueCharacter     = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.doubleDialogueCharacter,
-                                           id: "doubleDialogueCharacter",
-                                           description: "DD Character",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
-                                               headIndent: TableReadParagraphStyleDefaults.DD_CHARACTER_INDENT.rawValue,
-                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
-                                           ),
-                                           includeNextLine: true
-                                       );
+    "doubleDialogue": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.doubleDialogue,
+                   id: "doubleDialogue",
+                   description: "Double Dialogue",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       firstLineHeadIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
+                       headIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
+                       tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
+                   ),
+                   includeNextLine: true
+               ),
+
+    "transition": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.transition,
+                   id: "transition",
+                   description: "Transition",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       alignment: NSTextAlignment.right
+                   ),
+                   fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
+                   uppercase: true,
+                   fdxName: "Transition"
+               ),
     
-     let doubleDialogueParenthetical = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.doubleDialogueParenthetical,
-                                           id: "doubleDialogueParenthetical",
-                                           description: "DD Parenthetical",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
-                                               headIndent: TableReadParagraphStyleDefaults.DD_PARENTHETICAL_INDENT.rawValue,
-                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
-                                           ),
-                                           includeNextLine: true
-                                       );
+     "lyrics": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.lyrics,
+                   id: "lyrics",
+                   description: "Lyrics",
+                   fontStyle: TableReadFontStyle.byType(TableReadFontType.courier)
+               ),
     
-     let doubleDialogue              = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.doubleDialogue,
-                                           id: "doubleDialogue",
-                                           description: "Double Dialogue",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               firstLineHeadIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
-                                               headIndent: TableReadParagraphStyleDefaults.DOUBLE_DIALOGUE_INDENT.rawValue,
-                                               tailIndent: TableReadParagraphStyleDefaults.DD_RIGHT.rawValue
-                                           ),
-                                           includeNextLine: true
-                                       );
+    "pageBreak": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.pageBreak,
+                   id: "pageBreak",
+                   description: "Page Break"
+               ),
     
-     let transition                  = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.transition,
-                                           id: "transition",
-                                           description: "Transition",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               alignment: NSTextAlignment.right
-                                           ),
-                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.boldCourier),
-                                           uppercase: true,
-                                           fdxName: "Transition"
-                                       );
-    
-     let lyrics                      = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.lyrics,
-                                           id: "lyrics",
-                                           description: "Lyrics",
-                                           fontStyle: TableReadFontStyle.byType(TableReadFontType.courier)
-                                       );
-    
-     let pageBreak                   = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.pageBreak,
-                                           id: "pageBreak",
-                                           description: "Page Break"
-                                       );
-    
-     let centered                    = TableReadLineTypeStyle(
-                                           lineType: TableReadLineType.centered,
-                                           id: "centered",
-                                           description: "Centered",
-                                           paragraphStyle: TableReadParagraphStyle.initWithValues(
-                                               alignment: NSTextAlignment.center
-                                           )
-                                       );
+    "centered": TableReadLineTypeStyle(
+                   lineType: TableReadLineType.centered,
+                   id: "centered",
+                   description: "Centered",
+                   paragraphStyle: TableReadParagraphStyle.initWithValues(
+                       alignment: NSTextAlignment.center
+                   )
+               )
+    ];
     
 }
 

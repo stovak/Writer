@@ -19,18 +19,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         debugPrint("applicationDidFinishLaunching");
         
-        // TODO: Open default file
-        /*
-        NSURL* referenceFile = [[NSBundle mainBundle] URLForResource:@"Reference"
-            withExtension:@"fountain"];
-        
-        void (^completionHander)(NSDocument * _Nullable, BOOL, NSError * _Nullable) = ^void(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
-            [document setFileURL:[[NSURL alloc] init]];
+        if let referenceFile = Bundle.main.url(forResource: "Reference", withExtension: "fountain") {
+            let completionHander: (NSDocument?, Bool, Error?) -> Void = {(document: NSDocument?, documentWasAlreadyOpen: Bool, error: Error?) in
+                if (document != nil) {
+                    document?.fileURL = referenceFile.absoluteURL;
+                }
+            }
+            NSDocumentController.shared.openDocument(
+                withContentsOf: referenceFile,
+                display: true,
+                completionHandler:  completionHander
+            );
         };
-        [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:referenceFile
-            display:YES
-            completionHandler:completionHander];
-     */
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

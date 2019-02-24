@@ -55,5 +55,12 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Courier Prime.ttf</string>
+		<string>Courier Prime Bold.ttf</string>
+		<string>Courier Prime Italic.ttf</string>
+		<string>Courier Prime Bold Italic.ttf</string>
+	</array>
 </dict>
 </plist>

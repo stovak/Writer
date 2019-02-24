@@ -49,48 +49,45 @@ struct TableReadFont {
 class TableReadFontStyle: NSObject {
     
     public static func byType(_ type: TableReadFontType) -> TableReadFont {
-        return TableReadFontStyle().value(forKey: type.rawValue) as! TableReadFont;
+        return TableReadFontStyle.styles[type.rawValue]!;
     }
     
-    let courier = TableReadFont.init(
-        id: "courier",
-        description: "Courier",
-        font: NSFont.init(
-            descriptor: NSFontDescriptor.init(
-                name: "Courier Prime",
-                size: CGFloat(TableReadFont.DEFAULT_SIZE)),
-            size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
-    );
+    public static func findFont(_ name: String) -> NSFont {
+        debugPrint("findFont");
+        guard let customFont = NSFont(name: name, size: CGFloat(TableReadFont.DEFAULT_SIZE)) else {
+            for family in NSFontManager.shared.availableFontFamilies {
+                for member in NSFontManager.shared.availableMembers(ofFontFamily: family)!  {
+                    print("Family: \(family.description) Font names: \(member.description)")
+                }
+            }
+            
+                fatalError("Failed to load the \(name) font.");
+        }
+        dump(customFont);
+        return customFont;
+    }
     
     
-    let boldCourier = TableReadFont.init(
-        id: "boldCourier",
-        description: "Bold Courier",
-        font: NSFont.init(
-            descriptor: NSFontDescriptor.init(
-                name: "Courier Prime Bold",
-                size: CGFloat(TableReadFont.DEFAULT_SIZE)),
-            size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
-    );
-    
-    let italicCourier = TableReadFont.init(
-        id: "italicCourier",
-        description: "Italic Courier",
-        font: NSFont.init(
-            descriptor: NSFontDescriptor.init(
-                name: "Courier Prime Italic",
-                size: CGFloat(TableReadFont.DEFAULT_SIZE)),
-            size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
-    );
-    
-    let boldItalicCourier = TableReadFont.init(
-        id: "boldItalicCourier",
-        description: "Bold Italic Courier",
-        font: NSFont.init(
-            descriptor: NSFontDescriptor.init(
-                name: "Courier Prime Bold Italic",
-                size: CGFloat(TableReadFont.DEFAULT_SIZE)),
-            size: CGFloat(TableReadFont.DEFAULT_SIZE) )!
-    );
-    
+    public static let styles: [ String: TableReadFont ] = [
+        "courier": TableReadFont.init(
+                    id: "courier",
+                    description: "Courier",
+                    font: TableReadFontStyle.findFont("Courier")
+                ),
+        "boldCourier": TableReadFont.init(
+                id: "boldCourier",
+                description: "Bold Courier",
+                font: TableReadFontStyle.findFont("Courier-Bold")
+            ),
+        "italicCourier": TableReadFont.init(
+                id: "italicCourier",
+                description: "Italic Courier",
+                font: TableReadFontStyle.findFont("Courier-Oblique")
+            ),
+        "boldItalicCourier": TableReadFont.init(
+                id: "boldItalicCourier",
+                description: "Bold Italic Courier",
+                font: TableReadFontStyle.findFont("Courier-BoldOblique")
+            )
+    ];
 }
