@@ -38,7 +38,7 @@ class TableReadParagraphStyle: NSMutableParagraphStyle {
         headIndent: CGFloat = 0,
         tailIndent: CGFloat = 0,
         lineHeightMultiple: CGFloat = 12,
-        maximumLineHeight: CGFloat = 0,
+        maximumLineHeight: CGFloat = 14,
         minimumLineHeight: CGFloat = 0,
         paragraphSpacing: CGFloat = 0,
         paragraphSpacingBefore: CGFloat = 0
@@ -54,6 +54,7 @@ class TableReadParagraphStyle: NSMutableParagraphStyle {
         toReturn.minimumLineHeight = minimumLineHeight;
         toReturn.paragraphSpacing = paragraphSpacing;
         toReturn.paragraphSpacingBefore = paragraphSpacingBefore;
+        //toReturn.attributeKeys
         return toReturn;
     }
     

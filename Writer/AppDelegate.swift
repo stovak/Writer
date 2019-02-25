@@ -14,7 +14,7 @@ import Foundation
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    
+    //var director: Director?;
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         debugPrint("applicationDidFinishLaunching");
@@ -50,5 +50,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.open(URL(string: "https://github.com/HendrikNoeller/Writer-Mac")!);
 
     }
+    
+    /**
+    func getDirector() -> Director {
+        if (self.director == nil) {
+            self.director = Director();
+        }
+        return self.director!;
+    }
+     **/
     
 }

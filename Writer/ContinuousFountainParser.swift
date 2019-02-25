@@ -13,6 +13,7 @@ import Cocoa
 class ContinousFountainParser : NSObject {
     
     @objc public var lines: [ TableReadLine ] = [];
+    @objc public var sceneHeadings = IndexSet();
     var changedIndices: NSMutableArray = [];
     
     var changeInOutline: Bool?;
@@ -207,6 +208,11 @@ class ContinousFountainParser : NSObject {
             atIndex index: Int
         ) {
         line.type = self.parseLineType(forLine: line, atIndex: index);
+        debugPrint("RESULT: \(line.type.rawValue)");
+        if (line.type == .heading) {
+            self.sceneHeadings.insert(index);
+        }
+        line.sceneNumber = self.sceneHeadings.count;
         line.BIUNDiscovery();
     }
     
@@ -216,11 +222,20 @@ class ContinousFountainParser : NSObject {
         ) -> TableReadLineType {
         let string = line.string.trimmingCharacters(in: CharacterSet.whitespaces);
         let length = string.count;
+        debugPrint(string);
         if (length == 0) {
+            debugPrint("EMPTY!!! Length: \(length) //  line \(index)");
+            dump(line);
             return .empty;
         }
         let firstChar = string.first;
         let lastChar = string.last;
+        let firstThreeLetters = string.substring(to: 3).lowercased();
+        let lastThreeLetters = string.substring(from: 3).lowercased();
+        
+        if ( string == "===" || (firstThreeLetters == "===" && lastThreeLetters == "===")) {
+            return .pageBreak;
+        }
         
         //Check for forces (the first character can force a line type)
         if (firstChar == "!") {
@@ -235,7 +250,11 @@ class ContinousFountainParser : NSObject {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .lyrics;
         }
-        if (firstChar == ">" && lastChar != "<") {
+        if (firstChar == ">" && lastChar == "<") {
+            line.numberOfPreceedingFormattingCharacters = 1;
+            return .centered;
+        }
+        if ( ( firstChar == ">" ||  lastChar == ":" )  && length >= 2 ) {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .transition;
         }
@@ -243,30 +262,37 @@ class ContinousFountainParser : NSObject {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .section;
         }
-        if (firstChar == "=" && (length >= 2 ? string.first != "=" : true)) {
+        if (firstChar == "=" && length > 3) {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .synopse;
         }
-        if (firstChar == "." && length >= 2 && string.first != ".") {
+        if (firstChar == "." && length >= 2) {
             line.numberOfPreceedingFormattingCharacters = 1;
             return .heading;
         }
+        
 
         let preceedingLine = (index == 0) ? nil : self.lines[index - 1];
         let firstColonInRange = string.range(of: ":");
         let preceedingLineIsNil = ( preceedingLine == nil );
         let preceedingLineIsMetaData = ( preceedingLine?.getLineTypeStyle().isMetaData ?? false );
-        if ( (preceedingLineIsNil || preceedingLineIsMetaData) && firstColonInRange != nil ) {
-            let upToFirstColon = String(
-                string[..<(firstColonInRange!.upperBound)]
-                    .replacingOccurrences(of: ":", with: "")
-                    .localizedCapitalized
-            );
-            let key = "titlePage" + upToFirstColon;
-            if let lineTypeStyle = TableReadLineTypeStyles.styles[key] {
-                return lineTypeStyle.lineType;
+        let includeNextLine = ( preceedingLine?.getLineTypeStyle().includeNextLine ?? false );
+        if ( (preceedingLineIsNil && firstColonInRange != nil ) || preceedingLineIsMetaData) {
+            if (firstColonInRange != nil) {
+                let upToFirstColon = String(
+                    string[..<(firstColonInRange!.upperBound)]
+                        .replacingOccurrences(of: ":", with: "")
+                        .localizedCapitalized
+                );
+                let key = "titlePage" + upToFirstColon.capitalized.replaceAll(of: " ", with: "");
+                if let lineTypeStyle = TableReadLineTypeStyles.styles[key] {
+                    return lineTypeStyle.lineType;
+                }
+            } else {
+                if (includeNextLine == true) {
+                    return preceedingLine!.type;
+                }
             }
-
             return TableReadLineType.titlePageUnknown;
         }
 
@@ -280,8 +306,7 @@ class ContinousFountainParser : NSObject {
             }
         }
 
-        let firstThreeLetters = string.substring(to: 3).lowercased();
-        let lastThreeLetters = string.substring(from: 3).lowercased();
+
 
         if (preceedingLine?.type == nil || preceedingLine?.type == .empty) {
             if (length >= 3) {
@@ -296,9 +321,7 @@ class ContinousFountainParser : NSObject {
                 if ( lastThreeLetters == "to:") {
                     return .transition;
                 }
-                if ( firstThreeLetters == "===") {
-                    return .pageBreak;
-                }
+                
                 if (string.uppercased().trimmingCharacters(in: CharacterSet.whitespaces) == string) {
                     // A character line ending in ^ is a double dialogue character
                     if (lastChar == "^") {
@@ -313,20 +336,16 @@ class ContinousFountainParser : NSObject {
             }
         }
         
-      
-        
-        
-
-        
-        
+        debugPrint("Did we get here?, line \(index)");
 
         if (preceedingLine != nil) {
-            
+            debugPrint("Some sort of Dialog, line \(index)");
             if (
                 preceedingLine!.type == .character ||
                 preceedingLine!.type == .dialogue  ||
                 preceedingLine!.type == .parenthetical
                 ) {
+                debugPrint("standard dialogue, line \(index)");
                 if (firstChar == "(" && lastChar == ")") {
                     return .parenthetical
                 }
@@ -336,6 +355,7 @@ class ContinousFountainParser : NSObject {
                 preceedingLine!.type == .doubleDialogue ||
                 preceedingLine!.type == .doubleDialogueParenthetical
             ) {
+                debugPrint("double dialogue! line \(index)");
                 //Text in parentheses after character or dialogue is a parenthetical, else its dialogue
                 if (firstChar == "(" && lastChar == ")") {
                     return .doubleDialogueParenthetical;

@@ -192,7 +192,6 @@
 		D6C9AAD92204BDFF005AFF99 /* TableReadWriter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableReadWriter-Bridging-Header.h"; sourceTree = "<group>"; };
 		D6C9AADD2204C7B1005AFF99 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		D6C9AADF2204C8A3005AFF99 /* CastMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastMember.swift; sourceTree = "<group>"; };
-		D6C9AAE12204CAEB005AFF99 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D6E72FD62210AB1D007795A4 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D6ECE6F1221BD49C0079B6DC /* ContinuousFountainParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousFountainParserTests.swift; sourceTree = "<group>"; };
 		D6FE945C220752B600B333A9 /* YAMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAMLParser.swift; path = Yaml/YAMLParser.swift; sourceTree = SOURCE_ROOT; };
@@ -475,7 +474,6 @@
 				D6C96A9322050062006B9B83 /* Director.swift */,
 				D6C96A9C2205047C006B9B83 /* NotificationService.swift */,
 				D6C9AADF2204C8A3005AFF99 /* CastMember.swift */,
-				D6C9AAE12204CAEB005AFF99 /* String.swift */,
 			);
 			name = Cast;
 			sourceTree = "<group>";

@@ -43,7 +43,7 @@ class TableReadLine: NSObject {
     var string: String = "";
     var position: Int;
     var numberOfPreceedingFormattingCharacters: Int = 0;
-    var sceneNumber: Int?;
+    var sceneNumber: Int = -1;
     
     var boldRanges: [ NSTextCheckingResult ] = [];
     var italicRanges: [ NSTextCheckingResult ] = [];

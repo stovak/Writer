@@ -111,7 +111,7 @@ class TableReadDocument: NSDocument, NSTextViewDelegate, NSOutlineViewDataSource
         self.backgroundView?.fillColor = NSColor(calibratedRed: CGFloat(0.5), green: CGFloat(0.5), blue: CGFloat(0.5), alpha: CGFloat(1.0));
         self.textView?.setFont(
             TableReadFontStyle.byType(TableReadFontType.courier).font,
-            range: NSRange(location: 0, length: (self.textView?.string.lengthOfBytes(using: String.Encoding.utf8))!)
+            range: NSRange(location: 0, length: (self.textView?.string.count)!)
         );
         self.textView?.isAutomaticQuoteSubstitutionEnabled = false;
         self.textView?.isAutomaticDataDetectionEnabled = false;
